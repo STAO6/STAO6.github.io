@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="工具," />
+  <meta name="keywords" content="VUE," />
 
 
 
@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="组件代码：123&amp;lt;el-form-item label=&amp;quot;日期&amp;quot;&amp;gt;   &amp;lt;el-date-picker type=&amp;quot;date&amp;quot; value-format=&amp;quot;yyyy-MM-dd&amp;quot; placeholder=&amp;quot;&amp;quot; v-model=&amp;quot;BirthTm&amp;quot; style=&amp;quot;width:">
-<meta name="keywords" content="工具">
+<meta name="description" content="1.场景在处理列表时，常常有删除一条数据或者新增数据之后需要重新刷新当前页面的需求。（如果是通过查询接口来刷新页面，就可以直接在删除或者新增最后再次调用查询接口即可） 2.遇到的问题1.用vue-router重新路由到当前页面，页面是不进行刷新的 2.采用window.reload()，或者router.go(0)刷新时，整个浏览器进行了重新加载，闪烁，体验非常不好 3.解决方法provide &#x2F;">
+<meta name="keywords" content="VUE">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ElementUI 中日期选择器 常见限制可选择的日期">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;ElementUI%20%E4%B8%AD%E6%97%A5%E6%9C%9F%E9%80%89%E6%8B%A9%E5%99%A8%20%E5%B8%B8%E8%A7%81%E9%99%90%E5%88%B6%E5%8F%AF%E9%80%89%E6%8B%A9%E7%9A%84%E6%97%A5%E6%9C%9F&#x2F;index.html">
+<meta property="og:title" content="vue项目如何刷新当前页面">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;24&#x2F;vue%E9%A1%B9%E7%9B%AE%E5%A6%82%E4%BD%95%E5%88%B7%E6%96%B0%E5%BD%93%E5%89%8D%E9%A1%B5%E9%9D%A2&#x2F;index.html">
 <meta property="og:site_name" content="STAO_blog">
-<meta property="og:description" content="组件代码：123&amp;lt;el-form-item label=&amp;quot;日期&amp;quot;&amp;gt;   &amp;lt;el-date-picker type=&amp;quot;date&amp;quot; value-format=&amp;quot;yyyy-MM-dd&amp;quot; placeholder=&amp;quot;&amp;quot; v-model=&amp;quot;BirthTm&amp;quot; style=&amp;quot;width:">
+<meta property="og:description" content="1.场景在处理列表时，常常有删除一条数据或者新增数据之后需要重新刷新当前页面的需求。（如果是通过查询接口来刷新页面，就可以直接在删除或者新增最后再次调用查询接口即可） 2.遇到的问题1.用vue-router重新路由到当前页面，页面是不进行刷新的 2.采用window.reload()，或者router.go(0)刷新时，整个浏览器进行了重新加载，闪烁，体验非常不好 3.解决方法provide &#x2F;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-05-06T06:01:29.369Z">
+<meta property="og:updated_time" content="2020-05-06T07:12:32.539Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -118,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/11/28/ElementUI 中日期选择器 常见限制可选择的日期/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/12/24/vue项目如何刷新当前页面/"/>
 
 
 
 
 
-  <title>ElementUI 中日期选择器 常见限制可选择的日期 | STAO_blog</title>
+  <title>vue项目如何刷新当前页面 | STAO_blog</title>
   
 
 
@@ -251,7 +251,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/28/ElementUI%20%E4%B8%AD%E6%97%A5%E6%9C%9F%E9%80%89%E6%8B%A9%E5%99%A8%20%E5%B8%B8%E8%A7%81%E9%99%90%E5%88%B6%E5%8F%AF%E9%80%89%E6%8B%A9%E7%9A%84%E6%97%A5%E6%9C%9F/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/24/vue%E9%A1%B9%E7%9B%AE%E5%A6%82%E4%BD%95%E5%88%B7%E6%96%B0%E5%BD%93%E5%89%8D%E9%A1%B5%E9%9D%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="STAO">
@@ -268,7 +268,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ElementUI 中日期选择器 常见限制可选择的日期</h1>
+          <h1 class="post-title" itemprop="name headline">vue项目如何刷新当前页面</h1>
         
 
         <div class="post-meta">
@@ -280,8 +280,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-28T15:32:19+08:00">
-                2019-11-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-24T09:32:46+08:00">
+                2019-12-24
               </time>
             
 
@@ -340,16 +340,22 @@
       
 
       
-        <h1 id="组件代码："><a href="#组件代码：" class="headerlink" title="组件代码："></a>组件代码：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-form-item label=&quot;日期&quot;&gt;</span><br><span class="line">   &lt;el-date-picker type=&quot;date&quot; value-format=&quot;yyyy-MM-dd&quot; placeholder=&quot;&quot; v-model=&quot;BirthTm&quot; style=&quot;width: 140%;&quot;  :picker-options=&quot;dateLimit&quot;&gt;&lt;/el-date-picker&gt;</span><br><span class="line">&lt;/el-form-item&gt;</span><br></pre></td></tr></table></figure>
+        <h2 id="1-场景"><a href="#1-场景" class="headerlink" title="1.场景"></a>1.场景</h2><p>在处理列表时，常常有删除一条数据或者新增数据之后需要重新刷新当前页面的需求。（如果是通过查询接口来刷新页面，就可以直接在删除或者新增最后再次调用查询接口即可）</p>
+<h2 id="2-遇到的问题"><a href="#2-遇到的问题" class="headerlink" title="2.遇到的问题"></a>2.遇到的问题</h2><p>1.用vue-router重新路由到当前页面，页面是不进行刷新的</p>
+<p>2.采用window.reload()，或者router.go(0)刷新时，整个浏览器进行了重新加载，闪烁，体验非常不好</p>
+<h2 id="3-解决方法"><a href="#3-解决方法" class="headerlink" title="3.解决方法"></a>3.解决方法</h2><p>provide / inject 组合</p>
+<p>作用：允许一个祖先组件向其所有子孙后代注入一个依赖，不论组件层次有多深，并在起上下游关系成立的时间里始终生效。</p>
+<p>App.vue:</p>
+<p>声明reload方法，控制router-view的显示或隐藏，从而控制页面的再次加载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;router-view v-if=&quot;isRouterAlive&quot;&gt;&lt;/router-view&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &apos;app&apos;,</span><br><span class="line">  provide()&#123;</span><br><span class="line">	return&#123;</span><br><span class="line">		reload:this.reload</span><br><span class="line">	&#125;</span><br><span class="line">&#125;,</span><br><span class="line">  data()&#123;</span><br><span class="line">	return(</span><br><span class="line">		isRouterAlive:true;</span><br><span class="line">)&#125;,</span><br><span class="line">  methods:&#123;</span><br><span class="line">  reload()&#123;</span><br><span class="line">	this.isRouterAlive =false;</span><br><span class="line">	this.$nextTick(function()&#123;</span><br><span class="line">		this.isRouterAlive = true</span><br><span class="line">	&#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
-<p>#可选择今天（今天之后）的日期</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">data ()&#123;</span><br><span class="line">   return &#123;</span><br><span class="line">       dateLimit: &#123;</span><br><span class="line">          disabledDate(time) &#123;</span><br><span class="line">            return time.getTime() &lt; Date.now() - 8.64e7; // - 8.64e7 表示可选择当天时间</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,  </span><br><span class="line">   &#125;     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在页面注入App.vue组件提供（provide）的 reload 依赖，在逻辑完成之后（删除或添加…）,直接this.reload()调用，即可刷新当前页面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  inject:[&apos;reload&apos;],</span><br><span class="line">&#125;</span><br><span class="line">  methods:&#123;</span><br><span class="line">	add()&#123;</span><br><span class="line">		this.reload();</span><br><span class="line">	&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
-<p>#可选择今天（今天之前）的日期</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">data ()&#123;</span><br><span class="line">   return &#123;</span><br><span class="line">       dateLimit: &#123;</span><br><span class="line">          disabledDate(time) &#123;</span><br><span class="line">            return time.getTime() &gt; Date.now() - 8.64e6 // - 8.64e7 表示可选择当天时间</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,  </span><br><span class="line">   &#125;     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
+<h2 id="4-provide-inject-用法"><a href="#4-provide-inject-用法" class="headerlink" title="4.provide / inject 用法"></a>4.provide / inject 用法</h2><p>provide：选项应该是一个对象或返回一个对象的函数。该对象包含可注入其子孙的属性。</p>
+<p>inject：一个字符串数组，或一个对象，对象的 key 是本地的绑定名</p>
+<p>提示：provide 和 inject 绑定并不是可响应的。这是刻意为之的。如果你传入了一个可监听的对象，那么其对象的属性还是可响应的。</p>
+<h2 id="5-注意事项"><a href="#5-注意事项" class="headerlink" title="5.注意事项"></a>5.注意事项</h2><p>不能在生命周期中调用！！！否则会一直在重新调用，只能在添加或删除这样类似的操作中。</p>
 
       
     </div>
@@ -367,7 +373,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag"># 工具</a>
+            <a href="/tags/VUE/" rel="tag"># VUE</a>
           
         </div>
       
@@ -380,8 +386,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/25/markdown%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E8%AF%AD%E6%B3%95/" rel="next" title="markdown的基本使用语法">
-                <i class="fa fa-chevron-left"></i> markdown的基本使用语法
+              <a href="/2019/11/28/ElementUI%20%E4%B8%AD%E6%97%A5%E6%9C%9F%E9%80%89%E6%8B%A9%E5%99%A8%20%E5%B8%B8%E8%A7%81%E9%99%90%E5%88%B6%E5%8F%AF%E9%80%89%E6%8B%A9%E7%9A%84%E6%97%A5%E6%9C%9F%20-%20%E5%89%AF%E6%9C%AC/" rel="next" title="ElementUI 中日期选择器 常见限制可选择的日期">
+                <i class="fa fa-chevron-left"></i> ElementUI 中日期选择器 常见限制可选择的日期
               </a>
             
           </div>
@@ -469,7 +475,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -524,7 +530,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#组件代码："><span class="nav-number">1.</span> <span class="nav-text">组件代码：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-场景"><span class="nav-number">1.</span> <span class="nav-text">1.场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-遇到的问题"><span class="nav-number">2.</span> <span class="nav-text">2.遇到的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-解决方法"><span class="nav-number">3.</span> <span class="nav-text">3.解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-provide-inject-用法"><span class="nav-number">4.</span> <span class="nav-text">4.provide / inject 用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-注意事项"><span class="nav-number">5.</span> <span class="nav-text">5.注意事项</span></a></li></ol></div>
             
 
           </div>
