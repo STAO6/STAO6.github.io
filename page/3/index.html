@@ -250,6 +250,174 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/14/BOM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="STAO">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="STAO_blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/14/BOM/" itemprop="url">BOM(Browser Object Model 浏览器对象模型)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-14T09:18:06+08:00">
+                2020-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CODE/" itemprop="url" rel="index">
+                    <span itemprop="name">CODE</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>&emsp;&emsp;ECMAScript 是 JavaScript 的核心，但如果要在 Web 中使用 JavaScript，那么 BOM（浏览器对象模<br>型）则无疑才是真正的核心。BOM 提供了很多对象，用于访问浏览器的功能，这些功能与任<br>何网页内容无关。多年来，缺少事实上的规范导致 BOM 既有意思又有问题，因为浏览器提供商会按照各<br>自的想法随意去扩展它。于是，浏览器之间共有的对象就成为了事实上的标准。这些对象在浏览器中得以<br>存在，很大程度上是由于它们提供了与浏览器的互操作性。W3C 为了把浏览器中 JavaScript 最基本的部分<br>标准化，已经将 BOM 的主要方面纳入了 HTML5 的规范中。</p>
+<h1 id="1-window对象"><a href="#1-window对象" class="headerlink" title="1.window对象"></a>1.window对象</h1><p>&emsp;&emsp;BOM 的核心对象是 window，它表示浏览器的一个实例。在浏览器中，window 对象有双重角色，<br>它既是通过 JavaScript 访问浏览器窗口的一个接口，又是 ECMAScript 规定的 Global 对象。这意味着<br>在网页中定义的任何一个对象、变量和函数，都以 window 作为其 Global 对象，因此有权访问<br>parseInt()等方法。</p>
+<h2 id="1-1-全局作用域"><a href="#1-1-全局作用域" class="headerlink" title="1.1 全局作用域"></a>1.1 全局作用域</h2><p>有在全局作用域中声明的变量、函数都会变成 window 对象的属性和方法。但定义全局变量与在 window 对象上直接定义属性还是有一点差别：</p>
+<ol>
+<li>全局变量不能通过 delete 操作符删除，而直接在 window 对象上的定义的属性可以。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var age = 29;</span><br><span class="line">window.color = &quot;red&quot;;</span><br><span class="line">//在 IE &lt; 9 时抛出错误，在其他所有浏览器中都返回 false</span><br><span class="line">delete window.age;</span><br><span class="line">//在 IE &lt; 9 时抛出错误，在其他所有浏览器中都返回 true</span><br><span class="line">delete window.color; //returns true</span><br><span class="line">alert(window.age); //29</span><br><span class="line">alert(window.color); //undefined</span><br></pre></td></tr></table></figure></li>
+<li>直接访问未定义的变量会抛出错误，但是访问未定义的window属性则不会，会返回undefined。可以知道某个可能未声明的变量是否存在。<h2 id="1-2-导航和打开窗口"><a href="#1-2-导航和打开窗口" class="headerlink" title="1.2 导航和打开窗口"></a>1.2 导航和打开窗口</h2></li>
+</ol>
+<p><strong>函数</strong>：window.open(URL,窗口目标，特性字符串，是否打开新页面标志)；<br>四个参数中，一般只需要传URL，最后一个参数传_self时新窗口覆盖当前窗口，默认为打开新窗口。<br>特性表：<br><img src="https://i.loli.net/2019/11/19/xvFCBrUjIfqQHDL.png" alt=""><br>表中所列的部分或全部设置选项，都可以通过逗号分隔的名值对列表来指定。其中，名值对以等号<br>表示（注意，整个特性字符串中不允许出现空格），如下面的例子所示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">window.open(&quot;http://www.baidu.com&quot;,&quot;wroxWindow&quot;,</span><br><span class="line">&quot;height=400,width=400,top=10,left=10,resizable=yes&quot;);</span><br></pre></td></tr></table></figure>
+<p><strong>返回值</strong>：新打开窗口的window对象<br><strong>opener属性</strong>：新打开的窗口都有一个opener属性，保存着打开它的原始窗口的window对象。但原始窗口中并没有这样的指针指向弹出窗口。可指定opener为null；<br><strong>opener.close()</strong>：可以关闭本窗口中通过js打开的窗口；<br>不同浏览器使用close()方法的策略不同：</p>
+<ol>
+<li>ff : 无法关闭</li>
+<li>chrome : 直接关闭</li>
+<li>ie : 询问用户</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;button&gt;open&lt;/button&gt;</span><br><span class="line">&lt;button&gt;close&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  var oBtn = document.getElementsByTagName(&apos;button&apos;)[0];</span><br><span class="line">  var oBtn1 = document.getElementsByTagName(&apos;button&apos;)[1];</span><br><span class="line">  var wroxWin; </span><br><span class="line">  oBtn.onclick = function()&#123;</span><br><span class="line">    wroxWin = window.open(&quot;http://www.baidu.com/&quot;,&quot;wroxWindow&quot;,</span><br><span class="line">        &quot;height=400,width=400,top=10,left=10,resizable=yes&quot;);</span><br><span class="line">    // wroxWin.opener = null;</span><br><span class="line">    console.log(wroxWin);</span><br><span class="line">  &#125;;</span><br><span class="line">  oBtn1.onclick = function()&#123;</span><br><span class="line">    wroxWin.close();</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="1-3-窗口尺寸"><a href="#1-3-窗口尺寸" class="headerlink" title="1.3 窗口尺寸"></a>1.3 窗口尺寸</h1><h2 id="1-3-1可视区尺寸"><a href="#1-3-1可视区尺寸" class="headerlink" title="1.3.1可视区尺寸"></a>1.3.1可视区尺寸</h2><p>document.documentElement.clientWidth<br>document.documentElement.clientHeight<br><img src="https://i.loli.net/2019/11/20/EZJQWcSzdMA4w3R.png" alt=""></p>
+<h2 id="1-3-2-滚动条滚动距离"><a href="#1-3-2-滚动条滚动距离" class="headerlink" title="1.3.2 滚动条滚动距离"></a>1.3.2 滚动条滚动距离</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var scrollTop = document.documentElement.scrollTop || document.body.scrollTop(Left)</span><br></pre></td></tr></table></figure>
+<h2 id="1-3-3-内容高度（宽度）"><a href="#1-3-3-内容高度（宽度）" class="headerlink" title="1.3.3 内容高度（宽度）"></a>1.3.3 内容高度（宽度）</h2><p>Element.scrollHeight (Width)这个只读属性是一个元素内容高度的度量，包括由于溢出导致的视图中不可见内容。<br><img src="https://i.loli.net/2019/11/20/oOgEMeRGT6qQ3Zn.png" alt=""></p>
+<h1 id="1-3-4-offsetHeight-Width"><a href="#1-3-4-offsetHeight-Width" class="headerlink" title="1.3.4  offsetHeight /Width"></a>1.3.4  offsetHeight /Width</h1><p>HTMLElement.offsetHeight 是一个只读属性，它返回该元素的像素高度，高度包含该元素的垂直内边距和边框，且是一个整数。<br>通常，元素的offsetHeight是一种元素CSS高度的衡量标准，包括元素的边框、内边距和元素的水平滚动条（如果存在且渲染的话），不包含:before或:after等伪类元素的高度。<br>对于文档的body对象，它包括代替元素的CSS高度线性总含量高。浮动元素的向下延伸内容高度是被忽略的。<br>这个属性值会被四舍五入为整数值，如果你需要一个浮点数值，请用 element.getBoundingClientRect().<br><img src="https://i.loli.net/2019/11/20/pMmjAqbvItWC9ha.png" alt=""></p>
+<h1 id="2-location对象"><a href="#2-location对象" class="headerlink" title="2.location对象"></a>2.location对象</h1><p>最有用的BOM对象之一，既是window的属性，又是document的属性。location存储着当前文档的信息，并且将 URL 解析为独立的片段，可以通过location对象的属性访问，下面是所有的location属性：<br><img src="https://i.loli.net/2019/11/20/TIFaBu38SzwVxWt.png" alt=""></p>
+<h2 id="2-1-获取包含查询字符串的对象"><a href="#2-1-获取包含查询字符串的对象" class="headerlink" title="2.1 获取包含查询字符串的对象"></a>2.1 获取包含查询字符串的对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">function getQueryStringArgs()&#123; </span><br><span class="line"> //取得查询字符串并去掉开头的问号</span><br><span class="line">  var qs = (location.search.length &gt; 0 ? location.search.substring(1) : &quot;&quot;), </span><br><span class="line">  </span><br><span class="line">  //保存数据的对象</span><br><span class="line">  args = &#123;&#125;, </span><br><span class="line">  </span><br><span class="line">  //取得每一项</span><br><span class="line">  items = qs.length ? qs.split(&quot;&amp;&quot;) : [], </span><br><span class="line">  item = null, </span><br><span class="line">  name = null, </span><br><span class="line">  value = null, </span><br><span class="line">  //在 for 循环中使用</span><br><span class="line">  i = 0, </span><br><span class="line">  len = items.length; </span><br><span class="line">  //逐个将每一项添加到 args 对象中</span><br><span class="line">  for (i=0; i &lt; len; i++)&#123; </span><br><span class="line">      item = items[i].split(&quot;=&quot;); </span><br><span class="line">      name = decodeURIComponent(item[0]); </span><br><span class="line">      value = decodeURIComponent(item[1]); </span><br><span class="line">      if (name.length) &#123; </span><br><span class="line">      args[name] = value; </span><br><span class="line">      &#125; </span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> return args; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-改变浏览器位置"><a href="#2-2-改变浏览器位置" class="headerlink" title="2.2 改变浏览器位置"></a>2.2 改变浏览器位置</h2><ol>
+<li><code>location.assign( URL )</code>方法:立即打开新 URL 并在浏览器的历史记录中生成一条记录。修改window.location或者location.href也会调用assign方法，效果相同。修改表中location的属性也可改变浏览器位置。</li>
+<li><code>location.replace( URL )</code>,载入新页面且不会生成历史记录，无法回退。</li>
+<li><code>location.reload( true(可选) )</code>,重新载入页面，如果调用 reload()<br>时不传递任何参数，页面就会以最有效的方式重新加载。也就是说，如果页面自上次请求以来并没有改变过，页面就会从浏览器缓存中重新加载。如果要强制从服务器重新加载，需加参数true。位于 reload()调用之后的代码可能会也可能不会执行，这要取决于网络延迟或系统资源等因素。为此，最好将 reload()放在代码的最后一行。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/10/vue%E6%8F%92%E5%80%BC%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1511,7 +1679,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
