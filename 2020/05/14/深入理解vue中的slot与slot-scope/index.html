@@ -1,420 +1,478 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
 
 
 
-  
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.JPG">
+  <link rel="icon" type="image/png" href="/img/favicon.JPG">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="前端学习">
+  <meta name="author" content="STAO">
+  <meta name="keywords" content="">
+  <title>深入理解vue中的slot与slot-scope - STAO_blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
 
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="VUE," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="写在前面实际上，插槽的概念很简单，下面分三部分来讲。这三部分也是按照vue说明文档的顺序来写的。 插槽，也就是slot，是组件的一块HTML模板，这块模板显示不显示、以及怎样显示由父组件来决定。 实际上，一个slot最核心的两个问题在这里就点出来了，是显示不显示和怎样显示。 由于插槽是一块模板，所以，对于任何一个组件，从模板种类的角度来分，其实都可以分为非插槽模板和插槽模板两大类。 非插槽模板指的">
-<meta name="keywords" content="VUE">
-<meta property="og:type" content="article">
-<meta property="og:title" content="深入理解vue中的slot与slot-scope">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;05&#x2F;14&#x2F;%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3vue%E4%B8%AD%E7%9A%84slot%E4%B8%8Eslot-scope&#x2F;index.html">
-<meta property="og:site_name" content="STAO_blog">
-<meta property="og:description" content="写在前面实际上，插槽的概念很简单，下面分三部分来讲。这三部分也是按照vue说明文档的顺序来写的。 插槽，也就是slot，是组件的一块HTML模板，这块模板显示不显示、以及怎样显示由父组件来决定。 实际上，一个slot最核心的两个问题在这里就点出来了，是显示不显示和怎样显示。 由于插槽是一块模板，所以，对于任何一个组件，从模板种类的角度来分，其实都可以分为非插槽模板和插槽模板两大类。 非插槽模板指的">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https:&#x2F;&#x2F;user-gold-cdn.xitu.io&#x2F;2018&#x2F;1&#x2F;25&#x2F;1612dc51f5f9f1c4?imageView2&#x2F;0&#x2F;w&#x2F;1280&#x2F;h&#x2F;960&#x2F;format&#x2F;webp&#x2F;ignore-error&#x2F;1">
-<meta property="og:image" content="https:&#x2F;&#x2F;user-gold-cdn.xitu.io&#x2F;2018&#x2F;1&#x2F;25&#x2F;1612dc51f60baa0a?imageView2&#x2F;0&#x2F;w&#x2F;1280&#x2F;h&#x2F;960&#x2F;format&#x2F;webp&#x2F;ignore-error&#x2F;1">
-<meta property="og:image" content="https:&#x2F;&#x2F;user-gold-cdn.xitu.io&#x2F;2018&#x2F;1&#x2F;25&#x2F;1612dc51f6344ace?imageView2&#x2F;0&#x2F;w&#x2F;1280&#x2F;h&#x2F;960&#x2F;format&#x2F;webp&#x2F;ignore-error&#x2F;1">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;05&#x2F;14&#x2F;Wx8KceFpYVy7LCP.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;05&#x2F;14&#x2F;gRL8hk7tQNqBMUV.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;05&#x2F;14&#x2F;DLWJNI5ydf1kOPs.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;3378249-f4fe6925c63599e0.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1200&#x2F;format&#x2F;webp">
-<meta property="og:updated_time" content="2020-05-14T09:29:14.522Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;user-gold-cdn.xitu.io&#x2F;2018&#x2F;1&#x2F;25&#x2F;1612dc51f5f9f1c4?imageView2&#x2F;0&#x2F;w&#x2F;1280&#x2F;h&#x2F;960&#x2F;format&#x2F;webp&#x2F;ignore-error&#x2F;1">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'STAO'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/2020/05/14/深入理解vue中的slot与slot-scope/"/>
-
-
-
-
-
-  <title>深入理解vue中的slot与slot-scope | STAO_blog</title>
   
 
 
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
 
 
-
-
-
-
+  <script  src="/js/utils.js" ></script>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  
-  
-    
-  
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>STAO_blog</strong>&nbsp;</a>
 
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">STAO_blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
 </nav>
 
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/14/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3vue%E4%B8%AD%E7%9A%84slot%E4%B8%8Eslot-scope/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="STAO">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="STAO_blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">深入理解vue中的slot与slot-scope</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-14T17:32:17+08:00">
-                2020-05-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CODE/" itemprop="url" rel="index">
-                    <span itemprop="name">CODE</span>
-                  </a>
-                </span>
-
-                
-                
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
               
             </span>
-          
 
-          
             
-          
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-05-14 17:32">
+      2020年5月14日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      37
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
 
           
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      </div>
+    </div>
+  </header>
 
+  <main>
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
-      
-        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>实际上，插槽的概念很简单，下面分三部分来讲。这三部分也是按照vue说明文档的顺序来写的。</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>实际上，插槽的概念很简单，下面分三部分来讲。这三部分也是按照vue说明文档的顺序来写的。</p>
 <p><strong>插槽，也就是slot，是组件的一块HTML模板，这块模板显示不显示、以及怎样显示由父组件来决定。</strong> 实际上，一个slot最核心的两个问题在这里就点出来了，是<strong>显示不显示</strong>和<strong>怎样显示</strong>。</p>
 <p>由于插槽是一块模板，所以，对于任何一个组件，从模板种类的角度来分，其实都可以分为<strong>非插槽模板</strong>和<strong>插槽模板</strong>两大类。 非插槽模板指的是<strong>html模板</strong>，比如‘div、span、ul、table’这些，非插槽模板的显示与隐藏以及怎样显示由组件自身控制；插槽模板是slot，它是一个空壳子，因为它的显示与隐藏以及最后用什么样的html模板显示由父组件控制。<strong>但是插槽显示的位置却由子组件自身决定，slot写在组件template的什么位置，父组件传过来的模板将来就显示在什么位置</strong>。</p>
 <h2 id="单个插槽-默认插槽-匿名插槽"><a href="#单个插槽-默认插槽-匿名插槽" class="headerlink" title="单个插槽 | 默认插槽 | 匿名插槽"></a>单个插槽 | 默认插槽 | 匿名插槽</h2><p>首先是单个插槽，<strong>单个插槽</strong>是vue的官方叫法，但是其实也可以叫它默认插槽，或者与具名插槽相对，我们可以叫它匿名插槽。因为它不用设置name属性。</p>
 <p>单个插槽可以放置在组件的任意位置，但是就像它的名字一样，一个组件中只能有一个该类插槽。相对应的，具名插槽就可以有很多个，只要名字（name属性）不同就可以了。</p>
 <p>下面通过一个例子来展示。</p>
 <p>父组件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;father&quot;&gt;</span><br><span class="line">        &lt;h3&gt;这里是父组件&lt;/h3&gt;</span><br><span class="line">        &lt;child&gt;</span><br><span class="line">            &lt;div class=&quot;tmpl&quot;&gt;</span><br><span class="line">              &lt;span&gt;菜单1&lt;/span&gt;</span><br><span class="line">              &lt;span&gt;菜单2&lt;/span&gt;</span><br><span class="line">              &lt;span&gt;菜单3&lt;/span&gt;</span><br><span class="line">              &lt;span&gt;菜单4&lt;/span&gt;</span><br><span class="line">              &lt;span&gt;菜单5&lt;/span&gt;</span><br><span class="line">              &lt;span&gt;菜单6&lt;/span&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/child&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs angelscript">&lt;template&gt;
+    &lt;div <span class="hljs-keyword">class</span>="<span class="hljs-symbol">father</span>"&gt;
+        &lt;<span class="hljs-symbol">h3</span>&gt;这里是父组件&lt;/<span class="hljs-symbol">h3</span>&gt;
+        &lt;<span class="hljs-symbol">child</span>&gt;
+            &lt;<span class="hljs-symbol">div</span> <span class="hljs-symbol">class</span>="<span class="hljs-symbol">tmpl</span>"&gt;
+              &lt;<span class="hljs-symbol">span</span>&gt;菜单<span class="hljs-symbol">1</span>&lt;/<span class="hljs-symbol">span</span>&gt;
+              &lt;<span class="hljs-symbol">span</span>&gt;菜单<span class="hljs-symbol">2</span>&lt;/<span class="hljs-symbol">span</span>&gt;
+              &lt;<span class="hljs-symbol">span</span>&gt;菜单<span class="hljs-symbol">3</span>&lt;/<span class="hljs-symbol">span</span>&gt;
+              &lt;<span class="hljs-symbol">span</span>&gt;菜单<span class="hljs-symbol">4</span>&lt;/<span class="hljs-symbol">span</span>&gt;
+              &lt;<span class="hljs-symbol">span</span>&gt;菜单<span class="hljs-symbol">5</span>&lt;/<span class="hljs-symbol">span</span>&gt;
+              &lt;<span class="hljs-symbol">span</span>&gt;菜单<span class="hljs-symbol">6</span>&lt;/<span class="hljs-symbol">span</span>&gt;
+            &lt;/<span class="hljs-symbol">div</span>&gt;
+        &lt;/<span class="hljs-symbol">child</span>&gt;
+    &lt;/<span class="hljs-symbol">div</span>&gt;
+&lt;/<span class="hljs-symbol">template</span>&gt;
+复制代码</code></pre>
 
 <p>子组件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;child&quot;&gt;</span><br><span class="line">        &lt;h3&gt;这里是子组件&lt;/h3&gt;</span><br><span class="line">        &lt;slot&gt;&lt;/slot&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"child"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>这里是子组件<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+复制代码</code></pre>
 
 <p>在这个例子里，因为父组件在里面写了html模板，那么子组件的<strong>匿名插槽</strong>这块模板就是下面这样。也就是说，子组件的匿名插槽被使用了，是被下面这块模板使用了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;tmpl&quot;&gt;</span><br><span class="line">  &lt;span&gt;菜单1&lt;/span&gt;</span><br><span class="line">  &lt;span&gt;菜单2&lt;/span&gt;</span><br><span class="line">  &lt;span&gt;菜单3&lt;/span&gt;</span><br><span class="line">  &lt;span&gt;菜单4&lt;/span&gt;</span><br><span class="line">  &lt;span&gt;菜单5&lt;/span&gt;</span><br><span class="line">  &lt;span&gt;菜单6&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs angelscript">&lt;div <span class="hljs-keyword">class</span>="<span class="hljs-symbol">tmpl</span>"&gt;
+  &lt;<span class="hljs-symbol">span</span>&gt;菜单<span class="hljs-symbol">1</span>&lt;/<span class="hljs-symbol">span</span>&gt;
+  &lt;<span class="hljs-symbol">span</span>&gt;菜单<span class="hljs-symbol">2</span>&lt;/<span class="hljs-symbol">span</span>&gt;
+  &lt;<span class="hljs-symbol">span</span>&gt;菜单<span class="hljs-symbol">3</span>&lt;/<span class="hljs-symbol">span</span>&gt;
+  &lt;<span class="hljs-symbol">span</span>&gt;菜单<span class="hljs-symbol">4</span>&lt;/<span class="hljs-symbol">span</span>&gt;
+  &lt;<span class="hljs-symbol">span</span>&gt;菜单<span class="hljs-symbol">5</span>&lt;/<span class="hljs-symbol">span</span>&gt;
+  &lt;<span class="hljs-symbol">span</span>&gt;菜单<span class="hljs-symbol">6</span>&lt;/<span class="hljs-symbol">span</span>&gt;
+&lt;/<span class="hljs-symbol">div</span>&gt;
+复制代码</code></pre>
 
 <p>最终的渲染结果如图所示：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/1/25/1612dc51f5f9f1c4?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">注：所有demo都加了样式，以方便观察。其中，父组件以灰色背景填充，子组件都以浅蓝色填充。</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<p><img src="https://user-gold-cdn.xitu.io/2018/1/25/1612dc51f5f9f1c4?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" srcset="/img/loading.gif" alt="img"></p>
+<pre><code class="hljs maxima">注：所有<span class="hljs-built_in">demo</span>都加了样式，以方便观察。其中，父组件以灰色背景填充，子组件都以浅蓝色填充。
+复制代码</code></pre>
 
 <h2 id="具名插槽"><a href="#具名插槽" class="headerlink" title="具名插槽"></a>具名插槽</h2><p>匿名插槽没有name属性，所以是匿名插槽，那么，插槽加了name属性，就变成了具名插槽。具名插槽可以在一个组件中出现N次，出现在不同的位置。下面的例子，就是一个有两个<strong>具名插槽</strong>和<strong>单个插槽</strong>的组件，这三个插槽被父组件用同一套css样式显示了出来，不同的是内容上略有区别。</p>
 <p>父组件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;father&quot;&gt;</span><br><span class="line">    &lt;h3&gt;这里是父组件&lt;/h3&gt;</span><br><span class="line">    &lt;child&gt;</span><br><span class="line">      &lt;div class=&quot;tmpl&quot; slot=&quot;up&quot;&gt;</span><br><span class="line">        &lt;span&gt;菜单1&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;菜单2&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;菜单3&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;菜单4&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;菜单5&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;菜单6&lt;/span&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;div class=&quot;tmpl&quot; slot=&quot;down&quot;&gt;</span><br><span class="line">        &lt;span&gt;菜单-1&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;菜单-2&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;菜单-3&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;菜单-4&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;菜单-5&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;菜单-6&lt;/span&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;div class=&quot;tmpl&quot;&gt;</span><br><span class="line">        &lt;span&gt;菜单-&gt;1&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;菜单-&gt;2&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;菜单-&gt;3&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;菜单-&gt;4&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;菜单-&gt;5&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;菜单-&gt;6&lt;/span&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/child&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"father"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>这里是父组件<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">child</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tmpl"</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"up"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单1<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单2<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单3<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单4<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单5<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单6<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tmpl"</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"down"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单-1<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单-2<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单-3<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单-4<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单-5<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单-6<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tmpl"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单-&gt;1<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单-&gt;2<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单-&gt;3<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单-&gt;4<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单-&gt;5<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>菜单-&gt;6<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">child</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+复制代码</code></pre>
 
 <p>子组件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;child&quot;&gt;</span><br><span class="line">    // 具名插槽</span><br><span class="line">    &lt;slot name=&quot;up&quot;&gt;&lt;/slot&gt;</span><br><span class="line">    &lt;h3&gt;这里是子组件&lt;/h3&gt;</span><br><span class="line">    // 具名插槽</span><br><span class="line">    &lt;slot name=&quot;down&quot;&gt;&lt;/slot&gt;</span><br><span class="line">    // 匿名插槽</span><br><span class="line">    &lt;slot&gt;&lt;/slot&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs angelscript">&lt;template&gt;
+  &lt;div <span class="hljs-keyword">class</span>="<span class="hljs-symbol">child</span>"&gt;
+    // 具名插槽
+    &lt;<span class="hljs-symbol">slot</span> <span class="hljs-symbol">name</span>="<span class="hljs-symbol">up</span>"&gt;&lt;/<span class="hljs-symbol">slot</span>&gt;
+    &lt;<span class="hljs-symbol">h3</span>&gt;这里是子组件&lt;/<span class="hljs-symbol">h3</span>&gt;
+    // 具名插槽
+    &lt;<span class="hljs-symbol">slot</span> <span class="hljs-symbol">name</span>="<span class="hljs-symbol">down</span>"&gt;&lt;/<span class="hljs-symbol">slot</span>&gt;
+    // 匿名插槽
+    &lt;<span class="hljs-symbol">slot</span>&gt;&lt;/<span class="hljs-symbol">slot</span>&gt;
+  &lt;/<span class="hljs-symbol">div</span>&gt;
+&lt;/<span class="hljs-symbol">template</span>&gt;
+复制代码</code></pre>
 
 <p>显示结果如图：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/1/25/1612dc51f60baa0a?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/1/25/1612dc51f60baa0a?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" srcset="/img/loading.gif" alt="img"></p>
 <p>可以看到，父组件通过html模板上的slot属性关联具名插槽。没有slot属性的html模板默认关联匿名插槽。</p>
 <h2 id="作用域插槽-带数据的插槽"><a href="#作用域插槽-带数据的插槽" class="headerlink" title="作用域插槽 | 带数据的插槽"></a>作用域插槽 | 带数据的插槽</h2><p>最后，就是我们的作用域插槽。这个稍微难理解一点。官方叫它作用域插槽，实际上，对比前面两种插槽，我们可以叫它带数据的插槽。什么意思呢，就是前面两种，都是在组件的template里面写</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">匿名插槽</span><br><span class="line">&lt;slot&gt;&lt;/slot&gt;</span><br><span class="line">具名插槽</span><br><span class="line">&lt;slot name=&quot;up&quot;&gt;&lt;/slot&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs xml">匿名插槽
+<span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span>
+具名插槽
+<span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"up"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span>
+复制代码</code></pre>
 
 <p>但是<strong>作用域插槽要求，在slot上面绑定数据</strong>。也就是你得写成大概下面这个样子。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;slot name=&quot;up&quot; :data=&quot;data&quot;&gt;&lt;/slot&gt;</span><br><span class="line"> export default &#123;</span><br><span class="line">    data: function()&#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        data: [&apos;zhangsan&apos;,&apos;lisi&apos;,&apos;wanwu&apos;,&apos;zhaoliu&apos;,&apos;tianqi&apos;,&apos;xiaoba&apos;]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs routeros">&lt;slot <span class="hljs-attribute">name</span>=<span class="hljs-string">"up"</span> :<span class="hljs-attribute">data</span>=<span class="hljs-string">"data"</span>&gt;&lt;/slot&gt;
+ <span class="hljs-builtin-name">export</span><span class="hljs-built_in"> default </span>&#123;
+    data: function()&#123;
+      return &#123;
+        data: [<span class="hljs-string">'zhangsan'</span>,<span class="hljs-string">'lisi'</span>,<span class="hljs-string">'wanwu'</span>,<span class="hljs-string">'zhaoliu'</span>,<span class="hljs-string">'tianqi'</span>,<span class="hljs-string">'xiaoba'</span>]
+      &#125;
+    &#125;,
+&#125;
+复制代码</code></pre>
 
 <p>我们前面说了，插槽最后显示不显示是看父组件有没有在child下面写模板，像下面那样。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;child&gt;</span><br><span class="line">   html模板</span><br><span class="line">&lt;/child&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">child</span>&gt;</span>
+   html模板
+<span class="hljs-tag">&lt;/<span class="hljs-name">child</span>&gt;</span>
+复制代码</code></pre>
 
 <p>写了，插槽就总得在浏览器上显示点东西，东西就是html该有的模样，没写，插槽就是空壳子，啥都没有。 OK，我们说有html模板的情况，就是父组件会往子组件插模板的情况，那到底插一套什么样的样式呢，这由父组件的html+css共同决定，但是这套样式里面的内容呢？</p>
 <p>正因为作用域插槽绑定了一套数据，父组件可以拿来用。于是，情况就变成了这样：样式父组件说了算，但内容可以显示子组件插槽绑定的。</p>
 <p>我们再来对比，作用域插槽跟单个插槽和具名插槽的区别，因为单个插槽和具名插槽不绑定数据，所以父组件提供的模板一般要既包括样式又包括内容，上面的例子中，你看到的文字，“菜单1”，“菜单2”都是父组件自己提供的内容；而作用域插槽，父组件只需要提供一套样式（在确实用作用域插槽绑定的数据的前提下）。</p>
 <p>下面的例子，你就能看到，父组件提供了三种样式(分别是flex、ul、直接显示)，都没有提供数据，数据使用的都是子组件插槽自己绑定的那个数组（一堆人名的那个数组）。</p>
 <p>父组件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;father&quot;&gt;</span><br><span class="line">    &lt;h3&gt;这里是父组件&lt;/h3&gt;</span><br><span class="line">    &lt;!--第一次使用：用flex展示数据--&gt;</span><br><span class="line">    &lt;child&gt;</span><br><span class="line">      &lt;template slot-scope=&quot;user&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;tmpl&quot;&gt;</span><br><span class="line">          &lt;span v-for=&quot;item in user.data&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/span&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      &lt;/template&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/child&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--第二次使用：用列表展示数据--&gt;</span><br><span class="line">    &lt;child&gt;</span><br><span class="line">      &lt;template slot-scope=&quot;user&quot;&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">          &lt;li v-for=&quot;item in user.data&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/li&gt;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">      &lt;/template&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/child&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--第三次使用：直接显示数据--&gt;</span><br><span class="line">    &lt;child&gt;</span><br><span class="line">      &lt;template slot-scope=&quot;user&quot;&gt;</span><br><span class="line">       &#123;&#123;user.data&#125;&#125;</span><br><span class="line">      &lt;/template&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/child&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--第四次使用：不使用其提供的数据, 作用域插槽退变成匿名插槽--&gt;</span><br><span class="line">    &lt;child&gt;</span><br><span class="line">      我就是模板</span><br><span class="line">    &lt;/child&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs django"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"father"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>这里是父组件<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+    <span class="hljs-comment">&lt;!--第一次使用：用flex展示数据--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">child</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">slot-scope</span>=<span class="hljs-string">"user"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tmpl"</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">"item in user.data"</span>&gt;</span></span><span class="hljs-template-variable">&#123;&#123;item&#125;&#125;</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;/<span class="hljs-name">child</span>&gt;</span>
+
+    <span class="hljs-comment">&lt;!--第二次使用：用列表展示数据--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">child</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">slot-scope</span>=<span class="hljs-string">"user"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">"item in user.data"</span>&gt;</span></span><span class="hljs-template-variable">&#123;&#123;item&#125;&#125;</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;/<span class="hljs-name">child</span>&gt;</span>
+
+    <span class="hljs-comment">&lt;!--第三次使用：直接显示数据--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">child</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">slot-scope</span>=<span class="hljs-string">"user"</span>&gt;</span>
+       </span><span class="hljs-template-variable">&#123;&#123;user.data&#125;&#125;</span><span class="xml">
+      <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;/<span class="hljs-name">child</span>&gt;</span>
+
+    <span class="hljs-comment">&lt;!--第四次使用：不使用其提供的数据, 作用域插槽退变成匿名插槽--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">child</span>&gt;</span>
+      我就是模板
+    <span class="hljs-tag">&lt;/<span class="hljs-name">child</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+复制代码</span></code></pre>
 
 <p>子组件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;child&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;h3&gt;这里是子组件&lt;/h3&gt;</span><br><span class="line">    // 作用域插槽</span><br><span class="line">    &lt;slot  :data=&quot;data&quot;&gt;&lt;/slot&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"> export default &#123;</span><br><span class="line">    data: function()&#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        data: [&apos;zhangsan&apos;,&apos;lisi&apos;,&apos;wanwu&apos;,&apos;zhaoliu&apos;,&apos;tianqi&apos;,&apos;xiaoba&apos;]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs javascript">&lt;template&gt;
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"child"</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>这里是子组件<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+    // 作用域插槽
+    <span class="hljs-tag">&lt;<span class="hljs-name">slot</span>  <span class="hljs-attr">:data</span>=<span class="hljs-string">"data"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></span>
+
+ <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;
+    <span class="hljs-attr">data</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;
+      <span class="hljs-keyword">return</span> &#123;
+        <span class="hljs-attr">data</span>: [<span class="hljs-string">'zhangsan'</span>,<span class="hljs-string">'lisi'</span>,<span class="hljs-string">'wanwu'</span>,<span class="hljs-string">'zhaoliu'</span>,<span class="hljs-string">'tianqi'</span>,<span class="hljs-string">'xiaoba'</span>]
+      &#125;
+    &#125;
+&#125;
+复制代码</code></pre>
 
 <p>结果如图所示：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/1/25/1612dc51f6344ace?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/1/25/1612dc51f6344ace?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" srcset="/img/loading.gif" alt="img"></p>
 <h2 id="slot在element-ui中的应用"><a href="#slot在element-ui中的应用" class="headerlink" title="slot在element-ui中的应用"></a>slot在element-ui中的应用</h2><p>template（模版） 在这里属于一个固定用法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;template slot-scope=&quot;scope&quot;&gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs d">&lt;<span class="hljs-keyword">template</span> slot-<span class="hljs-keyword">scope</span>=<span class="hljs-string">"scope"</span>&gt;</code></pre>
 
 <p>我们主要说一下这个scope是个什么东西，按照element上的提示：</p>
 <p>通过 Scoped slot 可以获取到 row, column, $index 和 store（table 内部的状态管理）的数据</p>
 <p>我们可以理解为：tableData是给到table的记录集，scope是table内部基于tableData生成出来的。</p>
 <p>我们传进去的tableData，在table内部生成了类似于Excel的scope，因此，通过scope.row.属性名，我们就可以读取到每一行中的属性值。</p>
 <p>为了理解的更加透彻，我将tableData和scope.row分别打印出来，如下：</p>
-<p><img src="https://i.loli.net/2020/05/14/Wx8KceFpYVy7LCP.png" alt="tableData.png"></p>
-<p><img src="https://i.loli.net/2020/05/14/gRL8hk7tQNqBMUV.png" alt="scope.png"></p>
-<p><img src="https://i.loli.net/2020/05/14/DLWJNI5ydf1kOPs.png" alt="result.png"></p>
+<p><img src="https://i.loli.net/2020/05/14/Wx8KceFpYVy7LCP.png" srcset="/img/loading.gif" alt="tableData.png"></p>
+<p><img src="https://i.loli.net/2020/05/14/gRL8hk7tQNqBMUV.png" srcset="/img/loading.gif" alt="scope.png"></p>
+<p><img src="https://i.loli.net/2020/05/14/DLWJNI5ydf1kOPs.png" srcset="/img/loading.gif" alt="result.png"></p>
 <p>我们可以看出scope.row的值就是相当于整个tableData值当中的一行，选哪行就是哪行的数据（不管你在页面中展示tableData数据中的几个属性，都不会影响scope.row的取值，它始终是选中的tableData数据那一行全部属性的键值对）</p>
 <h2 id="v-slot"><a href="#v-slot" class="headerlink" title="v-slot"></a>v-slot</h2><p>vue.js官方文档：在 2.6.0 中，我们为具名插槽和作用域插槽引入了一个新的统一的语法 (即 v-slot 指令)。它取代了 slot 和 slot-scope 这两个目前已被废弃但未被移除且仍在文档中的 attribute。</p>
 <p><strong>使用</strong></p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根组件</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;mo&gt;</span><br><span class="line">            &lt;template v-slot:header=<span class="string">"slotProps"</span>&gt;</span><br><span class="line">                &lt;h1&gt;&#123;&#123;slotProps.header + <span class="string">' '</span> + msg&#125;&#125;&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">                </span></span><br><span class="line"><span class="regexp">            &lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">            &lt;p&gt;A paragraph <span class="keyword">for</span> the main content.&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">            &lt;p&gt;And another one.&lt;/</span>p&gt;</span><br><span class="line"></span><br><span class="line">            &lt;template v-slot:footer&gt;</span><br><span class="line">                &lt;p&gt;Here<span class="string">'s some contact info&lt;/p&gt;</span></span><br><span class="line"><span class="string">            &lt;/template&gt;</span></span><br><span class="line"><span class="string">        &lt;/mo&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;/template&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;script&gt;</span></span><br><span class="line"><span class="string">    import mo from '</span>./<span class="built_in">module</span>.vue<span class="string">'</span></span><br><span class="line"><span class="string">    export default &#123;</span></span><br><span class="line"><span class="string">        components: &#123;</span></span><br><span class="line"><span class="string">            mo</span></span><br><span class="line"><span class="string">        &#125;,</span></span><br><span class="line"><span class="string">        data() &#123;</span></span><br><span class="line"><span class="string">            return &#123;</span></span><br><span class="line"><span class="string">                msg: '</span>这是根组件的消息<span class="string">'</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 子组件</span></span><br><span class="line"><span class="string">&lt;template&gt;</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">        --header start--</span></span><br><span class="line"><span class="string">        &lt;header&gt;</span></span><br><span class="line"><span class="string">            &lt;slot name="header" :header="header"&gt;&lt;/slot&gt;</span></span><br><span class="line"><span class="string">        &lt;/header&gt;</span></span><br><span class="line"><span class="string">        --header over--</span></span><br><span class="line"><span class="string">        &lt;div&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">        --default start--</span></span><br><span class="line"><span class="string">        &lt;slot&gt;&lt;/slot&gt;</span></span><br><span class="line"><span class="string">        --default over--</span></span><br><span class="line"><span class="string">        &lt;div&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">        --footer start--</span></span><br><span class="line"><span class="string">        &lt;footer&gt;</span></span><br><span class="line"><span class="string">            &lt;slot name="footer"&gt;&lt;/slot&gt;</span></span><br><span class="line"><span class="string">        &lt;/footer&gt;</span></span><br><span class="line"><span class="string">        --dooter over--</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;/template&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;script&gt;</span></span><br><span class="line"><span class="string">    export default &#123;</span></span><br><span class="line"><span class="string">        data() &#123;</span></span><br><span class="line"><span class="string">            return &#123;</span></span><br><span class="line"><span class="string">                header: '</span>来自子组件的头部消息<span class="string">'</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;style scoped&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/style&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="hljs jsx"><span class="hljs-comment">// 根组件</span>
+&lt;template&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">mo</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">v-slot:header</span>=<span class="hljs-string">"slotProps"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>&#123;&#123;slotProps.header + ' ' + msg&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+                
+            <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
 
-<p><img src="https:////upload-images.jianshu.io/upload_images/3378249-f4fe6925c63599e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" alt="img"></p>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>A paragraph for the main content.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>And another one.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">v-slot:footer</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Here's some contact info<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">mo</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></span>
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+    <span class="hljs-keyword">import</span> mo <span class="hljs-keyword">from</span> <span class="hljs-string">'./module.vue'</span>
+    <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;
+        <span class="hljs-attr">components</span>: &#123;
+            mo
+        &#125;,
+        data() &#123;
+            <span class="hljs-keyword">return</span> &#123;
+                <span class="hljs-attr">msg</span>: <span class="hljs-string">'这是根组件的消息'</span>
+            &#125;
+        &#125;
+    &#125;
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
+
+<span class="hljs-comment">// 子组件</span>
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        --header start--
+        <span class="hljs-tag">&lt;<span class="hljs-name">header</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"header"</span> <span class="hljs-attr">:header</span>=<span class="hljs-string">"header"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
+        --header over--
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        --default start--
+        <span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span>
+        --default over--
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        --footer start--
+        <span class="hljs-tag">&lt;<span class="hljs-name">footer</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"footer"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">footer</span>&gt;</span>
+        --dooter over--
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></span>
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+    <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;
+        data() &#123;
+            <span class="hljs-keyword">return</span> &#123;
+                <span class="hljs-attr">header</span>: <span class="hljs-string">'来自子组件的头部消息'</span>
+            &#125;
+        &#125;
+    &#125;
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">scoped</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span></span></code></pre>
+
+<p><img src="https:////upload-images.jianshu.io/upload_images/3378249-f4fe6925c63599e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" srcset="/img/loading.gif" alt="img"></p>
 <p>image.png</p>
 <ol>
 <li>组件中可以使用template标签，加v-slot指令制定具名插槽，当没有指定插槽name时，默认出口会带有隐含的名字“default”。</li>
@@ -424,253 +482,169 @@
 <li>v-slot的缩写是#，但是如果使用#的话，必须始终使用具插槽来代替<br>&lt;mo #default=”slotProps”&gt;</li>
 </ol>
 
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/VUE/" rel="tag"># VUE</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2020/05/08/%E6%80%8E%E6%A0%B7%E4%B8%BA%E4%BD%A0%E7%9A%84vue%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%E5%A2%9E%E9%80%9F/" rel="next" title="怎样为你的vue单页应用增速">
-                <i class="fa fa-chevron-left"></i> 怎样为你的vue单页应用增速
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/05/25/v-charts%E4%BD%BF%E7%94%A8/" rel="prev" title="v-charts的使用">
-                v-charts的使用 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">STAO</p>
-              <p class="site-description motion-element" itemprop="description">前端学习</p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">29</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CODE/">CODE</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/VUE/">VUE</a>
+                    
+                  </div>
+                
               </div>
-            
-
-            
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/25/v-charts%E4%BD%BF%E7%94%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">v-charts的使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/08/%E6%80%8E%E6%A0%B7%E4%B8%BA%E4%BD%A0%E7%9A%84vue%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%E5%A2%9E%E9%80%9F/">
+                        <span class="hidden-mobile">怎样为你的vue单页应用增速</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
               
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1399664349&auto=1&height=66"></iframe>
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
+            </div>
 
             
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单个插槽-默认插槽-匿名插槽"><span class="nav-number">2.</span> <span class="nav-text">单个插槽 | 默认插槽 | 匿名插槽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具名插槽"><span class="nav-number">3.</span> <span class="nav-text">具名插槽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域插槽-带数据的插槽"><span class="nav-number">4.</span> <span class="nav-text">作用域插槽 | 带数据的插槽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slot在element-ui中的应用"><span class="nav-number">5.</span> <span class="nav-text">slot在element-ui中的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-slot"><span class="nav-number">6.</span> <span class="nav-text">v-slot</span></a></li></ol></div>
-            
-
           </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
+        </div>
       </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">STAO</span>
-
-  
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
 </div>
 
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
       </div>
     
-
-    
-
   </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
 
   
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
 
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+    <!-- APlayer 音乐播放器 -->
+    <div id="aplayer"></div>
+    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
+<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
 <script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+  var oldLoadAp = window.onload;
+  window.onload = function () {
+    oldLoadAp && oldLoadAp();
+
+    new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      autoplay: 'false' === 'true',
+      loop: 'all',
+      order: 'random',
+      theme: '#b7daff',
+      preload: 'none',
+      audio: [{"name":"name","artist":"artist","url":"http://music.163.com/song/media/outer/url?id=562598065.mp3","cover":"/img/favicon.JPG"}]
+    });
   }
 </script>
 
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
 
 
 
@@ -678,7 +652,150 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "深入理解vue中的slot与slot-scope&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
   
 
 
@@ -692,122 +809,7 @@
 
 
 
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
 
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>

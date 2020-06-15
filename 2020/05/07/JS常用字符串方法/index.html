@@ -1,651 +1,522 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
 
 
 
-  
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.JPG">
+  <link rel="icon" type="image/png" href="/img/favicon.JPG">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="前端学习">
+  <meta name="author" content="STAO">
+  <meta name="keywords" content="">
+  <title>JS常用字符串方法 - STAO_blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
 
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="JavaScript," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="1. charAt(x)charAt(x)返回字符串中x位置的字符，下标从 0 开始。 12345&#x2F;&#x2F;charAt(x)var myString = &amp;apos;jQuery FTW!!!&amp;apos;;console.log(myString.charAt(7));&#x2F;&#x2F;output: F复制代码  2.charCodeAt(x)charCodeAt(x)返回字符串中x位置处字符的unicode值。">
-<meta name="keywords" content="JavaScript">
-<meta property="og:type" content="article">
-<meta property="og:title" content="JS常用字符串方法">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;05&#x2F;07&#x2F;JS%E5%B8%B8%E7%94%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95&#x2F;index.html">
-<meta property="og:site_name" content="STAO_blog">
-<meta property="og:description" content="1. charAt(x)charAt(x)返回字符串中x位置的字符，下标从 0 开始。 12345&#x2F;&#x2F;charAt(x)var myString = &amp;apos;jQuery FTW!!!&amp;apos;;console.log(myString.charAt(7));&#x2F;&#x2F;output: F复制代码  2.charCodeAt(x)charCodeAt(x)返回字符串中x位置处字符的unicode值。">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-05-08T01:52:11.936Z">
-<meta name="twitter:card" content="summary">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'STAO'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/2020/05/07/JS常用字符串方法/"/>
-
-
-
-
-
-  <title>JS常用字符串方法 | STAO_blog</title>
   
 
 
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
 
 
-
-
-
-
+  <script  src="/js/utils.js" ></script>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  
-  
-    
-  
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>STAO_blog</strong>&nbsp;</a>
 
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">STAO_blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
 </nav>
 
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/07/JS%E5%B8%B8%E7%94%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="STAO">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="STAO_blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">JS常用字符串方法</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-07T16:44:18+08:00">
-                2020-05-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CODE/" itemprop="url" rel="index">
-                    <span itemprop="name">CODE</span>
-                  </a>
-                </span>
-
-                
-                
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
               
             </span>
-          
 
-          
             
-          
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-05-07 16:44">
+      2020年5月7日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
 
           
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      </div>
+    </div>
+  </header>
 
+  <main>
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
-      
-        <h2 id="1-charAt-x"><a href="#1-charAt-x" class="headerlink" title="1. charAt(x)"></a>1. charAt(x)</h2><p><code>charAt(x)</code>返回字符串中<code>x</code>位置的字符，下标从 <code>0</code> 开始。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//charAt(x)</span><br><span class="line">var myString = &apos;jQuery FTW!!!&apos;;</span><br><span class="line">console.log(myString.charAt(7));</span><br><span class="line">//output: F</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h2 id="1-charAt-x"><a href="#1-charAt-x" class="headerlink" title="1. charAt(x)"></a>1. charAt(x)</h2><p><code>charAt(x)</code>返回字符串中<code>x</code>位置的字符，下标从 <code>0</code> 开始。</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//charAt(x)</span>
+<span class="hljs-keyword">var</span> myString = <span class="hljs-string">'jQuery FTW!!!'</span>;
+<span class="hljs-built_in">console</span>.log(myString.charAt(<span class="hljs-number">7</span>));
+<span class="hljs-comment">//output: F</span>
+复制代码</code></pre>
 
 <h2 id="2-charCodeAt-x"><a href="#2-charCodeAt-x" class="headerlink" title="2.charCodeAt(x)"></a>2.charCodeAt(x)</h2><p><code>charCodeAt(x)</code>返回字符串中<code>x</code>位置处字符的<code>unicode</code>值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//charCodeAt(position)</span><br><span class="line">var message=&quot;jquery4u&quot;</span><br><span class="line">//alert &quot;113&quot;</span><br><span class="line">alert(message.charCodeAt(1)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs stylus"><span class="hljs-comment">//charCodeAt(position)</span>
+<span class="hljs-selector-tag">var</span> message=<span class="hljs-string">"jquery4u"</span>
+<span class="hljs-comment">//alert "113"</span>
+<span class="hljs-function"><span class="hljs-title">alert</span><span class="hljs-params">(message.charCodeAt(<span class="hljs-number">1</span>)</span></span>
+复制代码</code></pre>
 
 <h2 id="3-concat-v1-v2"><a href="#3-concat-v1-v2" class="headerlink" title="3.concat(v1,v2..)"></a>3.concat(v1,v2..)</h2><p><code>concat()</code> 方法用于连接两个或多个字符串，此方法不改变现有的字符串，返回拼接后的新的字符串。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//concat(v1, v2,..)</span><br><span class="line">var message=&quot;Sam&quot;</span><br><span class="line">var final=message.concat(&quot; is a&quot;,&quot; hopeless romantic.&quot;)</span><br><span class="line">//alerts &quot;Sam is a hopeless romantic.&quot;</span><br><span class="line">alert(final)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs stylus"><span class="hljs-comment">//concat(v1, v2,..)</span>
+<span class="hljs-selector-tag">var</span> message=<span class="hljs-string">"Sam"</span>
+<span class="hljs-selector-tag">var</span> final=message.concat(<span class="hljs-string">" is a"</span>,<span class="hljs-string">" hopeless romantic."</span>)
+<span class="hljs-comment">//alerts "Sam is a hopeless romantic."</span>
+<span class="hljs-function"><span class="hljs-title">alert</span><span class="hljs-params">(final)</span></span>
+复制代码</code></pre>
 
 <h2 id="4-fromCharcode-c1-c2"><a href="#4-fromCharcode-c1-c2" class="headerlink" title="4.fromCharcode(c1,c2)"></a>4.fromCharcode(c1,c2)</h2><p><code>fromCharcode(c1,c2)</code>转换一组<code>Unicode</code>值转换为字符。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//fromCharCode(c1, c2,...)</span><br><span class="line">console.log(String.fromCharCode(97,98,99,120,121,122))</span><br><span class="line">//output: abcxyz</span><br><span class="line">console.log(String.fromCharCode(72,69,76,76,79))</span><br><span class="line">//output: HELLO</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs angelscript"><span class="hljs-comment">//fromCharCode(c1, c2,...)</span>
+console.log(String.fromCharCode(<span class="hljs-number">97</span>,<span class="hljs-number">98</span>,<span class="hljs-number">99</span>,<span class="hljs-number">120</span>,<span class="hljs-number">121</span>,<span class="hljs-number">122</span>))
+<span class="hljs-comment">//output: abcxyz</span>
+console.log(String.fromCharCode(<span class="hljs-number">72</span>,<span class="hljs-number">69</span>,<span class="hljs-number">76</span>,<span class="hljs-number">76</span>,<span class="hljs-number">79</span>))
+<span class="hljs-comment">//output: HELLO</span>
+复制代码</code></pre>
 
 <h2 id="5-indexOf-substr-start"><a href="#5-indexOf-substr-start" class="headerlink" title="5.indexOf(substr, [start])"></a>5.indexOf(substr, [start])</h2><p><code>indexOf</code>方法搜索并(如果找到)返回字符串中搜索到的字符或子字符串的索引。如果没有找到，则返回<code>-1</code>。<code>Start</code>是一个可选参数，指定字符串中开始搜索的位置，默认值为<code>0</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//indexOf(char/substring)</span><br><span class="line">var sentence=&quot;Hi, my name is Sam!&quot;</span><br><span class="line">if (sentence.indexOf(&quot;Sam&quot;)!=-1)</span><br><span class="line">alert(&quot;Sam is in there!&quot;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs stylus"><span class="hljs-comment">//indexOf(char/substring)</span>
+<span class="hljs-selector-tag">var</span> sentence=<span class="hljs-string">"Hi, my name is Sam!"</span>
+<span class="hljs-keyword">if</span> (sentence.indexOf(<span class="hljs-string">"Sam"</span>)!=-<span class="hljs-number">1</span>)
+<span class="hljs-function"><span class="hljs-title">alert</span><span class="hljs-params">(<span class="hljs-string">"Sam is in there!"</span>)</span></span>
+复制代码</code></pre>
 
 <h2 id="6-lastIndexOf-substr-start"><a href="#6-lastIndexOf-substr-start" class="headerlink" title="6.lastIndexOf(substr, [start])"></a>6.lastIndexOf(substr, [start])</h2><p><code>lastIndexOf()</code> 方法返回指定文本在字符串中最后一次出现的索引, 如果未找到，则返回<code>-1</code>。 “<code>Start</code>”是一个可选参数，指定字符串中开始搜索的位置, 默认值为<code>string.length-1</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//lastIndexOf(substr, [start])</span><br><span class="line">var myString = &apos;javascript rox&apos;;</span><br><span class="line">console.log(myString.lastIndexOf(&apos;r&apos;));</span><br><span class="line">//output: 11</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs javascript"><span class="hljs-comment">//lastIndexOf(substr, [start])</span>
+<span class="hljs-keyword">var</span> myString = <span class="hljs-string">'javascript rox'</span>;
+<span class="hljs-built_in">console</span>.log(myString.lastIndexOf(<span class="hljs-string">'r'</span>));
+<span class="hljs-comment">//output: 11</span>
+复制代码</code></pre>
 
 <h2 id="7-match-regexp"><a href="#7-match-regexp" class="headerlink" title="7.match(regexp)"></a>7.match(regexp)</h2><p>根据正则表达式在字符串中搜索匹配项。如果没有找到匹配项，则返回一个信息数组或<code>null</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//match(regexp) //select integers only</span><br><span class="line">var intRegex = /[0-9 -()+]+$/;  </span><br><span class="line"> </span><br><span class="line">var myNumber = &apos;999&apos;;</span><br><span class="line">var myInt = myNumber.match(intRegex);</span><br><span class="line">console.log(isInt);</span><br><span class="line">//output: 999</span><br><span class="line"> </span><br><span class="line">var myString = &apos;999 JS Coders&apos;;</span><br><span class="line">var myInt = myString.match(intRegex);</span><br><span class="line">console.log(isInt);</span><br><span class="line">//output: null</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs javascript"><span class="hljs-comment">//match(regexp) //select integers only</span>
+<span class="hljs-keyword">var</span> intRegex = <span class="hljs-regexp">/[0-9 -()+]+$/</span>;  
+ 
+<span class="hljs-keyword">var</span> myNumber = <span class="hljs-string">'999'</span>;
+<span class="hljs-keyword">var</span> myInt = myNumber.match(intRegex);
+<span class="hljs-built_in">console</span>.log(isInt);
+<span class="hljs-comment">//output: 999</span>
+ 
+<span class="hljs-keyword">var</span> myString = <span class="hljs-string">'999 JS Coders'</span>;
+<span class="hljs-keyword">var</span> myInt = myString.match(intRegex);
+<span class="hljs-built_in">console</span>.log(isInt);
+<span class="hljs-comment">//output: null</span>
+复制代码</code></pre>
 
 <h2 id="8-replace-regexp-substr-replacetext"><a href="#8-replace-regexp-substr-replacetext" class="headerlink" title="8.replace(regexp/substr, replacetext)"></a>8.replace(regexp/substr, replacetext)</h2><p><code>replace()</code> 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//replace(substr, replacetext)</span><br><span class="line">var myString = &apos;999 JavaScript Coders&apos;;</span><br><span class="line">console.log(myString.replace(/JavaScript/i, &quot;jQuery&quot;));</span><br><span class="line">//output: 999 jQuery Coders</span><br><span class="line"> </span><br><span class="line">//replace(regexp, replacetext)</span><br><span class="line">var myString = &apos;999 JavaScript Coders&apos;;</span><br><span class="line">console.log(myString.replace(new RegExp( &quot;999&quot;, &quot;gi&quot; ), &quot;The&quot;));</span><br><span class="line">//output: The JavaScript Coders</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs javascript"><span class="hljs-comment">//replace(substr, replacetext)</span>
+<span class="hljs-keyword">var</span> myString = <span class="hljs-string">'999 JavaScript Coders'</span>;
+<span class="hljs-built_in">console</span>.log(myString.replace(<span class="hljs-regexp">/JavaScript/i</span>, <span class="hljs-string">"jQuery"</span>));
+<span class="hljs-comment">//output: 999 jQuery Coders</span>
+ 
+<span class="hljs-comment">//replace(regexp, replacetext)</span>
+<span class="hljs-keyword">var</span> myString = <span class="hljs-string">'999 JavaScript Coders'</span>;
+<span class="hljs-built_in">console</span>.log(myString.replace(<span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>( <span class="hljs-string">"999"</span>, <span class="hljs-string">"gi"</span> ), <span class="hljs-string">"The"</span>));
+<span class="hljs-comment">//output: The JavaScript Coders</span>
+复制代码</code></pre>
 
 <h2 id="9-search-regexp"><a href="#9-search-regexp" class="headerlink" title="9.search(regexp)"></a>9.search(regexp)</h2><p><code>search()</code> 方法用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串，如果找到，返回与 <code>regexp</code> 相匹配的子串的起始位置，否则返回 <code>-1</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//search(regexp)</span><br><span class="line">var intRegex = /[0-9 -()+]+$/;  </span><br><span class="line"> </span><br><span class="line">var myNumber = &apos;999&apos;;</span><br><span class="line">var isInt = myNumber.search(intRegex);</span><br><span class="line">console.log(isInt);</span><br><span class="line">//output: 0</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs javascript"><span class="hljs-comment">//search(regexp)</span>
+<span class="hljs-keyword">var</span> intRegex = <span class="hljs-regexp">/[0-9 -()+]+$/</span>;  
+ 
+<span class="hljs-keyword">var</span> myNumber = <span class="hljs-string">'999'</span>;
+<span class="hljs-keyword">var</span> isInt = myNumber.search(intRegex);
+<span class="hljs-built_in">console</span>.log(isInt);
+<span class="hljs-comment">//output: 0</span>
+复制代码</code></pre>
 
 <h2 id="10-slice-start-end"><a href="#10-slice-start-end" class="headerlink" title="10.slice(start, [end])"></a>10.slice(start, [end])</h2><p><code>slice()</code> 方法可提取字符串的某个部分，返回一个新的字符串。包括字符串从 <code>start</code> 开始（包括 start）到 <code>end</code> 结束（不包括 <code>end</code>）为止的所有字符。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//slice(start, end)</span><br><span class="line">var text=&quot;excellent&quot;</span><br><span class="line">text.slice(0,4) //returns &quot;exce&quot;</span><br><span class="line">text.slice(2,4) //returns &quot;ce&quot;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs pgsql">//<span class="hljs-keyword">slice</span>(<span class="hljs-keyword">start</span>, <span class="hljs-keyword">end</span>)
+var <span class="hljs-type">text</span>="excellent"
+<span class="hljs-type">text</span>.<span class="hljs-keyword">slice</span>(<span class="hljs-number">0</span>,<span class="hljs-number">4</span>) //<span class="hljs-keyword">returns</span> "exce"
+<span class="hljs-type">text</span>.<span class="hljs-keyword">slice</span>(<span class="hljs-number">2</span>,<span class="hljs-number">4</span>) //<span class="hljs-keyword">returns</span> "ce"
+复制代码</code></pre>
 
 <h2 id="11-split-delimiter-limit"><a href="#11-split-delimiter-limit" class="headerlink" title="11.split(delimiter, [limit])"></a>11.split(delimiter, [limit])</h2><p><code>split()</code> 方法用于把一个字符串分割成字符串数组，返回一个字符串数组返回的数组中的字串不包括 <code>delimiter</code>自身。 可选的“<code>limit</code>”是一个整数，允许各位指定要返回的最大数组的元素个数。</p>
 <h2 id="12-substr-start-length"><a href="#12-substr-start-length" class="headerlink" title="12.substr(start, [length])"></a>12.substr(start, [length])</h2><p><code>substr()</code> 方法可在字符串中抽取从 <code>start</code> 下标开始的指定数目的字符。返回一个新的字符串，包含从 <code>start</code>（包括 start 所指的字符） 处开始的 <code>length</code> 个字符。如果没有指定 <code>length</code>，那么返回的字符串包含从 <code>start</code> 到该字符串的结尾的字符。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//substr(from, to)</span><br><span class="line">var text=&quot;excellent&quot;</span><br><span class="line">text.substr(0,4) //returns &quot;exce&quot;</span><br><span class="line">text.substr(2,4) //returns &quot;cell&quot;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs pgsql">//substr(<span class="hljs-keyword">from</span>, <span class="hljs-keyword">to</span>)
+var <span class="hljs-type">text</span>="excellent"
+<span class="hljs-type">text</span>.substr(<span class="hljs-number">0</span>,<span class="hljs-number">4</span>) //<span class="hljs-keyword">returns</span> "exce"
+<span class="hljs-type">text</span>.substr(<span class="hljs-number">2</span>,<span class="hljs-number">4</span>) //<span class="hljs-keyword">returns</span> "cell"
+复制代码</code></pre>
 
 <h2 id="13-substring-from-to"><a href="#13-substring-from-to" class="headerlink" title="13.substring(from, [to])"></a>13.substring(from, [to])</h2><p><code>substring()</code> 方法用于提取字符串中介于两个指定下标之间的字符，方返回的子串包括 <code>start</code> 处的字符，但不包括 <code>stop</code> 处的字符，<code>to</code> 可选，如果省略该参数，那么返回的子串会一直到字符串的结尾。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//substring(from, [to])</span><br><span class="line">var myString = &apos;javascript rox&apos;;</span><br><span class="line">myString = myString.substring(0,10);</span><br><span class="line">console.log(myString)</span><br><span class="line">//output: javascript</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs pgsql">//substring(<span class="hljs-keyword">from</span>, [<span class="hljs-keyword">to</span>])
+var myString = <span class="hljs-string">'javascript rox'</span>;
+myString = myString.substring(<span class="hljs-number">0</span>,<span class="hljs-number">10</span>);
+console.log(myString)
+//output: javascript
+复制代码</code></pre>
 
 <h2 id="14-toLowerCase"><a href="#14-toLowerCase" class="headerlink" title="14.toLowerCase()"></a>14.toLowerCase()</h2><p><code>toLowerCase()</code> 方法用于把字符串转换为小写。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//toLowerCase()</span><br><span class="line">var myString = &apos;JAVASCRIPT ROX&apos;;</span><br><span class="line">myString = myString.toLowerCase();</span><br><span class="line">console.log(myString)</span><br><span class="line">//output: javascript rox</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs javascript"><span class="hljs-comment">//toLowerCase()</span>
+<span class="hljs-keyword">var</span> myString = <span class="hljs-string">'JAVASCRIPT ROX'</span>;
+myString = myString.toLowerCase();
+<span class="hljs-built_in">console</span>.log(myString)
+<span class="hljs-comment">//output: javascript rox</span>
+复制代码</code></pre>
 
 <h2 id="15-toUpperCase"><a href="#15-toUpperCase" class="headerlink" title="15.toUpperCase()"></a>15.toUpperCase()</h2><p><code>toUpperCase()</code> 方法用于把字符串转换为大写。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//toUpperCase()</span><br><span class="line">var myString = &apos;javascript rox&apos;;</span><br><span class="line">myString = myString.toUpperCase();</span><br><span class="line">console.log(myString)</span><br><span class="line">//output: JAVASCRIPT ROX</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs javascript"><span class="hljs-comment">//toUpperCase()</span>
+<span class="hljs-keyword">var</span> myString = <span class="hljs-string">'javascript rox'</span>;
+myString = myString.toUpperCase();
+<span class="hljs-built_in">console</span>.log(myString)
+<span class="hljs-comment">//output: JAVASCRIPT ROX</span>
+复制代码</code></pre>
 
 <h2 id="16-includes"><a href="#16-includes" class="headerlink" title="16. includes()"></a>16. includes()</h2><p><code>includes()</code> 方法用于检查字符串是否包含指定的字符串或字符。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//includes()</span><br><span class="line">var mystring = &quot;Hello, welcome to edureka&quot;;</span><br><span class="line">var n = mystring.includes(&quot;edureka&quot;);</span><br><span class="line">//output: True</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs actionscript"><span class="hljs-comment">//includes()</span>
+<span class="hljs-keyword">var</span> mystring = <span class="hljs-string">"Hello, welcome to edureka"</span>;
+<span class="hljs-keyword">var</span> n = mystring.includes(<span class="hljs-string">"edureka"</span>);
+<span class="hljs-comment">//output: True</span>
+复制代码</code></pre>
 
 <h2 id="17-endsWith"><a href="#17-endsWith" class="headerlink" title="17. endsWith()"></a>17. endsWith()</h2><p><code>endsWith()</code>函数检查字符串是否以指定的字符串或字符结束。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//endsWith()</span><br><span class="line">var mystr = &quot;List of javascript functions&quot;;</span><br><span class="line">var n = mystr.endsWith(&quot;functions&quot;);</span><br><span class="line">//output: True</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs actionscript"><span class="hljs-comment">//endsWith()</span>
+<span class="hljs-keyword">var</span> mystr = <span class="hljs-string">"List of javascript functions"</span>;
+<span class="hljs-keyword">var</span> n = mystr.endsWith(<span class="hljs-string">"functions"</span>);
+<span class="hljs-comment">//output: True</span>
+复制代码</code></pre>
 
 <h2 id="18-repeat"><a href="#18-repeat" class="headerlink" title="18. repeat()"></a>18. repeat()</h2><p><code>repeat()</code> 构造并返回一个新字符串，该字符串包含被连接在一起的指定数量的字符串的副本。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//repeat()</span><br><span class="line">var string = &quot;Welcome to Edureka&quot;;</span><br><span class="line">string.repeat(2);</span><br><span class="line">//output: Welcome to Edureka Welcome to Edureka</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs gml"><span class="hljs-comment">//repeat()</span>
+<span class="hljs-keywords">var</span> <span class="hljs-built_in">string</span> = <span class="hljs-string">"Welcome to Edureka"</span>;
+<span class="hljs-built_in">string</span>.<span class="hljs-keywords">repeat</span>(<span class="hljs-number">2</span>);
+<span class="hljs-comment">//output: Welcome to Edureka Welcome to Edureka</span>
+复制代码</code></pre>
 
 <h2 id="19-valueOf"><a href="#19-valueOf" class="headerlink" title="19. valueOf()"></a>19. valueOf()</h2><p><code>valueOf()</code> 方法返回一个<code>String</code>对象的原始值（primitive value），该值等同于<code>String.prototype.toString()</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//valueOf()</span><br><span class="line">var mystr = &quot;Hello World!&quot;;</span><br><span class="line">var res = mystr.valueOf();</span><br><span class="line">//output: Hello World!</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs actionscript"><span class="hljs-comment">//valueOf()</span>
+<span class="hljs-keyword">var</span> mystr = <span class="hljs-string">"Hello World!"</span>;
+<span class="hljs-keyword">var</span> res = mystr.valueOf();
+<span class="hljs-comment">//output: Hello World!</span>
+复制代码</code></pre>
 
 <h2 id="20-trim"><a href="#20-trim" class="headerlink" title="20. trim()"></a>20. trim()</h2><p><code>trim()</code> 方法会从一个字符串的两端删除空白字符。在这个上下文中的空白字符是所有的空白字符 (space, tab, no-break space 等) 以及所有行终止符字符（如 LF，CR）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//trim()</span><br><span class="line">var str = &quot;     Hello Edureka!     &quot;;</span><br><span class="line">alert(str.trim());</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs lisp">//trim()
+var str = <span class="hljs-string">"     Hello Edureka!     "</span><span class="hljs-comment">;</span>
+alert(<span class="hljs-name">str</span>.trim())<span class="hljs-comment">;</span></code></pre>
 
 
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2020/05/07/JS%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95%E6%80%BB%E8%A7%88/" rel="next" title="JS数组方法总览">
-                <i class="fa fa-chevron-left"></i> JS数组方法总览
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/05/07/for%20in%EF%BC%8CObject.keys%EF%BC%8Cfor%20of%20%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="prev" title="for in、Object.keys、for of的区别">
-                for in、Object.keys、for of的区别 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">STAO</p>
-              <p class="site-description motion-element" itemprop="description">前端学习</p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">29</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CODE/">CODE</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                  </div>
+                
               </div>
-            
-
-            
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/07/for%20in%EF%BC%8CObject.keys%EF%BC%8Cfor%20of%20%E7%9A%84%E5%8C%BA%E5%88%AB/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">for in、Object.keys、for of的区别</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/07/JS%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95%E6%80%BB%E8%A7%88/">
+                        <span class="hidden-mobile">JS数组方法总览</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
               
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1399664349&auto=1&height=66"></iframe>
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
+            </div>
 
             
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-charAt-x"><span class="nav-number">1.</span> <span class="nav-text">1. charAt(x)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-charCodeAt-x"><span class="nav-number">2.</span> <span class="nav-text">2.charCodeAt(x)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-concat-v1-v2"><span class="nav-number">3.</span> <span class="nav-text">3.concat(v1,v2..)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-fromCharcode-c1-c2"><span class="nav-number">4.</span> <span class="nav-text">4.fromCharcode(c1,c2)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-indexOf-substr-start"><span class="nav-number">5.</span> <span class="nav-text">5.indexOf(substr, [start])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-lastIndexOf-substr-start"><span class="nav-number">6.</span> <span class="nav-text">6.lastIndexOf(substr, [start])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-match-regexp"><span class="nav-number">7.</span> <span class="nav-text">7.match(regexp)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-replace-regexp-substr-replacetext"><span class="nav-number">8.</span> <span class="nav-text">8.replace(regexp/substr, replacetext)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-search-regexp"><span class="nav-number">9.</span> <span class="nav-text">9.search(regexp)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-slice-start-end"><span class="nav-number">10.</span> <span class="nav-text">10.slice(start, [end])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-split-delimiter-limit"><span class="nav-number">11.</span> <span class="nav-text">11.split(delimiter, [limit])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-substr-start-length"><span class="nav-number">12.</span> <span class="nav-text">12.substr(start, [length])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-substring-from-to"><span class="nav-number">13.</span> <span class="nav-text">13.substring(from, [to])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-toLowerCase"><span class="nav-number">14.</span> <span class="nav-text">14.toLowerCase()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-toUpperCase"><span class="nav-number">15.</span> <span class="nav-text">15.toUpperCase()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-includes"><span class="nav-number">16.</span> <span class="nav-text">16. includes()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-endsWith"><span class="nav-number">17.</span> <span class="nav-text">17. endsWith()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-repeat"><span class="nav-number">18.</span> <span class="nav-text">18. repeat()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-valueOf"><span class="nav-number">19.</span> <span class="nav-text">19. valueOf()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-trim"><span class="nav-number">20.</span> <span class="nav-text">20. trim()</span></a></li></ol></div>
-            
-
           </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
+        </div>
       </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">STAO</span>
-
-  
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
 </div>
 
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
       </div>
     
-
-    
-
   </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
 
   
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
 
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+    <!-- APlayer 音乐播放器 -->
+    <div id="aplayer"></div>
+    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
+<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
 <script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+  var oldLoadAp = window.onload;
+  window.onload = function () {
+    oldLoadAp && oldLoadAp();
+
+    new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      autoplay: 'false' === 'true',
+      loop: 'all',
+      order: 'random',
+      theme: '#b7daff',
+      preload: 'none',
+      audio: [{"name":"name","artist":"artist","url":"http://music.163.com/song/media/outer/url?id=562598065.mp3","cover":"/img/favicon.JPG"}]
+    });
   }
 </script>
 
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
 
 
 
@@ -653,7 +524,150 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "JS常用字符串方法&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
   
 
 
@@ -667,122 +681,7 @@
 
 
 
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
 
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>

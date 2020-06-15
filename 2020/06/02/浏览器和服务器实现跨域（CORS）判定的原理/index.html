@@ -1,346 +1,206 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
 
 
 
-  
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.JPG">
+  <link rel="icon" type="image/png" href="/img/favicon.JPG">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="前端学习">
+  <meta name="author" content="STAO">
+  <meta name="keywords" content="">
+  <title>浏览器和服务器实现跨域（CORS）判定的原理 - STAO_blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
 
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="JavaScript," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="前端对Cross-Origin Resource Sharing 问题(CORS，中文又称’跨域’)应该很熟悉了。众所周知出于安全的考虑，浏览器有个同源策略，对于不同源的站点之间的相互请求会做限制（跨域限制是浏览器行为，不是服务器行为。）。不过下午想到了一个略无趣的问题：浏览器和服务器到底是如何判定有没有跨域呢？本文主要分两个部分，一是对这个问题的总结，二是nginx下如何配置服务器允许跨域。 同">
-<meta name="keywords" content="JavaScript">
-<meta property="og:type" content="article">
-<meta property="og:title" content="浏览器和服务器实现跨域（CORS）判定的原理">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;06&#x2F;02&#x2F;%E6%B5%8F%E8%A7%88%E5%99%A8%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%EF%BC%88CORS%EF%BC%89%E5%88%A4%E5%AE%9A%E7%9A%84%E5%8E%9F%E7%90%86&#x2F;index.html">
-<meta property="og:site_name" content="STAO_blog">
-<meta property="og:description" content="前端对Cross-Origin Resource Sharing 问题(CORS，中文又称’跨域’)应该很熟悉了。众所周知出于安全的考虑，浏览器有个同源策略，对于不同源的站点之间的相互请求会做限制（跨域限制是浏览器行为，不是服务器行为。）。不过下午想到了一个略无趣的问题：浏览器和服务器到底是如何判定有没有跨域呢？本文主要分两个部分，一是对这个问题的总结，二是nginx下如何配置服务器允许跨域。 同">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-06-02T06:09:08.688Z">
-<meta name="twitter:card" content="summary">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'STAO'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/2020/06/02/浏览器和服务器实现跨域（CORS）判定的原理/"/>
-
-
-
-
-
-  <title>浏览器和服务器实现跨域（CORS）判定的原理 | STAO_blog</title>
   
 
 
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
 
 
-
-
-
-
+  <script  src="/js/utils.js" ></script>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  
-  
-    
-  
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>STAO_blog</strong>&nbsp;</a>
 
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">STAO_blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
 </nav>
 
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/02/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%EF%BC%88CORS%EF%BC%89%E5%88%A4%E5%AE%9A%E7%9A%84%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="STAO">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="STAO_blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">浏览器和服务器实现跨域（CORS）判定的原理</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-02T13:57:54+08:00">
-                2020-06-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CODE/" itemprop="url" rel="index">
-                    <span itemprop="name">CODE</span>
-                  </a>
-                </span>
-
-                
-                
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
               
             </span>
-          
 
-          
             
-          
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-06-02 13:57">
+      2020年6月2日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
 
           
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      </div>
+    </div>
+  </header>
 
+  <main>
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
-      
-        <p>前端对Cross-Origin Resource Sharing 问题(CORS，中文又称’跨域’)应该很熟悉了。众所周知出于安全的考虑，浏览器有个<code>同源策略</code>，对于不同源的站点之间的相互请求会做限制（<strong>跨域限制是浏览器行为，不是服务器行为。</strong>）。不过下午想到了一个略无趣的问题：浏览器和服务器到底是如何判定有没有跨域呢？本文主要分两个部分，一是对这个问题的总结，二是nginx下如何配置服务器允许跨域。</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>前端对Cross-Origin Resource Sharing 问题(CORS，中文又称’跨域’)应该很熟悉了。众所周知出于安全的考虑，浏览器有个<code>同源策略</code>，对于不同源的站点之间的相互请求会做限制（<strong>跨域限制是浏览器行为，不是服务器行为。</strong>）。不过下午想到了一个略无趣的问题：浏览器和服务器到底是如何判定有没有跨域呢？本文主要分两个部分，一是对这个问题的总结，二是nginx下如何配置服务器允许跨域。</p>
 <h2 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h2><blockquote>
 <p>同源指的是域名（或IP），协议，端口都相同，不同源的客户端脚本(javascript、ActionScript)在没明确授权的情况下，不能读写对方的资源。</p>
 </blockquote>
@@ -406,20 +266,43 @@
 <li><p>请求的服务器端地址为<code>http://localhost/city.json</code>,服务器解析引擎使用的<code>nginx</code>,且服务器只配置了允许来自<code>http://segmentfault.com</code>的跨域请求</p>
 </li>
 <li><p>检测方法：在各个域名下利用chrome浏览器的<code>console</code>界面模拟发送ajax请求，代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var xhr = new XMLHttpRequest();</span><br><span class="line">xhr.open(&apos;GET&apos;, &apos;http://localhost/city.json&apos;,true);</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs haxe"><span class="hljs-keyword">var</span> xhr = <span class="hljs-keyword">new</span> <span class="hljs-type">XMLHttpRequest</span>();
+xhr.open(<span class="hljs-string">'GET'</span>, <span class="hljs-string">'http://localhost/city.json'</span>,<span class="hljs-literal">true</span>);
+xhr.send();</code></pre>
 
 </li>
 </ol>
 <h3 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h3><ol>
 <li><p>在<code>http://localhost</code>域名下,<strong>请求成功。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">服务器回应的http文件头如下：</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs livecodeserver">服务器回应的<span class="hljs-keyword">http</span>文件头如下：</code></pre>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Server: nginx/1.6.2</span><br><span class="line">Date: Sun, 05 Jul 2015 17:44:06 GMT</span><br><span class="line">Content-Type: application/octet-stream</span><br><span class="line">Content-Length: 2084</span><br><span class="line">Last-Modified: Sat, 18 Apr 2015 06:20:12 GMT</span><br><span class="line">Connection: keep-alive</span><br><span class="line">ETag: &quot;5531f79c-824&quot;</span><br><span class="line">Access-Control-Allow-Credentials: true</span><br><span class="line">Access-Control-Allow-Methods: GET, POST, OPTIONS</span><br><span class="line">Accept-Ranges: bytes</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs yaml"><span class="hljs-string">HTTP/1.1</span> <span class="hljs-number">200</span> <span class="hljs-string">OK</span>
+<span class="hljs-attr">Server:</span> <span class="hljs-string">nginx/1.6.2</span>
+<span class="hljs-attr">Date:</span> <span class="hljs-string">Sun,</span> <span class="hljs-number">05</span> <span class="hljs-string">Jul</span> <span class="hljs-number">2015</span> <span class="hljs-number">17</span><span class="hljs-string">:44:06</span> <span class="hljs-string">GMT</span>
+<span class="hljs-attr">Content-Type:</span> <span class="hljs-string">application/octet-stream</span>
+<span class="hljs-attr">Content-Length:</span> <span class="hljs-number">2084</span>
+<span class="hljs-attr">Last-Modified:</span> <span class="hljs-string">Sat,</span> <span class="hljs-number">18</span> <span class="hljs-string">Apr</span> <span class="hljs-number">2015</span> <span class="hljs-number">06</span><span class="hljs-string">:20:12</span> <span class="hljs-string">GMT</span>
+<span class="hljs-attr">Connection:</span> <span class="hljs-string">keep-alive</span>
+<span class="hljs-attr">ETag:</span> <span class="hljs-string">"5531f79c-824"</span>
+<span class="hljs-attr">Access-Control-Allow-Credentials:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">Access-Control-Allow-Methods:</span> <span class="hljs-string">GET,</span> <span class="hljs-string">POST,</span> <span class="hljs-string">OPTIONS</span>
+<span class="hljs-attr">Accept-Ranges:</span> <span class="hljs-string">bytes</span></code></pre>
 </li>
 <li><p>在<code>http://segmentfault.com</code>域名下，<strong>请求成功</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">服务器回应的http文件头如下：</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs livecodeserver">服务器回应的<span class="hljs-keyword">http</span>文件头如下：</code></pre>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Server: nginx/1.6.2</span><br><span class="line">Date: Sun, 05 Jul 2015 18:17:27 GMT</span><br><span class="line">Content-Type: application/octet-stream</span><br><span class="line">Content-Length: 2084</span><br><span class="line">Last-Modified: Sat, 18 Apr 2015 06:20:12 GMT</span><br><span class="line">Connection: keep-alive</span><br><span class="line">ETag: &quot;5531f79c-824&quot;</span><br><span class="line">**Access-Control-Allow-origin: http://segmentfault.com**</span><br><span class="line">Access-Control-Allow-Credentials: true</span><br><span class="line">Access-Control-Allow-Methods: GET, POST, OPTIONS</span><br><span class="line">Accept-Ranges: bytes</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs yaml"><span class="hljs-string">HTTP/1.1</span> <span class="hljs-number">200</span> <span class="hljs-string">OK</span>
+<span class="hljs-attr">Server:</span> <span class="hljs-string">nginx/1.6.2</span>
+<span class="hljs-attr">Date:</span> <span class="hljs-string">Sun,</span> <span class="hljs-number">05</span> <span class="hljs-string">Jul</span> <span class="hljs-number">2015</span> <span class="hljs-number">18</span><span class="hljs-string">:17:27</span> <span class="hljs-string">GMT</span>
+<span class="hljs-attr">Content-Type:</span> <span class="hljs-string">application/octet-stream</span>
+<span class="hljs-attr">Content-Length:</span> <span class="hljs-number">2084</span>
+<span class="hljs-attr">Last-Modified:</span> <span class="hljs-string">Sat,</span> <span class="hljs-number">18</span> <span class="hljs-string">Apr</span> <span class="hljs-number">2015</span> <span class="hljs-number">06</span><span class="hljs-string">:20:12</span> <span class="hljs-string">GMT</span>
+<span class="hljs-attr">Connection:</span> <span class="hljs-string">keep-alive</span>
+<span class="hljs-attr">ETag:</span> <span class="hljs-string">"5531f79c-824"</span>
+<span class="hljs-string">**Access-Control-Allow-origin:</span> <span class="hljs-string">http://segmentfault.com**</span>
+<span class="hljs-attr">Access-Control-Allow-Credentials:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">Access-Control-Allow-Methods:</span> <span class="hljs-string">GET,</span> <span class="hljs-string">POST,</span> <span class="hljs-string">OPTIONS</span>
+<span class="hljs-attr">Accept-Ranges:</span> <span class="hljs-string">bytes</span></code></pre>
 </li>
 <li><p>在<code>http://www.zhihu.com</code>下，<strong>请求失败</strong><br><strong>虽然都是失败，但是返回的HTTP文件头内容会视服务器是否有配置跨域请求而发生变化</strong></p>
 </li>
@@ -429,14 +312,35 @@
 <p>XMLHttpRequest cannot load <a href="http://localhost/city.json" target="_blank" rel="noopener">http://localhost/city.json</a>. The ‘Access-Control-Allow-Origin’ header has a value ‘<a href="http://segmentfault.com/" target="_blank" rel="noopener">http://segmentfault.com</a>‘ that is not equal to the supplied origin. Origin ‘<a href="http://www.zhihu.com/" target="_blank" rel="noopener">http://www.zhihu.com</a>‘ is therefore notallowed access.</p>
 </blockquote>
 <p>服务器回应的http文件头如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Server: nginx/1.6.2</span><br><span class="line">Date: Sun, 05 Jul 2015 17:59:25 GMT</span><br><span class="line">Content-Type: application/octet-stream</span><br><span class="line">Content-Length: 2084</span><br><span class="line">Last-Modified: Sat, 18 Apr 2015 06:20:12 GMT</span><br><span class="line">Connection: keep-alive</span><br><span class="line">ETag: &quot;5531f79c-824&quot;</span><br><span class="line">Access-Control-Allow-origin: http://segmentfault.com</span><br><span class="line">Access-Control-Allow-Credentials: true</span><br><span class="line">Access-Control-Allow-Methods: GET, POST, OPTIONS</span><br><span class="line">Accept-Ranges: bytes</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs yaml"><span class="hljs-string">HTTP/1.1</span> <span class="hljs-number">200</span> <span class="hljs-string">OK</span>
+<span class="hljs-attr">Server:</span> <span class="hljs-string">nginx/1.6.2</span>
+<span class="hljs-attr">Date:</span> <span class="hljs-string">Sun,</span> <span class="hljs-number">05</span> <span class="hljs-string">Jul</span> <span class="hljs-number">2015</span> <span class="hljs-number">17</span><span class="hljs-string">:59:25</span> <span class="hljs-string">GMT</span>
+<span class="hljs-attr">Content-Type:</span> <span class="hljs-string">application/octet-stream</span>
+<span class="hljs-attr">Content-Length:</span> <span class="hljs-number">2084</span>
+<span class="hljs-attr">Last-Modified:</span> <span class="hljs-string">Sat,</span> <span class="hljs-number">18</span> <span class="hljs-string">Apr</span> <span class="hljs-number">2015</span> <span class="hljs-number">06</span><span class="hljs-string">:20:12</span> <span class="hljs-string">GMT</span>
+<span class="hljs-attr">Connection:</span> <span class="hljs-string">keep-alive</span>
+<span class="hljs-attr">ETag:</span> <span class="hljs-string">"5531f79c-824"</span>
+<span class="hljs-attr">Access-Control-Allow-origin:</span> <span class="hljs-string">http://segmentfault.com</span>
+<span class="hljs-attr">Access-Control-Allow-Credentials:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">Access-Control-Allow-Methods:</span> <span class="hljs-string">GET,</span> <span class="hljs-string">POST,</span> <span class="hljs-string">OPTIONS</span>
+<span class="hljs-attr">Accept-Ranges:</span> <span class="hljs-string">bytes</span></code></pre>
 
 <h4 id="服务器不允许任何跨域请求"><a href="#服务器不允许任何跨域请求" class="headerlink" title="服务器不允许任何跨域请求"></a>服务器不允许任何跨域请求</h4><p>console.log窗口提示:</p>
 <blockquote>
 <p>XMLHttpRequest cannot load <a href="http://localhost/city.json" target="_blank" rel="noopener">http://localhost/city.json</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘<a href="http://www.zhihu.com/" target="_blank" rel="noopener">http://www.zhihu.com</a>‘ is therefore not allowed access.</p>
 </blockquote>
 <p>服务器回应的http文件头如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Server: nginx/1.6.2</span><br><span class="line">Date: Sun, 05 Jul 2015 17:51:29 GMT</span><br><span class="line">Content-Type: application/octet-stream</span><br><span class="line">Content-Length: 2084</span><br><span class="line">Last-Modified: Sat, 18 Apr 2015 06:20:12 GMT</span><br><span class="line">Connection: keep-alive</span><br><span class="line">ETag: &quot;5531f79c-824&quot;</span><br><span class="line">Access-Control-Allow-Credentials: true</span><br><span class="line">Access-Control-Allow-Methods: GET, POST, OPTIONS</span><br><span class="line">Accept-Ranges: bytes</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs yaml"><span class="hljs-string">HTTP/1.1</span> <span class="hljs-number">200</span> <span class="hljs-string">OK</span>
+<span class="hljs-attr">Server:</span> <span class="hljs-string">nginx/1.6.2</span>
+<span class="hljs-attr">Date:</span> <span class="hljs-string">Sun,</span> <span class="hljs-number">05</span> <span class="hljs-string">Jul</span> <span class="hljs-number">2015</span> <span class="hljs-number">17</span><span class="hljs-string">:51:29</span> <span class="hljs-string">GMT</span>
+<span class="hljs-attr">Content-Type:</span> <span class="hljs-string">application/octet-stream</span>
+<span class="hljs-attr">Content-Length:</span> <span class="hljs-number">2084</span>
+<span class="hljs-attr">Last-Modified:</span> <span class="hljs-string">Sat,</span> <span class="hljs-number">18</span> <span class="hljs-string">Apr</span> <span class="hljs-number">2015</span> <span class="hljs-number">06</span><span class="hljs-string">:20:12</span> <span class="hljs-string">GMT</span>
+<span class="hljs-attr">Connection:</span> <span class="hljs-string">keep-alive</span>
+<span class="hljs-attr">ETag:</span> <span class="hljs-string">"5531f79c-824"</span>
+<span class="hljs-attr">Access-Control-Allow-Credentials:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">Access-Control-Allow-Methods:</span> <span class="hljs-string">GET,</span> <span class="hljs-string">POST,</span> <span class="hljs-string">OPTIONS</span>
+<span class="hljs-attr">Accept-Ranges:</span> <span class="hljs-string">bytes</span></code></pre>
 
 <h3 id="跨域的判定流程"><a href="#跨域的判定流程" class="headerlink" title="跨域的判定流程"></a>跨域的判定流程</h3><p>从<code>zhihu</code>页面的两次浏览器报错以及<code>segmentfault</code>的成功返回值来看，可以很容易得出浏览器和服务器的合作判定步骤如下：</p>
 <blockquote>
@@ -461,13 +365,20 @@
 <li><strong>Access-Control-Max-Age</strong>（可选） – 以秒为单位的缓存时间。预请求的的发送并非免费午餐，允许时应当尽可能缓存。</li>
 </ul>
 <h3 id="具体配置举例"><a href="#具体配置举例" class="headerlink" title="具体配置举例"></a>具体配置举例</h3><h4 id="全域名或者单域名允许跨域"><a href="#全域名或者单域名允许跨域" class="headerlink" title="全域名或者单域名允许跨域"></a>全域名或者单域名允许跨域</h4><p>这个最省心<br>打开Nginx的配置文件（默认为<code>nginx.conf</code>）。找到对应域名设置的<code>local</code>配置部分。<br>添加以下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">add_header &apos;Access-Control-Allow-origin&apos; &apos;http://www.example.com&apos;;</span><br><span class="line">add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs nginx"><span class="hljs-attribute">add_header</span> <span class="hljs-string">'Access-Control-Allow-origin'</span> <span class="hljs-string">'http://www.example.com'</span>;
+<span class="hljs-attribute">add_header</span> <span class="hljs-string">'Access-Control-Allow-Methods'</span> <span class="hljs-string">'GET, POST, OPTIONS'</span>;</code></pre>
 
 <blockquote>
 <p>添加的域名必须带<code>http://</code>协议头（否则服务器无法区分是http还是https），如果接受所有域名的跨域请求，则可以用<code>*</code>(安全性有问题，不推荐)</p>
 </blockquote>
 <h4 id="添加多域名跨域配置"><a href="#添加多域名跨域配置" class="headerlink" title="添加多域名跨域配置"></a>添加多域名跨域配置</h4><p>如果允许跨域的域名有多个但出于安全问题又不想配置全域名通配的时候，就可以用到nginx里的<code>if</code>判断了。<br>添加如下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if ($http_origin = &apos;http://segmentfault.com&apos; ) &#123;  </span><br><span class="line"> add_header &apos;Access-Control-Allow-Origin&apos; &quot;$http_origin&quot;;</span><br><span class="line"> &#125;</span><br><span class="line">if ($http_origin = &apos;http://localhost:4000&apos; ) &#123;  </span><br><span class="line"> add_header &apos;Access-Control-Allow-Origin&apos; &quot;$http_origin&quot;;</span><br><span class="line"> &#125;</span><br><span class="line"> add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs nginx"><span class="hljs-attribute">if</span> (<span class="hljs-variable">$http_origin</span> = <span class="hljs-string">'http://segmentfault.com'</span> ) &#123;  
+ <span class="hljs-attribute">add_header</span> <span class="hljs-string">'Access-Control-Allow-Origin'</span> <span class="hljs-string">"<span class="hljs-variable">$http_origin</span>"</span>;
+ &#125;
+<span class="hljs-attribute">if</span> (<span class="hljs-variable">$http_origin</span> = <span class="hljs-string">'http://localhost:4000'</span> ) &#123;  
+ <span class="hljs-attribute">add_header</span> <span class="hljs-string">'Access-Control-Allow-Origin'</span> <span class="hljs-string">"<span class="hljs-variable">$http_origin</span>"</span>;
+ &#125;
+ <span class="hljs-attribute">add_header</span> <span class="hljs-string">'Access-Control-Allow-Methods'</span> <span class="hljs-string">'GET, POST, OPTIONS'</span>;</code></pre>
 
 <blockquote>
 <ul>
@@ -480,253 +391,169 @@
 <li><code>Access-Control-Allow-Origin</code>也可以改成全小写的形式，不影响结果.(<code>access-control-allow-origin</code>也可以)</li>
 </ul>
 
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2020/05/25/v-charts%E4%BD%BF%E7%94%A8/" rel="next" title="v-charts的使用">
-                <i class="fa fa-chevron-left"></i> v-charts的使用
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/06/09/%E8%AE%A9%E5%90%8E%E5%8F%B0%E5%B0%8F%E5%93%A5%E8%83%BD%E5%BF%AB%E9%80%9F%E5%AF%B9%E6%8E%A5%E4%BD%A0%E7%9A%84%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2/" rel="prev" title="让后台小哥能快速对接你的前端页面">
-                让后台小哥能快速对接你的前端页面 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">STAO</p>
-              <p class="site-description motion-element" itemprop="description">前端学习</p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">29</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CODE/">CODE</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                  </div>
+                
               </div>
-            
-
-            
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/06/09/%E8%AE%A9%E5%90%8E%E5%8F%B0%E5%B0%8F%E5%93%A5%E8%83%BD%E5%BF%AB%E9%80%9F%E5%AF%B9%E6%8E%A5%E4%BD%A0%E7%9A%84%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">让后台小哥能快速对接你的前端页面</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/25/v-charts%E4%BD%BF%E7%94%A8/">
+                        <span class="hidden-mobile">v-charts的使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
               
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1399664349&auto=1&height=66"></iframe>
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
+            </div>
 
             
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#同源策略"><span class="nav-number">1.</span> <span class="nav-text">同源策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#是否允许跨域的判定"><span class="nav-number">2.</span> <span class="nav-text">是否允许跨域的判定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境说明"><span class="nav-number">2.1.</span> <span class="nav-text">环境说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验过程"><span class="nav-number">2.2.</span> <span class="nav-text">实验过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器允许跨域请求"><span class="nav-number">2.2.1.</span> <span class="nav-text">服务器允许跨域请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器不允许任何跨域请求"><span class="nav-number">2.2.2.</span> <span class="nav-text">服务器不允许任何跨域请求</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跨域的判定流程"><span class="nav-number">2.3.</span> <span class="nav-text">跨域的判定流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置服务器实现跨域传输"><span class="nav-number">3.</span> <span class="nav-text">配置服务器实现跨域传输</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置项解析"><span class="nav-number">3.1.</span> <span class="nav-text">配置项解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体配置举例"><span class="nav-number">3.2.</span> <span class="nav-text">具体配置举例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全域名或者单域名允许跨域"><span class="nav-number">3.2.1.</span> <span class="nav-text">全域名或者单域名允许跨域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加多域名跨域配置"><span class="nav-number">3.2.2.</span> <span class="nav-text">添加多域名跨域配置</span></a></li></ol></li></ol></li></ol></div>
-            
-
           </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
+        </div>
       </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">STAO</span>
-
-  
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
 </div>
 
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
       </div>
     
-
-    
-
   </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
 
   
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
 
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+    <!-- APlayer 音乐播放器 -->
+    <div id="aplayer"></div>
+    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
+<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
 <script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+  var oldLoadAp = window.onload;
+  window.onload = function () {
+    oldLoadAp && oldLoadAp();
+
+    new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      autoplay: 'false' === 'true',
+      loop: 'all',
+      order: 'random',
+      theme: '#b7daff',
+      preload: 'none',
+      audio: [{"name":"name","artist":"artist","url":"http://music.163.com/song/media/outer/url?id=562598065.mp3","cover":"/img/favicon.JPG"}]
+    });
   }
 </script>
 
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
 
 
 
@@ -734,7 +561,150 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "浏览器和服务器实现跨域（CORS）判定的原理&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
   
 
 
@@ -748,122 +718,7 @@
 
 
 
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
 
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>

@@ -1,657 +1,992 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
 
 
 
-  
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.JPG">
+  <link rel="icon" type="image/png" href="/img/favicon.JPG">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="前端学习">
+  <meta name="author" content="STAO">
+  <meta name="keywords" content="">
+  <title>JS数组方法总览 - STAO_blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
 
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="JavaScript," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="01、push(value)将value添加到数组的最后，返回数组长度(改变原数组)123456789101112&#x2F;&#x2F; Baselet a = [1, 2, 3, 4, 5]let result = a.push(1)console.log(result)       &#x2F;&#x2F; 6console.log(a)            &#x2F;&#x2F; [1, 2, 3, 4, 5, 1] 原数组被改变&#x2F;&#x2F; More">
-<meta name="keywords" content="JavaScript">
-<meta property="og:type" content="article">
-<meta property="og:title" content="JS数组方法总览">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;05&#x2F;07&#x2F;JS%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95%E6%80%BB%E8%A7%88&#x2F;index.html">
-<meta property="og:site_name" content="STAO_blog">
-<meta property="og:description" content="01、push(value)将value添加到数组的最后，返回数组长度(改变原数组)123456789101112&#x2F;&#x2F; Baselet a = [1, 2, 3, 4, 5]let result = a.push(1)console.log(result)       &#x2F;&#x2F; 6console.log(a)            &#x2F;&#x2F; [1, 2, 3, 4, 5, 1] 原数组被改变&#x2F;&#x2F; More">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-05-07T08:40:32.090Z">
-<meta name="twitter:card" content="summary">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'STAO'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/2020/05/07/JS数组方法总览/"/>
-
-
-
-
-
-  <title>JS数组方法总览 | STAO_blog</title>
   
 
 
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
 
 
-
-
-
-
+  <script  src="/js/utils.js" ></script>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  
-  
-    
-  
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>STAO_blog</strong>&nbsp;</a>
 
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">STAO_blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
 </nav>
 
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/07/JS%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95%E6%80%BB%E8%A7%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="STAO">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="STAO_blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">JS数组方法总览</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-07T16:39:53+08:00">
-                2020-05-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CODE/" itemprop="url" rel="index">
-                    <span itemprop="name">CODE</span>
-                  </a>
-                </span>
-
-                
-                
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
               
             </span>
-          
 
-          
             
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h3 id="01、push-value-将value添加到数组的最后，返回数组长度-改变原数组"><a href="#01、push-value-将value添加到数组的最后，返回数组长度-改变原数组" class="headerlink" title="01、push(value)将value添加到数组的最后，返回数组长度(改变原数组)"></a>01、<code>push(value)</code>将value添加到数组的最后，返回数组长度(改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.push(1)</span><br><span class="line">console.log(result)       // 6</span><br><span class="line">console.log(a)            // [1, 2, 3, 4, 5, 1] 原数组被改变</span><br><span class="line"></span><br><span class="line">// More</span><br><span class="line">a = [1, 2, 3, 4, 5]</span><br><span class="line">result = a.push(&apos;a&apos;, &apos;b&apos;) // 可一次添加多个值</span><br><span class="line">console.log(result)       // 7</span><br><span class="line">console.log(a)            // [1, 2, 3, 4, 5, &apos;a&apos;, &apos;b&apos;]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="02、unshift-添加元素到数组的开头，返回数组的长度-改变原数组"><a href="#02、unshift-添加元素到数组的开头，返回数组的长度-改变原数组" class="headerlink" title="02、unshift()添加元素到数组的开头，返回数组的长度(改变原数组)"></a>02、<code>unshift()</code>添加元素到数组的开头，返回数组的长度(改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.unshift(1)</span><br><span class="line">console.log(result)           // 6</span><br><span class="line">console.log(a)                // [1, 1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">// More</span><br><span class="line">result = a.unshift(&apos;a&apos;, &apos;b&apos;)  // 可一次添加多个值</span><br><span class="line">console.log(result)           // 8</span><br><span class="line">console.log(a)                // [&apos;a&apos;, &apos;b&apos;, 1, 1, 2, 3, 4, 5]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="03、pop-删除数组中最后一个元素，返回被删除元素-改变原数组"><a href="#03、pop-删除数组中最后一个元素，返回被删除元素-改变原数组" class="headerlink" title="03、pop()删除数组中最后一个元素，返回被删除元素(改变原数组)"></a>03、<code>pop()</code>删除数组中最后一个元素，返回被删除元素(改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [5]</span><br><span class="line">let result = a.pop()</span><br><span class="line">console.log(result)   // 5</span><br><span class="line">console.log(a)        // []</span><br><span class="line"></span><br><span class="line">// More</span><br><span class="line">result = a.pop()      // 数组元素为空后会返回undefined</span><br><span class="line">console.log(result)   // undefined</span><br><span class="line">console.log(a)        // []</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="04、shift-删除数组第一个元素，返回删除的元素-改变原数组"><a href="#04、shift-删除数组第一个元素，返回删除的元素-改变原数组" class="headerlink" title="04、shift()删除数组第一个元素，返回删除的元素(改变原数组)"></a>04、<code>shift()</code>删除数组第一个元素，返回删除的元素(改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [5]</span><br><span class="line">let result = a.shift()</span><br><span class="line">console.log(result)      // 5</span><br><span class="line">console.log(a)           // []</span><br><span class="line"></span><br><span class="line">// More</span><br><span class="line">result = a.shift()       // 数组元素为空后会返回undefined</span><br><span class="line">console.log(result)      // undefined</span><br><span class="line">console.log(a)           // []</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="05、join-value-将数组用value连接为字符串-不改变原数组"><a href="#05、join-value-将数组用value连接为字符串-不改变原数组" class="headerlink" title="05、join(value)将数组用value连接为字符串(不改变原数组)"></a>05、<code>join(value)</code>将数组用value连接为字符串(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.join(&apos;,&apos;)</span><br><span class="line">console.log(result)   // &apos;1,2,3,4,5&apos;</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">// More</span><br><span class="line">let obj = &#123;</span><br><span class="line">  toString() &#123;</span><br><span class="line">    console.log(&apos;调用了toString()方法！&apos;)</span><br><span class="line">    return &apos;a&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  toValue() &#123;</span><br><span class="line">    console.log(&apos;toValue()方法！&apos;)</span><br><span class="line">    return &apos;b&apos;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">result = a.join(obj) // 使用对象时会调用对象自身的toString方法转化为字符串，我们这里重写了toString，从而覆盖了原型链上的toString</span><br><span class="line">// 调用了toString()方法！</span><br><span class="line">console.log(result)   // 1a2a3a4a5</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">// join的一个相对的方法是字符串的split方法</span><br><span class="line">console.log(&apos;1a2a3a4a5&apos;.split(&apos;a&apos;)) // [1, 2, 3, 4, 5]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="06、reverse-反转数组-改变原数组"><a href="#06、reverse-反转数组-改变原数组" class="headerlink" title="06、reverse()反转数组(改变原数组)"></a>06、<code>reverse()</code>反转数组(改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.reverse()</span><br><span class="line">console.log(result)   // [5, 4, 3, 2, 1]</span><br><span class="line">console.log(a)        // [5, 4, 3, 2, 1]</span><br><span class="line"></span><br><span class="line">// More</span><br><span class="line">a = [1, [2, 3], [4, 5]]</span><br><span class="line">result = a.reverse()</span><br><span class="line">console.log(result)   // [[4, 5], [2, 3], 1]</span><br><span class="line">console.log(a)        // [[4, 5], [2, 3], 1]</span><br><span class="line">// 可以看到这里的反转只是基于数组的第一层，属于浅反转。</span><br><span class="line"></span><br><span class="line">// 一个简单的深反转，使用递归实现</span><br><span class="line">const deepReverse = (array) =&gt; &#123;</span><br><span class="line">  let temp = array.reverse()</span><br><span class="line">  temp.forEach(v =&gt; &#123;</span><br><span class="line">    if(Object.prototype.toString.call(v) === &apos;[object Array]&apos;) &#123;</span><br><span class="line">      deepReverse(v)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  return temp</span><br><span class="line">&#125;</span><br><span class="line">a = [1, [2, 3], [4, 5]]</span><br><span class="line">result = deepReverse(a)</span><br><span class="line">console.log(result)    // [[5, 4], [3, 2], 1]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="07、slice-start-end-返回新数组，包含原数组索引start的值到索引end的值，不包含end-不改变原数组"><a href="#07、slice-start-end-返回新数组，包含原数组索引start的值到索引end的值，不包含end-不改变原数组" class="headerlink" title="07、slice(start, end)返回新数组，包含原数组索引start的值到索引end的值，不包含end(不改变原数组)"></a>07、<code>slice(start, end)</code>返回新数组，包含原数组索引start的值到索引end的值，不包含end(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.slice(2, 4)</span><br><span class="line">console.log(result)   // [3, 4]</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">// More</span><br><span class="line">console.log(a.slice(1))         // [2, 3, 4, 5]   只有一个参数且不小于0，则从此索引开始截取到数组的末位</span><br><span class="line">console.log(a.slice(-1))        // [5]            只有一个参数且小于0，则从倒数|start|位截取到数组的末位</span><br><span class="line">console.log(a.slice(-1, 1))     // []             反向截取，不合法返回空数组</span><br><span class="line">console.log(a.slice(1, -1))     // [2, 3, 4]      从第一位截取到倒数第一位，不包含倒数第一位</span><br><span class="line">console.log(a.slice(-1, -2))    // []             反向截取，不合法返回空数组</span><br><span class="line">console.log(a.slice(-2, -1))    // [4]            倒数第二位截取到倒数第一位</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="08、splice-index-count-value-从索引为index处删除count个元素，插入value-改变原数组"><a href="#08、splice-index-count-value-从索引为index处删除count个元素，插入value-改变原数组" class="headerlink" title="08、splice(index, count, value)从索引为index处删除count个元素，插入value(改变原数组)"></a>08、<code>splice(index, count, value)</code>从索引为index处删除count个元素，插入value(改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.splice(1, 2, 0)</span><br><span class="line">console.log(result)   // [2, 3]</span><br><span class="line">console.log(a)        // [1, 0, 4, 5]</span><br><span class="line"></span><br><span class="line">// More</span><br><span class="line">a = [1, 2, 3, 4, 5]</span><br><span class="line">console.log(a.splice(-2))                   // [4. 5]</span><br><span class="line">console.log(a)                              // [1, 2, 3]</span><br><span class="line"></span><br><span class="line">a = [1, 2, 3, 4, 5]</span><br><span class="line">console.log(a.splice(-1))                   // [5]</span><br><span class="line">console.log(a)                              // [1, 2, 3, 4]               当参数为单个且小于0时，将从数组的倒数|index|位截取到数组的末位</span><br><span class="line"></span><br><span class="line">a = [1, 2, 3, 4, 5]</span><br><span class="line">console.log(a.splice(0))                    // [1, 2, 3, 4, 5]</span><br><span class="line">console.log(a)                              // []</span><br><span class="line"></span><br><span class="line">a = [1, 2, 3, 4, 5]</span><br><span class="line">console.log(a.splice(1))                    // [2, 3, 4, 5]</span><br><span class="line">console.log(a)                              // [1]                        当参数为单个且不小于0时，将从当前数代表的索引位开始截取到数组的末位</span><br><span class="line"></span><br><span class="line">a = [1, 2, 3, 4, 5]</span><br><span class="line">console.log(a.splice(-1, 2))                // [5]</span><br><span class="line">console.log(a)                              // [1, 2, 3, 4]               从倒数第一位开始截取两个元素，元素不够，只返回存在的元素</span><br><span class="line"></span><br><span class="line">a = [1, 2, 3, 4, 5]</span><br><span class="line">console.log(a.splice(0, 2, &apos;a&apos;, &apos;b&apos;, &apos;c&apos;))  // [1, 2]</span><br><span class="line">console.log(a)                              // [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, 3, 4, 5]   截取后将value一次填充到数组被截取的位置，value的数量大于截取的数量时，数组中剩余的元素后移</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="09、sort-对数组元素进行排序-改变原数组"><a href="#09、sort-对数组元素进行排序-改变原数组" class="headerlink" title="09、sort()对数组元素进行排序(改变原数组)"></a>09、<code>sort()</code>对数组元素进行排序(改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [31, 22, 27, 1, 9]</span><br><span class="line">let result = a.sort()</span><br><span class="line">console.log(result)   // [1, 22, 27, 31, 9]</span><br><span class="line">console.log(a)        // [1, 22, 27, 31, 9]</span><br><span class="line"></span><br><span class="line">// More</span><br><span class="line">a = [&apos;c&apos;, &apos;ac&apos;, &apos;ab&apos;, &apos;1c&apos;, 13, 12, &apos;13&apos;, &apos;12&apos;, &apos;3&apos;, &apos;2&apos;, &apos;1b&apos;, &apos;1a&apos;, 1, &apos;aa&apos;, &apos;a&apos;, 3, &apos;b&apos;, 2]</span><br><span class="line">a.sort()</span><br><span class="line">console.log(a) // [1, 12, &quot;12&quot;, 13, &quot;13&quot;, &quot;1a&quot;, &quot;1b&quot;, &quot;1c&quot;, &quot;2&quot;, 2, &quot;3&quot;, 3, &quot;a&quot;, &quot;aa&quot;, &quot;ab&quot;, &quot;ac&quot;, &quot;b&quot;, &quot;c&quot;]</span><br><span class="line">                      // 可以看出sort排序是根据位来进行排序，而非值的大小，先比较第一位数字在前，字母在后，若相同则比较后面位(实际是比较各个值转化为字符串后的各个位点的unicode位点)</span><br><span class="line">a = [31, 22, 27, 1, 9]</span><br><span class="line">a.sort((a, b)=&gt;&#123;</span><br><span class="line">  return a - b</span><br><span class="line">&#125;)</span><br><span class="line">console.log(a)        // [1, 9, 22, 27, 31]  按数值大小正序排列</span><br><span class="line"></span><br><span class="line">a = [31, 22, 27, 1, 9]</span><br><span class="line">a.sort((a, b)=&gt;&#123;</span><br><span class="line">  return b - a</span><br><span class="line">&#125;)</span><br><span class="line">console.log(a)        // [31, 27, 22, 9, 1]  按数值大小倒序排列</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="10、toString-将数组中的元素用逗号拼接成字符串-不改变原数组"><a href="#10、toString-将数组中的元素用逗号拼接成字符串-不改变原数组" class="headerlink" title="10、toString()将数组中的元素用逗号拼接成字符串(不改变原数组)"></a>10、<code>toString()</code>将数组中的元素用逗号拼接成字符串(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.toString()</span><br><span class="line">console.log(result)   // 1,2,3,4,5</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="11、indexOf-value-从索引为0开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1-不改变原数组"><a href="#11、indexOf-value-从索引为0开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1-不改变原数组" class="headerlink" title="11、indexOf(value)从索引为0开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1(不改变原数组)"></a>11、<code>indexOf(value)</code>从索引为0开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [1, 2, 3, 2, 5]</span><br><span class="line">let result = a.indexOf(2)</span><br><span class="line">console.log(result)   // 1</span><br><span class="line">console.log(a)        // [1, 2, 3, 2, 5]</span><br><span class="line"></span><br><span class="line">result = a.indexOf(6)</span><br><span class="line">console.log(result)   // -1</span><br><span class="line">console.log(a)        // [1, 2, 3, 2, 5]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="12、lastIndexOf-value-从最后的索引开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1-不改变原数组"><a href="#12、lastIndexOf-value-从最后的索引开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1-不改变原数组" class="headerlink" title="12、lastIndexOf(value)从最后的索引开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1(不改变原数组)"></a>12、<code>lastIndexOf(value)</code>从最后的索引开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [1, 2, 3, 2, 5]</span><br><span class="line">let result = a.lastIndexOf(2)</span><br><span class="line">console.log(result)   // 3</span><br><span class="line">console.log(a)        // [1, 2, 3, 2, 5]</span><br><span class="line"></span><br><span class="line">result = a.lastIndexOf(6)</span><br><span class="line">console.log(result)   // -1</span><br><span class="line">console.log(a)        // [1, 2, 3, 2, 5]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="13、concat-value-将数组和-或值连接成新数组-不改变原数组"><a href="#13、concat-value-将数组和-或值连接成新数组-不改变原数组" class="headerlink" title="13、concat(value)将数组和/或值连接成新数组(不改变原数组)"></a>13、<code>concat(value)</code>将数组和/或值连接成新数组(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [1, 2], b = [3, 4], c = 5</span><br><span class="line">let result = a.concat(b, c)</span><br><span class="line">console.log(result)   // [1, 2, 3, 4, 5]</span><br><span class="line">console.log(a)        // [1, 2]</span><br><span class="line"></span><br><span class="line">// More</span><br><span class="line">b = [3, [4]]</span><br><span class="line">result = a.concat(b, c)</span><br><span class="line">console.log(result)   // [1, 2, 3, [4], 5] concat对于嵌套数组无法拉平</span><br><span class="line">console.log(a)        // [1, 2]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="14、fill-value-start-end-使用给定value填充数组，从索引start开始end结束，不包含end-改变原数组"><a href="#14、fill-value-start-end-使用给定value填充数组，从索引start开始end结束，不包含end-改变原数组" class="headerlink" title="14、fill(value, start, end)使用给定value填充数组，从索引start开始end结束，不包含end(改变原数组)"></a>14、<code>fill(value, start, end)</code>使用给定value填充数组，从索引start开始end结束，不包含end(改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.fill(0, 2, 3)</span><br><span class="line">console.log(result)             // [1, 2, 0, 4, 5]</span><br><span class="line">console.log(a)                  // [1, 2, 0, 4, 5]</span><br><span class="line"></span><br><span class="line">// More</span><br><span class="line">a = [1, 2, 3, 4, 5]</span><br><span class="line">console.log(a.fill(1))          // [1, 1, 1, 1, 1]  参数一个时，将该参数覆盖填充到数组每一项</span><br><span class="line">a = [1, 2, 3, 4, 5]</span><br><span class="line">console.log(a.fill(1, 2))       // [1, 2, 1, 1, 1]  只有start时，从索引start开始填充到数组末位</span><br><span class="line">a = [1, 2, 3, 4, 5]</span><br><span class="line">console.log(a.fill(1, -2))      // [1, 2, 3, 1, 1]  只有start且为负数时，从倒数|start|位开始填充到数组末位</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="15、flat-将二维数组变为一维数组-不改变原数组"><a href="#15、flat-将二维数组变为一维数组-不改变原数组" class="headerlink" title="15、flat()将二维数组变为一维数组(不改变原数组)"></a>15、<code>flat()</code>将二维数组变为一维数组(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [1, 2, 3, [4, 5]]</span><br><span class="line">let result = a.flat()</span><br><span class="line">console.log(result)   // [1, 2, 3, 4, 5]</span><br><span class="line">console.log(a)        // [1, 2, 3, [4, 5]]</span><br><span class="line"></span><br><span class="line">let a = [1, 2, 3, [4, 5, [6, 7, [8, 9]]]]</span><br><span class="line">let result = a.flat()</span><br><span class="line">console.log(result)   // [1, 2, 3, 4, 5, [6, 7, [8, 9]]] 很显然只能将第二层嵌套数组“拉平”</span><br><span class="line">console.log(a)        // [1, 2, 3, [4, 5, [6, 7, [8, 9]]]]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="16、flatMap-相当于map与flat的结合-不改变原数组"><a href="#16、flatMap-相当于map与flat的结合-不改变原数组" class="headerlink" title="16、flatMap()相当于map与flat的结合(不改变原数组)"></a>16、<code>flatMap()</code>相当于map与flat的结合(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.flatMap((currentValue)=&gt;&#123;</span><br><span class="line">  return [currentValue, currentValue * 2]</span><br><span class="line">&#125;)</span><br><span class="line">console.log(result)   // [1, 2, 2, 4, 3, 6, 4, 8, 5, 10]</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="17、copyWithin-target-start-end-将数组从start到end索引的元素-不包含end-复制到target开始的索引位置-改变原数组"><a href="#17、copyWithin-target-start-end-将数组从start到end索引的元素-不包含end-复制到target开始的索引位置-改变原数组" class="headerlink" title="17、copyWithin(target, start, end)将数组从start到end索引的元素(不包含end)复制到target开始的索引位置(改变原数组)"></a>17、<code>copyWithin(target, start, end)</code>将数组从start到end索引的元素(不包含end)复制到target开始的索引位置(改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.copyWithin(0, 3, 5)  </span><br><span class="line">console.log(result)                 // [4, 5, 3, 4, 5]</span><br><span class="line">console.log(a)                      // [4, 5, 3, 4, 5]  索引3到5的元素为4和5，复制到从0开始的位置，替换掉了1和2</span><br><span class="line"></span><br><span class="line">// More</span><br><span class="line">a = [1, 2, 3, 4, 5]</span><br><span class="line">console.log(a.copyWithin(2))        // [1, 2, 1, 2, 3]  参数只有一个时，start默认为0，end默认为数组长度-1</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="18、entries-返回一个新的Array迭代器对象-可用for…of遍历-不改变原数组"><a href="#18、entries-返回一个新的Array迭代器对象-可用for…of遍历-不改变原数组" class="headerlink" title="18、entries()返回一个新的Array迭代器对象,可用for…of遍历(不改变原数组)"></a>18、<code>entries()</code>返回一个新的Array迭代器对象,可用for…of遍历(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">// Base</span><br><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.entries()</span><br><span class="line">console.log(result.next())   // &#123;value: [0, 1], done: false&#125;    value数组中第一个元素为索引，第二元素为索引对应的值</span><br><span class="line">...</span><br><span class="line">console.log(result.next())   // &#123;value: [4, 5], done: false&#125;</span><br><span class="line">console.log(result.next())   // &#123;value: undefined, done: true&#125;</span><br><span class="line">console.log(result)          // Array Iterator &#123;&#125;</span><br><span class="line">console.log(a)               // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">result = a.entries()</span><br><span class="line">for(let value of result) &#123;</span><br><span class="line">  console.log(value)</span><br><span class="line">&#125;</span><br><span class="line">// [0, 1]</span><br><span class="line">// [1, 2]</span><br><span class="line">// [2, 3]</span><br><span class="line">// [3, 4]</span><br><span class="line">// [4, 5]</span><br><span class="line"></span><br><span class="line">// Time</span><br><span class="line">a = []</span><br><span class="line">for(let i = 0; i &lt; 10000000; i++) &#123;</span><br><span class="line">  a.push(i)</span><br><span class="line">&#125;</span><br><span class="line">let dateStart = Date.now()</span><br><span class="line">result = a.entries()</span><br><span class="line">for(let v of result) &#123; &#125;</span><br><span class="line">let dateEnd = Date.now()</span><br><span class="line">console.log(dateEnd - dateStart)  // 运行三次，三次的耗时数 518ms 515ms 530ms</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="19、keys-返回一个新的Array迭代器对象-可用for…of遍历-不改变原数组"><a href="#19、keys-返回一个新的Array迭代器对象-可用for…of遍历-不改变原数组" class="headerlink" title="19、keys()返回一个新的Array迭代器对象,可用for…of遍历(不改变原数组)"></a>19、<code>keys()</code>返回一个新的Array迭代器对象,可用for…of遍历(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.keys()</span><br><span class="line">console.log(result.next())   // &#123;value: 0, done: false&#125;  value为索引  </span><br><span class="line">...</span><br><span class="line">console.log(result.next())   // &#123;value: 3, done: false&#125;</span><br><span class="line">console.log(result.next())   // &#123;value: 4, done: false&#125;</span><br><span class="line">console.log(result)          // Array Iterator &#123;&#125;</span><br><span class="line">console.log(a)               // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">result = a.keys()</span><br><span class="line">for(let value of result) &#123;</span><br><span class="line">  console.log(value)</span><br><span class="line">&#125;</span><br><span class="line">// 0</span><br><span class="line">// 1</span><br><span class="line">// 2</span><br><span class="line">// 3</span><br><span class="line">// 4</span><br><span class="line"></span><br><span class="line">// Time</span><br><span class="line">a = []</span><br><span class="line">for(let i = 0; i &lt; 10000000; i++) &#123;</span><br><span class="line">  a.push(i)</span><br><span class="line">&#125;</span><br><span class="line">let dateStart = Date.now()</span><br><span class="line">result = a.keys()</span><br><span class="line">for(let v of result) &#123; &#125;</span><br><span class="line">let dateEnd = Date.now()</span><br><span class="line">console.log(dateEnd - dateStart)  // 运行三次，三次的耗时数 223ms 262ms 300ms</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="20、values-返回一个新的迭代器-不改变原数组"><a href="#20、values-返回一个新的迭代器-不改变原数组" class="headerlink" title="20、values()返回一个新的迭代器(不改变原数组)"></a>20、<code>values()</code>返回一个新的迭代器(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.values()</span><br><span class="line">console.log(result.next())   // &#123;value: 1, done: false&#125;  value为索引  </span><br><span class="line">...</span><br><span class="line">console.log(result.next())   // &#123;value: 4, done: false&#125;</span><br><span class="line">console.log(result.next())   // &#123;value: 5, done: false&#125;</span><br><span class="line">console.log(result)          // Array Iterator &#123;&#125;</span><br><span class="line">console.log(a)               // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">result = a.values()</span><br><span class="line">for(let value of result) &#123;</span><br><span class="line">  console.log(value)</span><br><span class="line">&#125;</span><br><span class="line">// 1</span><br><span class="line">// 2</span><br><span class="line">// 3</span><br><span class="line">// 4</span><br><span class="line">// 5</span><br><span class="line"></span><br><span class="line">// Time</span><br><span class="line">a = []</span><br><span class="line">for(let i = 0; i &lt; 10000000; i++) &#123;</span><br><span class="line">  a.push(i)</span><br><span class="line">&#125;</span><br><span class="line">let dateStart = Date.now()</span><br><span class="line">result = a.values()</span><br><span class="line">for(let v of result) &#123; &#125;</span><br><span class="line">let dateEnd = Date.now()</span><br><span class="line">console.log(dateEnd - dateStart)  // 运行三次，三次的耗时数 254ms 270ms 273ms</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="21、forEach-遍历数组-不改变原数组"><a href="#21、forEach-遍历数组-不改变原数组" class="headerlink" title="21、forEach()遍历数组(不改变原数组)"></a>21、<code>forEach()</code>遍历数组(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.forEach((v, i)=&gt;&#123;</span><br><span class="line">  console.log(v, i)  </span><br><span class="line">  // 1 0</span><br><span class="line">  // 2 1</span><br><span class="line">  // 3 2</span><br><span class="line">  // 4 3</span><br><span class="line">  // 5 4</span><br><span class="line">&#125;)</span><br><span class="line">console.log(result)   // undefined</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">// Time</span><br><span class="line">a = []</span><br><span class="line">for(let i = 0; i &lt; 10000000; i++) &#123;</span><br><span class="line">  a.push(i)</span><br><span class="line">&#125;</span><br><span class="line">let dateStart = Date.now()</span><br><span class="line">a.forEach(v=&gt;&#123;&#125;)</span><br><span class="line">let dateEnd = Date.now()</span><br><span class="line">console.log(dateEnd - dateStart)  // 运行三次，三次的耗时数 182ms 188ms 180ms</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="22、every-fn-判断数组中是否所有元素都满足fn函数中的条件-不改变原数组"><a href="#22、every-fn-判断数组中是否所有元素都满足fn函数中的条件-不改变原数组" class="headerlink" title="22、every(fn)判断数组中是否所有元素都满足fn函数中的条件(不改变原数组)"></a>22、<code>every(fn)</code>判断数组中是否所有元素都满足fn函数中的条件(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.every((currentValue)=&gt;&#123;</span><br><span class="line">  return currentValue &gt; 0</span><br><span class="line">&#125;)</span><br><span class="line">console.log(result)   // true  显然所有元素都大于0</span><br><span class="line"></span><br><span class="line">result = a.every((currentValue)=&gt;&#123;</span><br><span class="line">  return currentValue &gt; 1</span><br><span class="line">&#125;)</span><br><span class="line">console.log(result)   // false  1并不大于1</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">// Time</span><br><span class="line">a = []</span><br><span class="line">for(let i = 0; i &lt; 10000000; i++) &#123;</span><br><span class="line">  a.push(i)</span><br><span class="line">&#125;</span><br><span class="line">let dateStart = Date.now()</span><br><span class="line">a.every(v=&gt; v &gt; -1 )</span><br><span class="line">let dateEnd = Date.now()</span><br><span class="line">console.log(dateEnd - dateStart) // 运行三次，三次的耗时数 176ms 200ms 186ms</span><br><span class="line"></span><br><span class="line">dateStart = Date.now()</span><br><span class="line">a.every(v=&gt; v &gt; 8 )</span><br><span class="line">dateEnd = Date.now()</span><br><span class="line">console.log(dateEnd - dateStart) // 0ms 0ms 0ms 不超过1ms，可见every的判断是在识别到不满足的条件时，立刻停止</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="23、filter-fn-返回数组中满足fn函数中条件的集合-不改变原数组"><a href="#23、filter-fn-返回数组中满足fn函数中条件的集合-不改变原数组" class="headerlink" title="23、filter(fn)返回数组中满足fn函数中条件的集合(不改变原数组)"></a>23、<code>filter(fn)</code>返回数组中满足fn函数中条件的集合(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.filter((currentValue)=&gt;&#123;</span><br><span class="line">  return currentValue &gt; 4</span><br><span class="line">&#125;)</span><br><span class="line">console.log(result)   // [5] 只有5满足条件</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">// Time</span><br><span class="line">a = []</span><br><span class="line">for(let i = 0; i &lt; 10000000; i++) &#123;</span><br><span class="line">  a.push(i)</span><br><span class="line">&#125;</span><br><span class="line">let dateStart = Date.now()</span><br><span class="line">a.filter(v=&gt; v &gt; -1 )</span><br><span class="line">let dateEnd = Date.now()</span><br><span class="line">console.log(dateEnd - dateStart) // 运行三次，三次的耗时数 584ms 660ms 552ms 全部值都满足条件的情况</span><br><span class="line"></span><br><span class="line">a = []</span><br><span class="line">for(let i = 0; i &lt; 10000000; i++) &#123;</span><br><span class="line">  a.push(i)</span><br><span class="line">&#125;</span><br><span class="line">let dateStart = Date.now()</span><br><span class="line">a.filter(v=&gt; v &lt; 0 )</span><br><span class="line">let dateEnd = Date.now()</span><br><span class="line">console.log(dateEnd - dateStart) // 200ms 194ms 183ms 这个时候才个forEach接近，这也是与forEach本身只有遍历的功能，没有执行其他逻辑相关</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="24、find-fn-返回数组中第一个匹配fn函数中条件的值没有则返回undefined-不改变原数组"><a href="#24、find-fn-返回数组中第一个匹配fn函数中条件的值没有则返回undefined-不改变原数组" class="headerlink" title="24、find(fn)返回数组中第一个匹配fn函数中条件的值没有则返回undefined(不改变原数组)"></a>24、<code>find(fn)</code>返回数组中第一个匹配fn函数中条件的值没有则返回undefined(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.find((currentValue)=&gt;&#123;</span><br><span class="line">  return currentValue &gt; 3</span><br><span class="line">&#125;)</span><br><span class="line">console.log(result)   // 4</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">let result = a.find((currentValue)=&gt;&#123;</span><br><span class="line">  return currentValue &gt; 5</span><br><span class="line">&#125;)</span><br><span class="line">console.log(result)   // undefined</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">// Time</span><br><span class="line">a = []</span><br><span class="line">for(let i = 0; i &lt; 10000000; i++) &#123;</span><br><span class="line">  a.push(i)</span><br><span class="line">&#125;</span><br><span class="line">let dateStart = Date.now()</span><br><span class="line">a.find(v=&gt; v &lt; 0 )</span><br><span class="line">let dateEnd = Date.now()</span><br><span class="line">console.log(dateEnd - dateStart)  // 185ms 197ms 203ms 全部不满足的情况下，效率与forEach相当</span><br><span class="line"></span><br><span class="line">a = []</span><br><span class="line">for(let i = 0; i &lt; 10000000; i++) &#123;</span><br><span class="line">  a.push(i)</span><br><span class="line">&#125;</span><br><span class="line">let dateStart = Date.now()</span><br><span class="line">a.find(v=&gt; v &gt; 10 )</span><br><span class="line">let dateEnd = Date.now()</span><br><span class="line">console.log(dateEnd - dateStart)  // 0ms 0ms 0ms 小于1ms，可以判断当匹配到满足条件的第一个值后，立刻停止循环，与every相当</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="25、findIndex-fn-返回数组中第一个匹配fn函数中条件的索引没有则返回undefined-不改变原数组"><a href="#25、findIndex-fn-返回数组中第一个匹配fn函数中条件的索引没有则返回undefined-不改变原数组" class="headerlink" title="25、findIndex(fn)返回数组中第一个匹配fn函数中条件的索引没有则返回undefined(不改变原数组)"></a>25、<code>findIndex(fn)</code>返回数组中第一个匹配fn函数中条件的索引没有则返回undefined(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.findIndex((currentValue)=&gt;&#123;</span><br><span class="line">  return currentValue &gt; 3</span><br><span class="line">&#125;)</span><br><span class="line">console.log(result)   // 3</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">let result = a.findIndex((currentValue)=&gt;&#123;</span><br><span class="line">  return currentValue &gt; 5</span><br><span class="line">&#125;)</span><br><span class="line">console.log(result)   // -1</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">// Time</span><br><span class="line">a = []</span><br><span class="line">for(let i = 0; i &lt; 10000000; i++) &#123;</span><br><span class="line">  a.push(i)</span><br><span class="line">&#125;</span><br><span class="line">let dateStart = Date.now()</span><br><span class="line">a.findIndex(v=&gt; v &lt; 0 )</span><br><span class="line">let dateEnd = Date.now()</span><br><span class="line">console.log(dateEnd - dateStart)  // 185ms 183ms 187ms 与find相当</span><br><span class="line"></span><br><span class="line">a = []</span><br><span class="line">for(let i = 0; i &lt; 10000000; i++) &#123;</span><br><span class="line">  a.push(i)</span><br><span class="line">&#125;</span><br><span class="line">let dateStart = Date.now()</span><br><span class="line">a.findIndex(v=&gt; v &gt; 10 )</span><br><span class="line">let dateEnd = Date.now()</span><br><span class="line">console.log(dateEnd - dateStart)  // 0ms 0ms 0ms 与find相当</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="26、includes-返回一个布尔值，表示某个数组是否包含给定的值-不改变原数组"><a href="#26、includes-返回一个布尔值，表示某个数组是否包含给定的值-不改变原数组" class="headerlink" title="26、includes()返回一个布尔值，表示某个数组是否包含给定的值(不改变原数组)"></a>26、<code>includes()</code>返回一个布尔值，表示某个数组是否包含给定的值(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.includes(2)</span><br><span class="line">console.log(result)   // true</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">result = a.includes(6)</span><br><span class="line">console.log(result)   // false</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">// Time</span><br><span class="line">a = []</span><br><span class="line">for(let i = 0; i &lt; 10000000; i++) &#123;</span><br><span class="line">  a.push(i)</span><br><span class="line">&#125;</span><br><span class="line">let dateStart = Date.now()</span><br><span class="line">a.includes(10)</span><br><span class="line">let dateEnd = Date.now()</span><br><span class="line">console.log(dateEnd - dateStart) // 0ms 0ms 0ms</span><br><span class="line"></span><br><span class="line">a = []</span><br><span class="line">for(let i = 0; i &lt; 10000000; i++) &#123;</span><br><span class="line">  a.push(i)</span><br><span class="line">&#125;</span><br><span class="line">let dateStart = Date.now()</span><br><span class="line">a.includes(10000000-1)</span><br><span class="line">let dateEnd = Date.now()</span><br><span class="line">console.log(dateEnd - dateStart) // 22ms 18ms 27ms 性能不错</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="27、map-fn-以fn函数中返回值组成新的数组返回-不改变原数组"><a href="#27、map-fn-以fn函数中返回值组成新的数组返回-不改变原数组" class="headerlink" title="27、map(fn)以fn函数中返回值组成新的数组返回(不改变原数组)"></a>27、<code>map(fn)</code>以fn函数中返回值组成新的数组返回(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.map((v, i)=&gt;&#123;</span><br><span class="line">  return 9</span><br><span class="line">&#125;)</span><br><span class="line">console.log(result)   // [9, 9, 9, 9, 9]</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">// Time</span><br><span class="line">a = []</span><br><span class="line">for(let i = 0; i &lt; 10000000; i++) &#123;</span><br><span class="line">  a.push(i)</span><br><span class="line">&#125;</span><br><span class="line">let dateStart = Date.now()</span><br><span class="line">a.map(v=&gt;1)</span><br><span class="line">let dateEnd = Date.now()</span><br><span class="line">console.log(dateEnd - dateStart) // 2158ms 2007ms 2079ms 耗时比较大</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="28、reduce-累计器-不改变原数组"><a href="#28、reduce-累计器-不改变原数组" class="headerlink" title="28、reduce()累计器(不改变原数组)"></a>28、<code>reduce()</code>累计器(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.reduce((accumulator, currentValue, currentIndex, array)=&gt;&#123;</span><br><span class="line">  console.log(accumulator, currentValue, currentIndex, array)</span><br><span class="line">  return accumulator + currentValue</span><br><span class="line">  // 5  1 0 [1, 2, 3, 4, 5]  第一次accumulator的值为reduce第二个参数5, currentValue为数组第一个元素</span><br><span class="line">  // 6  2 1 [1, 2, 3, 4, 5]  第二次accumulator的值为5加上数组a中的第一个值，即是第一次循环时return的值</span><br><span class="line">  // 8  3 2 [1, 2, 3, 4, 5]  同上</span><br><span class="line">  // 11 4 3 [1, 2, 3, 4, 5]  同上 </span><br><span class="line">  // 15 5 4 [1, 2, 3, 4, 5]  同上</span><br><span class="line">&#125;, 5)</span><br><span class="line">console.log(result)   // 20 为最终累计的和</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">// 无初始值时，accumulator的初始值为数组的第一个元素，currentValue为数组第二个元素</span><br><span class="line">result = a.reduce((accumulator, currentValue, currentIndex, array)=&gt;&#123;</span><br><span class="line">  console.log(accumulator, currentValue, currentIndex, array)</span><br><span class="line">  return accumulator + currentValue</span><br><span class="line">  // 1  2 1 [1, 2, 3, 4, 5]</span><br><span class="line">  // 3  3 2 [1, 2, 3, 4, 5]</span><br><span class="line">  // 6  4 3 [1, 2, 3, 4, 5]</span><br><span class="line">  // 10 5 4 [1, 2, 3, 4, 5]</span><br><span class="line">&#125;)</span><br><span class="line">console.log(result)   // 15 为最终累计的和</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">// Time</span><br><span class="line">a = []</span><br><span class="line">for(let i = 0; i &lt; 10000000; i++) &#123;</span><br><span class="line">  a.push(i)</span><br><span class="line">&#125;</span><br><span class="line">let dateStart = Date.now()</span><br><span class="line">a.reduce((accumulator, currentValue, currentIndex, array)=&gt;&#123;</span><br><span class="line">  return accumulator + currentValue</span><br><span class="line">&#125;)</span><br><span class="line">let dateEnd = Date.now()</span><br><span class="line">console.log(dateEnd - dateStart) // 200ms 258ms 257ms 效率与forEach相差也不多，而且比forEach多个累计的功能</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="29、reduceRight-与reduce功能一样，只是从数组末尾开始进行累计-不改变原数组"><a href="#29、reduceRight-与reduce功能一样，只是从数组末尾开始进行累计-不改变原数组" class="headerlink" title="29、reduceRight()与reduce功能一样，只是从数组末尾开始进行累计(不改变原数组)"></a>29、<code>reduceRight()</code>与reduce功能一样，只是从数组末尾开始进行累计(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">略...</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="30、some-fn-检查数组中是否含有满足fn函数条件的值-不改变原数组"><a href="#30、some-fn-检查数组中是否含有满足fn函数条件的值-不改变原数组" class="headerlink" title="30、some(fn)检查数组中是否含有满足fn函数条件的值(不改变原数组)"></a>30、<code>some(fn)</code>检查数组中是否含有满足fn函数条件的值(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">let a = [1, 2, 3, 4, 5]</span><br><span class="line">let result = a.some((v)=&gt;&#123;</span><br><span class="line">  return v &gt; 2</span><br><span class="line">&#125;)</span><br><span class="line">console.log(result)   // true</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">result = a.some((v)=&gt;&#123;</span><br><span class="line">  return v &gt; 6</span><br><span class="line">&#125;)</span><br><span class="line">console.log(result)   // false</span><br><span class="line">console.log(a)        // [1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">// Time</span><br><span class="line">a = []</span><br><span class="line">for(let i = 0; i &lt; 10000000; i++) &#123;</span><br><span class="line">  a.push(i)</span><br><span class="line">&#125;</span><br><span class="line">let dateStart = Date.now()</span><br><span class="line">a.some(v=&gt;&#123;</span><br><span class="line">  return v &lt; 0</span><br><span class="line">&#125;)</span><br><span class="line">let dateEnd = Date.now()</span><br><span class="line">console.log(dateEnd - dateStart)  // 171ms 176ms 188ms 全部不满足的情况下效率与forEach相当</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="31、toLocaleString-将数组中的每个元素使用各自的toLocaleString-转换后用-拼接-不改变原数组"><a href="#31、toLocaleString-将数组中的每个元素使用各自的toLocaleString-转换后用-拼接-不改变原数组" class="headerlink" title="31、toLocaleString()将数组中的每个元素使用各自的toLocaleString()转换后用,拼接(不改变原数组)"></a>31、<code>toLocaleString()</code>将数组中的每个元素使用各自的toLocaleString()转换后用<code>,</code>拼接(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let a = [1, new Date(), &apos;a&apos;, &#123;m: 1&#125;]</span><br><span class="line">let result = a.toLocaleString()</span><br><span class="line">console.log(result)   // &apos;1,2018/10/3 下午9:23:59,a,[object Object]&apos;</span><br><span class="line">console.log(a)        // [1, Wed Oct 03 2018 21:23:59 GMT+0800 (中国标准时间), &quot;a&quot;, &#123;m: 1&#125;]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="32、-iterator-数组自带的迭代器方法-不改变原数组"><a href="#32、-iterator-数组自带的迭代器方法-不改变原数组" class="headerlink" title="32、[@@iterator]()数组自带的迭代器方法(不改变原数组)"></a>32、<code>[@@iterator]()</code>数组自带的迭代器方法(不改变原数组)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使得数组原生可以使用for...of进行遍历</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2020/05/06/vue.js%E4%B8%AD%E7%88%B6%E7%BB%84%E4%BB%B6%E8%A7%A6%E5%8F%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95/" rel="next" title="vue.js中父组件触发子组件中的方法">
-                <i class="fa fa-chevron-left"></i> vue.js中父组件触发子组件中的方法
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/05/07/JS%E5%B8%B8%E7%94%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95/" rel="prev" title="JS常用字符串方法">
-                JS常用字符串方法 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-05-07 16:39">
+      2020年5月7日 下午
+    </time>
   </div>
 
 
-          </div>
-          
-
-
-          
-
+<div class="mt-1">
   
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
     
-    <div class="sidebar-inner">
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.4k 字
+    </span>
+  
 
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
-
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
+      70
+       分钟
+    </span>
+  
 
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">STAO</p>
-              <p class="site-description motion-element" itemprop="description">前端学习</p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">29</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1399664349&auto=1&height=66"></iframe>
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01、push-value-将value添加到数组的最后，返回数组长度-改变原数组"><span class="nav-number">1.</span> <span class="nav-text">01、push(value)将value添加到数组的最后，返回数组长度(改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02、unshift-添加元素到数组的开头，返回数组的长度-改变原数组"><span class="nav-number">2.</span> <span class="nav-text">02、unshift()添加元素到数组的开头，返回数组的长度(改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03、pop-删除数组中最后一个元素，返回被删除元素-改变原数组"><span class="nav-number">3.</span> <span class="nav-text">03、pop()删除数组中最后一个元素，返回被删除元素(改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04、shift-删除数组第一个元素，返回删除的元素-改变原数组"><span class="nav-number">4.</span> <span class="nav-text">04、shift()删除数组第一个元素，返回删除的元素(改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05、join-value-将数组用value连接为字符串-不改变原数组"><span class="nav-number">5.</span> <span class="nav-text">05、join(value)将数组用value连接为字符串(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06、reverse-反转数组-改变原数组"><span class="nav-number">6.</span> <span class="nav-text">06、reverse()反转数组(改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07、slice-start-end-返回新数组，包含原数组索引start的值到索引end的值，不包含end-不改变原数组"><span class="nav-number">7.</span> <span class="nav-text">07、slice(start, end)返回新数组，包含原数组索引start的值到索引end的值，不包含end(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08、splice-index-count-value-从索引为index处删除count个元素，插入value-改变原数组"><span class="nav-number">8.</span> <span class="nav-text">08、splice(index, count, value)从索引为index处删除count个元素，插入value(改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09、sort-对数组元素进行排序-改变原数组"><span class="nav-number">9.</span> <span class="nav-text">09、sort()对数组元素进行排序(改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10、toString-将数组中的元素用逗号拼接成字符串-不改变原数组"><span class="nav-number">10.</span> <span class="nav-text">10、toString()将数组中的元素用逗号拼接成字符串(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11、indexOf-value-从索引为0开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1-不改变原数组"><span class="nav-number">11.</span> <span class="nav-text">11、indexOf(value)从索引为0开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12、lastIndexOf-value-从最后的索引开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1-不改变原数组"><span class="nav-number">12.</span> <span class="nav-text">12、lastIndexOf(value)从最后的索引开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13、concat-value-将数组和-或值连接成新数组-不改变原数组"><span class="nav-number">13.</span> <span class="nav-text">13、concat(value)将数组和/或值连接成新数组(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14、fill-value-start-end-使用给定value填充数组，从索引start开始end结束，不包含end-改变原数组"><span class="nav-number">14.</span> <span class="nav-text">14、fill(value, start, end)使用给定value填充数组，从索引start开始end结束，不包含end(改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15、flat-将二维数组变为一维数组-不改变原数组"><span class="nav-number">15.</span> <span class="nav-text">15、flat()将二维数组变为一维数组(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16、flatMap-相当于map与flat的结合-不改变原数组"><span class="nav-number">16.</span> <span class="nav-text">16、flatMap()相当于map与flat的结合(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17、copyWithin-target-start-end-将数组从start到end索引的元素-不包含end-复制到target开始的索引位置-改变原数组"><span class="nav-number">17.</span> <span class="nav-text">17、copyWithin(target, start, end)将数组从start到end索引的元素(不包含end)复制到target开始的索引位置(改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18、entries-返回一个新的Array迭代器对象-可用for…of遍历-不改变原数组"><span class="nav-number">18.</span> <span class="nav-text">18、entries()返回一个新的Array迭代器对象,可用for…of遍历(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19、keys-返回一个新的Array迭代器对象-可用for…of遍历-不改变原数组"><span class="nav-number">19.</span> <span class="nav-text">19、keys()返回一个新的Array迭代器对象,可用for…of遍历(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20、values-返回一个新的迭代器-不改变原数组"><span class="nav-number">20.</span> <span class="nav-text">20、values()返回一个新的迭代器(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21、forEach-遍历数组-不改变原数组"><span class="nav-number">21.</span> <span class="nav-text">21、forEach()遍历数组(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22、every-fn-判断数组中是否所有元素都满足fn函数中的条件-不改变原数组"><span class="nav-number">22.</span> <span class="nav-text">22、every(fn)判断数组中是否所有元素都满足fn函数中的条件(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23、filter-fn-返回数组中满足fn函数中条件的集合-不改变原数组"><span class="nav-number">23.</span> <span class="nav-text">23、filter(fn)返回数组中满足fn函数中条件的集合(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24、find-fn-返回数组中第一个匹配fn函数中条件的值没有则返回undefined-不改变原数组"><span class="nav-number">24.</span> <span class="nav-text">24、find(fn)返回数组中第一个匹配fn函数中条件的值没有则返回undefined(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25、findIndex-fn-返回数组中第一个匹配fn函数中条件的索引没有则返回undefined-不改变原数组"><span class="nav-number">25.</span> <span class="nav-text">25、findIndex(fn)返回数组中第一个匹配fn函数中条件的索引没有则返回undefined(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26、includes-返回一个布尔值，表示某个数组是否包含给定的值-不改变原数组"><span class="nav-number">26.</span> <span class="nav-text">26、includes()返回一个布尔值，表示某个数组是否包含给定的值(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27、map-fn-以fn函数中返回值组成新的数组返回-不改变原数组"><span class="nav-number">27.</span> <span class="nav-text">27、map(fn)以fn函数中返回值组成新的数组返回(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28、reduce-累计器-不改变原数组"><span class="nav-number">28.</span> <span class="nav-text">28、reduce()累计器(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29、reduceRight-与reduce功能一样，只是从数组末尾开始进行累计-不改变原数组"><span class="nav-number">29.</span> <span class="nav-text">29、reduceRight()与reduce功能一样，只是从数组末尾开始进行累计(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30、some-fn-检查数组中是否含有满足fn函数条件的值-不改变原数组"><span class="nav-number">30.</span> <span class="nav-text">30、some(fn)检查数组中是否含有满足fn函数条件的值(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31、toLocaleString-将数组中的每个元素使用各自的toLocaleString-转换后用-拼接-不改变原数组"><span class="nav-number">31.</span> <span class="nav-text">31、toLocaleString()将数组中的每个元素使用各自的toLocaleString()转换后用,拼接(不改变原数组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32、-iterator-数组自带的迭代器方法-不改变原数组"><span class="nav-number">32.</span> <span class="nav-text">32、[@@iterator]()数组自带的迭代器方法(不改变原数组)</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">STAO</span>
-
+  
   
 </div>
 
+            
+          </div>
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
+          
+        </div>
       </div>
-    </footer>
+    </div>
+  </header>
 
+  <main>
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h3 id="01、push-value-将value添加到数组的最后，返回数组长度-改变原数组"><a href="#01、push-value-将value添加到数组的最后，返回数组长度-改变原数组" class="headerlink" title="01、push(value)将value添加到数组的最后，返回数组长度(改变原数组)"></a>01、<code>push(value)</code>将value添加到数组的最后，返回数组长度(改变原数组)</h3><pre><code class="hljs livecodeserver">// Base
+let <span class="hljs-keyword">a</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+let <span class="hljs-built_in">result</span> = <span class="hljs-keyword">a</span>.push(<span class="hljs-number">1</span>)
+console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">result</span>)      <span class="hljs-comment"> // 6</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)           <span class="hljs-comment"> // [1, 2, 3, 4, 5, 1] 原数组被改变</span>
+<span class="hljs-comment">
+// More</span>
+<span class="hljs-keyword">a</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+<span class="hljs-built_in">result</span> = <span class="hljs-keyword">a</span>.push(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>)<span class="hljs-comment"> // 可一次添加多个值</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">result</span>)      <span class="hljs-comment"> // 7</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)           <span class="hljs-comment"> // [1, 2, 3, 4, 5, 'a', 'b']</span>
+复制代码</code></pre>
+
+<h3 id="02、unshift-添加元素到数组的开头，返回数组的长度-改变原数组"><a href="#02、unshift-添加元素到数组的开头，返回数组的长度-改变原数组" class="headerlink" title="02、unshift()添加元素到数组的开头，返回数组的长度(改变原数组)"></a>02、<code>unshift()</code>添加元素到数组的开头，返回数组的长度(改变原数组)</h3><pre><code class="hljs livecodeserver">// Base
+let <span class="hljs-keyword">a</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+let <span class="hljs-built_in">result</span> = <span class="hljs-keyword">a</span>.unshift(<span class="hljs-number">1</span>)
+console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">result</span>)          <span class="hljs-comment"> // 6</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)               <span class="hljs-comment"> // [1, 1, 2, 3, 4, 5]</span>
+<span class="hljs-comment">
+// More</span>
+<span class="hljs-built_in">result</span> = <span class="hljs-keyword">a</span>.unshift(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>) <span class="hljs-comment"> // 可一次添加多个值</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">result</span>)          <span class="hljs-comment"> // 8</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)               <span class="hljs-comment"> // ['a', 'b', 1, 1, 2, 3, 4, 5]</span>
+复制代码</code></pre>
+
+<h3 id="03、pop-删除数组中最后一个元素，返回被删除元素-改变原数组"><a href="#03、pop-删除数组中最后一个元素，返回被删除元素-改变原数组" class="headerlink" title="03、pop()删除数组中最后一个元素，返回被删除元素(改变原数组)"></a>03、<code>pop()</code>删除数组中最后一个元素，返回被删除元素(改变原数组)</h3><pre><code class="hljs livecodeserver">// Base
+let <span class="hljs-keyword">a</span> = [<span class="hljs-number">5</span>]
+let <span class="hljs-built_in">result</span> = <span class="hljs-keyword">a</span>.pop()
+console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">result</span>)  <span class="hljs-comment"> // 5</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)       <span class="hljs-comment"> // []</span>
+<span class="hljs-comment">
+// More</span>
+<span class="hljs-built_in">result</span> = <span class="hljs-keyword">a</span>.pop()     <span class="hljs-comment"> // 数组元素为空后会返回undefined</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">result</span>)  <span class="hljs-comment"> // undefined</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)       <span class="hljs-comment"> // []</span>
+复制代码</code></pre>
+
+<h3 id="04、shift-删除数组第一个元素，返回删除的元素-改变原数组"><a href="#04、shift-删除数组第一个元素，返回删除的元素-改变原数组" class="headerlink" title="04、shift()删除数组第一个元素，返回删除的元素(改变原数组)"></a>04、<code>shift()</code>删除数组第一个元素，返回删除的元素(改变原数组)</h3><pre><code class="hljs livecodeserver">// Base
+let <span class="hljs-keyword">a</span> = [<span class="hljs-number">5</span>]
+let <span class="hljs-built_in">result</span> = <span class="hljs-keyword">a</span>.shift()
+console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">result</span>)     <span class="hljs-comment"> // 5</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)          <span class="hljs-comment"> // []</span>
+<span class="hljs-comment">
+// More</span>
+<span class="hljs-built_in">result</span> = <span class="hljs-keyword">a</span>.shift()      <span class="hljs-comment"> // 数组元素为空后会返回undefined</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">result</span>)     <span class="hljs-comment"> // undefined</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)          <span class="hljs-comment"> // []</span>
+复制代码</code></pre>
+
+<h3 id="05、join-value-将数组用value连接为字符串-不改变原数组"><a href="#05、join-value-将数组用value连接为字符串-不改变原数组" class="headerlink" title="05、join(value)将数组用value连接为字符串(不改变原数组)"></a>05、<code>join(value)</code>将数组用value连接为字符串(不改变原数组)</h3><pre><code class="hljs javascript"><span class="hljs-comment">// Base</span>
+<span class="hljs-keyword">let</span> a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+<span class="hljs-keyword">let</span> result = a.join(<span class="hljs-string">','</span>)
+<span class="hljs-built_in">console</span>.log(result)   <span class="hljs-comment">// '1,2,3,4,5'</span>
+<span class="hljs-built_in">console</span>.log(a)        <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+
+<span class="hljs-comment">// More</span>
+<span class="hljs-keyword">let</span> obj = &#123;
+  toString() &#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'调用了toString()方法！'</span>)
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'a'</span>
+  &#125;,
+  toValue() &#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'toValue()方法！'</span>)
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'b'</span>
+  &#125;
+&#125;
+result = a.join(obj) <span class="hljs-comment">// 使用对象时会调用对象自身的toString方法转化为字符串，我们这里重写了toString，从而覆盖了原型链上的toString</span>
+<span class="hljs-comment">// 调用了toString()方法！</span>
+<span class="hljs-built_in">console</span>.log(result)   <span class="hljs-comment">// 1a2a3a4a5</span>
+<span class="hljs-built_in">console</span>.log(a)        <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+
+<span class="hljs-comment">// join的一个相对的方法是字符串的split方法</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'1a2a3a4a5'</span>.split(<span class="hljs-string">'a'</span>)) <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+复制代码</code></pre>
+
+<h3 id="06、reverse-反转数组-改变原数组"><a href="#06、reverse-反转数组-改变原数组" class="headerlink" title="06、reverse()反转数组(改变原数组)"></a>06、<code>reverse()</code>反转数组(改变原数组)</h3><pre><code class="hljs angelscript"><span class="hljs-comment">// Base</span>
+let a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+let result = a.reverse()
+console.log(result)   <span class="hljs-comment">// [5, 4, 3, 2, 1]</span>
+console.log(a)        <span class="hljs-comment">// [5, 4, 3, 2, 1]</span>
+
+<span class="hljs-comment">// More</span>
+a = [<span class="hljs-number">1</span>, [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>]]
+result = a.reverse()
+console.log(result)   <span class="hljs-comment">// [[4, 5], [2, 3], 1]</span>
+console.log(a)        <span class="hljs-comment">// [[4, 5], [2, 3], 1]</span>
+<span class="hljs-comment">// 可以看到这里的反转只是基于数组的第一层，属于浅反转。</span>
+
+<span class="hljs-comment">// 一个简单的深反转，使用递归实现</span>
+<span class="hljs-keyword">const</span> deepReverse = (<span class="hljs-built_in">array</span>) =&gt; &#123;
+  let temp = <span class="hljs-built_in">array</span>.reverse()
+  temp.forEach(v =&gt; &#123;
+    <span class="hljs-keyword">if</span>(Object.prototype.toString.call(v) === <span class="hljs-string">'[object Array]'</span>) &#123;
+      deepReverse(v)
+    &#125;
+  &#125;)
+  <span class="hljs-keyword">return</span> temp
+&#125;
+a = [<span class="hljs-number">1</span>, [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>]]
+result = deepReverse(a)
+console.log(result)    <span class="hljs-comment">// [[5, 4], [3, 2], 1]</span>
+复制代码</code></pre>
+
+<h3 id="07、slice-start-end-返回新数组，包含原数组索引start的值到索引end的值，不包含end-不改变原数组"><a href="#07、slice-start-end-返回新数组，包含原数组索引start的值到索引end的值，不包含end-不改变原数组" class="headerlink" title="07、slice(start, end)返回新数组，包含原数组索引start的值到索引end的值，不包含end(不改变原数组)"></a>07、<code>slice(start, end)</code>返回新数组，包含原数组索引start的值到索引end的值，不包含end(不改变原数组)</h3><pre><code class="hljs livecodeserver">// Base
+let <span class="hljs-keyword">a</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+let <span class="hljs-built_in">result</span> = <span class="hljs-keyword">a</span>.slice(<span class="hljs-number">2</span>, <span class="hljs-number">4</span>)
+console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">result</span>)  <span class="hljs-comment"> // [3, 4]</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)       <span class="hljs-comment"> // [1, 2, 3, 4, 5]</span>
+<span class="hljs-comment">
+// More</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>.slice(<span class="hljs-number">1</span>))        <span class="hljs-comment"> // [2, 3, 4, 5]   只有一个参数且不小于0，则从此索引开始截取到数组的末位</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>.slice(<span class="hljs-number">-1</span>))       <span class="hljs-comment"> // [5]            只有一个参数且小于0，则从倒数|start|位截取到数组的末位</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>.slice(<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>))    <span class="hljs-comment"> // []             反向截取，不合法返回空数组</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>.slice(<span class="hljs-number">1</span>, <span class="hljs-number">-1</span>))    <span class="hljs-comment"> // [2, 3, 4]      从第一位截取到倒数第一位，不包含倒数第一位</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>.slice(<span class="hljs-number">-1</span>, <span class="hljs-number">-2</span>))   <span class="hljs-comment"> // []             反向截取，不合法返回空数组</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>.slice(<span class="hljs-number">-2</span>, <span class="hljs-number">-1</span>))   <span class="hljs-comment"> // [4]            倒数第二位截取到倒数第一位</span>
+复制代码</code></pre>
+
+<h3 id="08、splice-index-count-value-从索引为index处删除count个元素，插入value-改变原数组"><a href="#08、splice-index-count-value-从索引为index处删除count个元素，插入value-改变原数组" class="headerlink" title="08、splice(index, count, value)从索引为index处删除count个元素，插入value(改变原数组)"></a>08、<code>splice(index, count, value)</code>从索引为index处删除count个元素，插入value(改变原数组)</h3><pre><code class="hljs angelscript"><span class="hljs-comment">// Base</span>
+let a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+let result = a.splice(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>)
+console.log(result)   <span class="hljs-comment">// [2, 3]</span>
+console.log(a)        <span class="hljs-comment">// [1, 0, 4, 5]</span>
+
+<span class="hljs-comment">// More</span>
+a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+console.log(a.splice(<span class="hljs-number">-2</span>))                   <span class="hljs-comment">// [4. 5]</span>
+console.log(a)                              <span class="hljs-comment">// [1, 2, 3]</span>
+
+a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+console.log(a.splice(<span class="hljs-number">-1</span>))                   <span class="hljs-comment">// [5]</span>
+console.log(a)                              <span class="hljs-comment">// [1, 2, 3, 4]               当参数为单个且小于0时，将从数组的倒数|index|位截取到数组的末位</span>
+
+a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+console.log(a.splice(<span class="hljs-number">0</span>))                    <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+console.log(a)                              <span class="hljs-comment">// []</span>
+
+a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+console.log(a.splice(<span class="hljs-number">1</span>))                    <span class="hljs-comment">// [2, 3, 4, 5]</span>
+console.log(a)                              <span class="hljs-comment">// [1]                        当参数为单个且不小于0时，将从当前数代表的索引位开始截取到数组的末位</span>
+
+a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+console.log(a.splice(<span class="hljs-number">-1</span>, <span class="hljs-number">2</span>))                <span class="hljs-comment">// [5]</span>
+console.log(a)                              <span class="hljs-comment">// [1, 2, 3, 4]               从倒数第一位开始截取两个元素，元素不够，只返回存在的元素</span>
+
+a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+console.log(a.splice(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>))  <span class="hljs-comment">// [1, 2]</span>
+console.log(a)                              <span class="hljs-comment">// ["a", "b", "c", 3, 4, 5]   截取后将value一次填充到数组被截取的位置，value的数量大于截取的数量时，数组中剩余的元素后移</span>
+复制代码</code></pre>
+
+<h3 id="09、sort-对数组元素进行排序-改变原数组"><a href="#09、sort-对数组元素进行排序-改变原数组" class="headerlink" title="09、sort()对数组元素进行排序(改变原数组)"></a>09、<code>sort()</code>对数组元素进行排序(改变原数组)</h3><pre><code class="hljs vim">// Base
+<span class="hljs-keyword">let</span> <span class="hljs-keyword">a</span> = [<span class="hljs-number">31</span>, <span class="hljs-number">22</span>, <span class="hljs-number">27</span>, <span class="hljs-number">1</span>, <span class="hljs-number">9</span>]
+<span class="hljs-keyword">let</span> result = <span class="hljs-keyword">a</span>.<span class="hljs-keyword">sort</span>()
+console.<span class="hljs-built_in">log</span>(result)   // [<span class="hljs-number">1</span>, <span class="hljs-number">22</span>, <span class="hljs-number">27</span>, <span class="hljs-number">31</span>, <span class="hljs-number">9</span>]
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)        // [<span class="hljs-number">1</span>, <span class="hljs-number">22</span>, <span class="hljs-number">27</span>, <span class="hljs-number">31</span>, <span class="hljs-number">9</span>]
+
+// More
+<span class="hljs-keyword">a</span> = [<span class="hljs-string">'c'</span>, <span class="hljs-string">'ac'</span>, <span class="hljs-string">'ab'</span>, <span class="hljs-string">'1c'</span>, <span class="hljs-number">13</span>, <span class="hljs-number">12</span>, <span class="hljs-string">'13'</span>, <span class="hljs-string">'12'</span>, <span class="hljs-string">'3'</span>, <span class="hljs-string">'2'</span>, <span class="hljs-string">'1b'</span>, <span class="hljs-string">'1a'</span>, <span class="hljs-number">1</span>, <span class="hljs-string">'aa'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-number">3</span>, <span class="hljs-string">'b'</span>, <span class="hljs-number">2</span>]
+<span class="hljs-keyword">a</span>.<span class="hljs-keyword">sort</span>()
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>) // [<span class="hljs-number">1</span>, <span class="hljs-number">12</span>, <span class="hljs-string">"12"</span>, <span class="hljs-number">13</span>, <span class="hljs-string">"13"</span>, <span class="hljs-string">"1a"</span>, <span class="hljs-string">"1b"</span>, <span class="hljs-string">"1c"</span>, <span class="hljs-string">"2"</span>, <span class="hljs-number">2</span>, <span class="hljs-string">"3"</span>, <span class="hljs-number">3</span>, <span class="hljs-string">"a"</span>, <span class="hljs-string">"aa"</span>, <span class="hljs-string">"ab"</span>, <span class="hljs-string">"ac"</span>, <span class="hljs-string">"b"</span>, <span class="hljs-string">"c"</span>]
+                      // 可以看出<span class="hljs-keyword">sort</span>排序是根据位来进行排序，而非值的大小，先比较第一位数字在前，字母在后，若相同则比较后面位(实际是比较各个值转化为字符串后的各个位点的unicode位点)
+<span class="hljs-keyword">a</span> = [<span class="hljs-number">31</span>, <span class="hljs-number">22</span>, <span class="hljs-number">27</span>, <span class="hljs-number">1</span>, <span class="hljs-number">9</span>]
+<span class="hljs-keyword">a</span>.<span class="hljs-keyword">sort</span>((<span class="hljs-keyword">a</span>, <span class="hljs-keyword">b</span>)=&gt;&#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">a</span> - <span class="hljs-keyword">b</span>
+&#125;)
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)        // [<span class="hljs-number">1</span>, <span class="hljs-number">9</span>, <span class="hljs-number">22</span>, <span class="hljs-number">27</span>, <span class="hljs-number">31</span>]  按数值大小正序排列
+
+<span class="hljs-keyword">a</span> = [<span class="hljs-number">31</span>, <span class="hljs-number">22</span>, <span class="hljs-number">27</span>, <span class="hljs-number">1</span>, <span class="hljs-number">9</span>]
+<span class="hljs-keyword">a</span>.<span class="hljs-keyword">sort</span>((<span class="hljs-keyword">a</span>, <span class="hljs-keyword">b</span>)=&gt;&#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">b</span> - <span class="hljs-keyword">a</span>
+&#125;)
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)        // [<span class="hljs-number">31</span>, <span class="hljs-number">27</span>, <span class="hljs-number">22</span>, <span class="hljs-number">9</span>, <span class="hljs-number">1</span>]  按数值大小倒序排列
+复制代码</code></pre>
+
+<h3 id="10、toString-将数组中的元素用逗号拼接成字符串-不改变原数组"><a href="#10、toString-将数组中的元素用逗号拼接成字符串-不改变原数组" class="headerlink" title="10、toString()将数组中的元素用逗号拼接成字符串(不改变原数组)"></a>10、<code>toString()</code>将数组中的元素用逗号拼接成字符串(不改变原数组)</h3><pre><code class="hljs livecodeserver">// Base
+let <span class="hljs-keyword">a</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+let <span class="hljs-built_in">result</span> = <span class="hljs-keyword">a</span>.toString()
+console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">result</span>)  <span class="hljs-comment"> // 1,2,3,4,5</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)       <span class="hljs-comment"> // [1, 2, 3, 4, 5]</span>
+复制代码</code></pre>
+
+<h3 id="11、indexOf-value-从索引为0开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1-不改变原数组"><a href="#11、indexOf-value-从索引为0开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1-不改变原数组" class="headerlink" title="11、indexOf(value)从索引为0开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1(不改变原数组)"></a>11、<code>indexOf(value)</code>从索引为0开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1(不改变原数组)</h3><pre><code class="hljs livecodeserver">// Base
+let <span class="hljs-keyword">a</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span>]
+let <span class="hljs-built_in">result</span> = <span class="hljs-keyword">a</span>.indexOf(<span class="hljs-number">2</span>)
+console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">result</span>)  <span class="hljs-comment"> // 1</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)       <span class="hljs-comment"> // [1, 2, 3, 2, 5]</span>
+
+<span class="hljs-built_in">result</span> = <span class="hljs-keyword">a</span>.indexOf(<span class="hljs-number">6</span>)
+console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">result</span>)  <span class="hljs-comment"> // -1</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)       <span class="hljs-comment"> // [1, 2, 3, 2, 5]</span>
+复制代码</code></pre>
+
+<h3 id="12、lastIndexOf-value-从最后的索引开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1-不改变原数组"><a href="#12、lastIndexOf-value-从最后的索引开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1-不改变原数组" class="headerlink" title="12、lastIndexOf(value)从最后的索引开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1(不改变原数组)"></a>12、<code>lastIndexOf(value)</code>从最后的索引开始，检查数组是否包含value，有则返回匹配到的第一个索引，没有返回-1(不改变原数组)</h3><pre><code class="hljs livecodeserver">// Base
+let <span class="hljs-keyword">a</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span>]
+let <span class="hljs-built_in">result</span> = <span class="hljs-keyword">a</span>.lastIndexOf(<span class="hljs-number">2</span>)
+console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">result</span>)  <span class="hljs-comment"> // 3</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)       <span class="hljs-comment"> // [1, 2, 3, 2, 5]</span>
+
+<span class="hljs-built_in">result</span> = <span class="hljs-keyword">a</span>.lastIndexOf(<span class="hljs-number">6</span>)
+console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">result</span>)  <span class="hljs-comment"> // -1</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)       <span class="hljs-comment"> // [1, 2, 3, 2, 5]</span>
+复制代码</code></pre>
+
+<h3 id="13、concat-value-将数组和-或值连接成新数组-不改变原数组"><a href="#13、concat-value-将数组和-或值连接成新数组-不改变原数组" class="headerlink" title="13、concat(value)将数组和/或值连接成新数组(不改变原数组)"></a>13、<code>concat(value)</code>将数组和/或值连接成新数组(不改变原数组)</h3><pre><code class="hljs livecodeserver">// Base
+let <span class="hljs-keyword">a</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], b = [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>], c = <span class="hljs-number">5</span>
+let <span class="hljs-built_in">result</span> = <span class="hljs-keyword">a</span>.concat(b, c)
+console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">result</span>)  <span class="hljs-comment"> // [1, 2, 3, 4, 5]</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)       <span class="hljs-comment"> // [1, 2]</span>
+<span class="hljs-comment">
+// More</span>
+b = [<span class="hljs-number">3</span>, [<span class="hljs-number">4</span>]]
+<span class="hljs-built_in">result</span> = <span class="hljs-keyword">a</span>.concat(b, c)
+console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">result</span>)  <span class="hljs-comment"> // [1, 2, 3, [4], 5] concat对于嵌套数组无法拉平</span>
+console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">a</span>)       <span class="hljs-comment"> // [1, 2]</span>
+复制代码</code></pre>
+
+<h3 id="14、fill-value-start-end-使用给定value填充数组，从索引start开始end结束，不包含end-改变原数组"><a href="#14、fill-value-start-end-使用给定value填充数组，从索引start开始end结束，不包含end-改变原数组" class="headerlink" title="14、fill(value, start, end)使用给定value填充数组，从索引start开始end结束，不包含end(改变原数组)"></a>14、<code>fill(value, start, end)</code>使用给定value填充数组，从索引start开始end结束，不包含end(改变原数组)</h3><pre><code class="hljs yaml"><span class="hljs-string">//</span> <span class="hljs-string">Base</span>
+<span class="hljs-string">let</span> <span class="hljs-string">a</span> <span class="hljs-string">=</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+<span class="hljs-string">let</span> <span class="hljs-string">result</span> <span class="hljs-string">=</span> <span class="hljs-string">a.fill(0,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">)</span>
+<span class="hljs-string">console.log(result)</span>             <span class="hljs-string">//</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">0</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+<span class="hljs-string">console.log(a)</span>                  <span class="hljs-string">//</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">0</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+
+<span class="hljs-string">//</span> <span class="hljs-string">More</span>
+<span class="hljs-string">a</span> <span class="hljs-string">=</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+<span class="hljs-string">console.log(a.fill(1))</span>          <span class="hljs-string">//</span> <span class="hljs-string">[1,</span> <span class="hljs-number">1</span><span class="hljs-string">,</span> <span class="hljs-number">1</span><span class="hljs-string">,</span> <span class="hljs-number">1</span><span class="hljs-string">,</span> <span class="hljs-number">1</span><span class="hljs-string">]</span>  <span class="hljs-string">参数一个时，将该参数覆盖填充到数组每一项</span>
+<span class="hljs-string">a</span> <span class="hljs-string">=</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+<span class="hljs-string">console.log(a.fill(1,</span> <span class="hljs-number">2</span><span class="hljs-string">))</span>       <span class="hljs-string">//</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">1</span><span class="hljs-string">,</span> <span class="hljs-number">1</span><span class="hljs-string">,</span> <span class="hljs-number">1</span><span class="hljs-string">]</span>  <span class="hljs-string">只有start时，从索引start开始填充到数组末位</span>
+<span class="hljs-string">a</span> <span class="hljs-string">=</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+<span class="hljs-string">console.log(a.fill(1,</span> <span class="hljs-number">-2</span><span class="hljs-string">))</span>      <span class="hljs-string">//</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">1</span><span class="hljs-string">,</span> <span class="hljs-number">1</span><span class="hljs-string">]</span>  <span class="hljs-string">只有start且为负数时，从倒数|start|位开始填充到数组末位</span>
+<span class="hljs-string">复制代码</span></code></pre>
+
+<h3 id="15、flat-将二维数组变为一维数组-不改变原数组"><a href="#15、flat-将二维数组变为一维数组-不改变原数组" class="headerlink" title="15、flat()将二维数组变为一维数组(不改变原数组)"></a>15、<code>flat()</code>将二维数组变为一维数组(不改变原数组)</h3><pre><code class="hljs yaml"><span class="hljs-string">//</span> <span class="hljs-string">Base</span>
+<span class="hljs-string">let</span> <span class="hljs-string">a</span> <span class="hljs-string">=</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-string">[4,</span> <span class="hljs-number">5</span><span class="hljs-string">]]</span>
+<span class="hljs-string">let</span> <span class="hljs-string">result</span> <span class="hljs-string">=</span> <span class="hljs-string">a.flat()</span>
+<span class="hljs-string">console.log(result)</span>   <span class="hljs-string">//</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+<span class="hljs-string">console.log(a)</span>        <span class="hljs-string">//</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-string">[4,</span> <span class="hljs-number">5</span><span class="hljs-string">]]</span>
+
+<span class="hljs-string">let</span> <span class="hljs-string">a</span> <span class="hljs-string">=</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-string">[4,</span> <span class="hljs-number">5</span><span class="hljs-string">,</span> <span class="hljs-string">[6,</span> <span class="hljs-number">7</span><span class="hljs-string">,</span> <span class="hljs-string">[8,</span> <span class="hljs-number">9</span><span class="hljs-string">]]]]</span>
+<span class="hljs-string">let</span> <span class="hljs-string">result</span> <span class="hljs-string">=</span> <span class="hljs-string">a.flat()</span>
+<span class="hljs-string">console.log(result)</span>   <span class="hljs-string">//</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">,</span> <span class="hljs-string">[6,</span> <span class="hljs-number">7</span><span class="hljs-string">,</span> <span class="hljs-string">[8,</span> <span class="hljs-number">9</span><span class="hljs-string">]]]</span> <span class="hljs-string">很显然只能将第二层嵌套数组“拉平”</span>
+<span class="hljs-string">console.log(a)</span>        <span class="hljs-string">//</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-string">[4,</span> <span class="hljs-number">5</span><span class="hljs-string">,</span> <span class="hljs-string">[6,</span> <span class="hljs-number">7</span><span class="hljs-string">,</span> <span class="hljs-string">[8,</span> <span class="hljs-number">9</span><span class="hljs-string">]]]]</span>
+<span class="hljs-string">复制代码</span></code></pre>
+
+<h3 id="16、flatMap-相当于map与flat的结合-不改变原数组"><a href="#16、flatMap-相当于map与flat的结合-不改变原数组" class="headerlink" title="16、flatMap()相当于map与flat的结合(不改变原数组)"></a>16、<code>flatMap()</code>相当于map与flat的结合(不改变原数组)</h3><pre><code class="hljs yaml"><span class="hljs-string">//</span> <span class="hljs-string">Base</span>
+<span class="hljs-string">let</span> <span class="hljs-string">a</span> <span class="hljs-string">=</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+<span class="hljs-string">let</span> <span class="hljs-string">result</span> <span class="hljs-string">=</span> <span class="hljs-string">a.flatMap((currentValue)=&gt;&#123;</span>
+  <span class="hljs-string">return</span> <span class="hljs-string">[currentValue,</span> <span class="hljs-string">currentValue</span> <span class="hljs-string">*</span> <span class="hljs-number">2</span><span class="hljs-string">]</span>
+<span class="hljs-string">&#125;)</span>
+<span class="hljs-string">console.log(result)</span>   <span class="hljs-string">//</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">6</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">8</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">,</span> <span class="hljs-number">10</span><span class="hljs-string">]</span>
+<span class="hljs-string">console.log(a)</span>        <span class="hljs-string">//</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+<span class="hljs-string">复制代码</span></code></pre>
+
+<h3 id="17、copyWithin-target-start-end-将数组从start到end索引的元素-不包含end-复制到target开始的索引位置-改变原数组"><a href="#17、copyWithin-target-start-end-将数组从start到end索引的元素-不包含end-复制到target开始的索引位置-改变原数组" class="headerlink" title="17、copyWithin(target, start, end)将数组从start到end索引的元素(不包含end)复制到target开始的索引位置(改变原数组)"></a>17、<code>copyWithin(target, start, end)</code>将数组从start到end索引的元素(不包含end)复制到target开始的索引位置(改变原数组)</h3><pre><code class="hljs yaml"><span class="hljs-string">//</span> <span class="hljs-string">Base</span>
+<span class="hljs-string">let</span> <span class="hljs-string">a</span> <span class="hljs-string">=</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+<span class="hljs-string">let</span> <span class="hljs-string">result</span> <span class="hljs-string">=</span> <span class="hljs-string">a.copyWithin(0,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">)</span>  
+<span class="hljs-string">console.log(result)</span>                 <span class="hljs-string">//</span> <span class="hljs-string">[4,</span> <span class="hljs-number">5</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+<span class="hljs-string">console.log(a)</span>                      <span class="hljs-string">//</span> <span class="hljs-string">[4,</span> <span class="hljs-number">5</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>  <span class="hljs-string">索引3到5的元素为4和5，复制到从0开始的位置，替换掉了1和2</span>
+
+<span class="hljs-string">//</span> <span class="hljs-string">More</span>
+<span class="hljs-string">a</span> <span class="hljs-string">=</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+<span class="hljs-string">console.log(a.copyWithin(2))</span>        <span class="hljs-string">//</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">1</span><span class="hljs-string">,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">]</span>  <span class="hljs-string">参数只有一个时，start默认为0，end默认为数组长度-1</span>
+<span class="hljs-string">复制代码</span></code></pre>
+
+<h3 id="18、entries-返回一个新的Array迭代器对象-可用for…of遍历-不改变原数组"><a href="#18、entries-返回一个新的Array迭代器对象-可用for…of遍历-不改变原数组" class="headerlink" title="18、entries()返回一个新的Array迭代器对象,可用for…of遍历(不改变原数组)"></a>18、<code>entries()</code>返回一个新的Array迭代器对象,可用for…of遍历(不改变原数组)</h3><pre><code class="hljs qml"><span class="hljs-comment">// Base</span>
+<span class="hljs-keyword">let</span> a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+<span class="hljs-keyword">let</span> result = a.entries()
+<span class="hljs-built_in">console</span>.log(result.next())   <span class="hljs-comment">// &#123;value: [0, 1], done: false&#125;    value数组中第一个元素为索引，第二元素为索引对应的值</span>
+...
+<span class="hljs-built_in">console</span>.log(result.next())   <span class="hljs-comment">// &#123;value: [4, 5], done: false&#125;</span>
+<span class="hljs-built_in">console</span>.log(result.next())   <span class="hljs-comment">// &#123;value: undefined, done: true&#125;</span>
+<span class="hljs-built_in">console</span>.log(result)          <span class="hljs-comment">// Array Iterator &#123;&#125;</span>
+<span class="hljs-built_in">console</span>.log(a)               <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+
+result = a.entries()
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> value <span class="hljs-keyword">of</span> result) &#123;
+  <span class="hljs-built_in">console</span>.log(value)
+&#125;
+<span class="hljs-comment">// [0, 1]</span>
+<span class="hljs-comment">// [1, 2]</span>
+<span class="hljs-comment">// [2, 3]</span>
+<span class="hljs-comment">// [3, 4]</span>
+<span class="hljs-comment">// [4, 5]</span>
+
+<span class="hljs-comment">// Time</span>
+a = []
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000000</span>; i++) &#123;
+  a.push(i)
+&#125;
+<span class="hljs-keyword">let</span> dateStart = <span class="hljs-built_in">Date</span>.now()
+result = a.entries()
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> v <span class="hljs-keyword">of</span> result) &#123; &#125;
+<span class="hljs-keyword">let</span> dateEnd = <span class="hljs-built_in">Date</span>.now()
+<span class="hljs-built_in">console</span>.log(dateEnd - dateStart)  <span class="hljs-comment">// 运行三次，三次的耗时数 518ms 515ms 530ms</span>
+复制代码</code></pre>
+
+<h3 id="19、keys-返回一个新的Array迭代器对象-可用for…of遍历-不改变原数组"><a href="#19、keys-返回一个新的Array迭代器对象-可用for…of遍历-不改变原数组" class="headerlink" title="19、keys()返回一个新的Array迭代器对象,可用for…of遍历(不改变原数组)"></a>19、<code>keys()</code>返回一个新的Array迭代器对象,可用for…of遍历(不改变原数组)</h3><pre><code class="hljs qml"><span class="hljs-keyword">let</span> a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+<span class="hljs-keyword">let</span> result = a.keys()
+<span class="hljs-built_in">console</span>.log(result.next())   <span class="hljs-comment">// &#123;value: 0, done: false&#125;  value为索引  </span>
+...
+<span class="hljs-built_in">console</span>.log(result.next())   <span class="hljs-comment">// &#123;value: 3, done: false&#125;</span>
+<span class="hljs-built_in">console</span>.log(result.next())   <span class="hljs-comment">// &#123;value: 4, done: false&#125;</span>
+<span class="hljs-built_in">console</span>.log(result)          <span class="hljs-comment">// Array Iterator &#123;&#125;</span>
+<span class="hljs-built_in">console</span>.log(a)               <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+
+result = a.keys()
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> value <span class="hljs-keyword">of</span> result) &#123;
+  <span class="hljs-built_in">console</span>.log(value)
+&#125;
+<span class="hljs-comment">// 0</span>
+<span class="hljs-comment">// 1</span>
+<span class="hljs-comment">// 2</span>
+<span class="hljs-comment">// 3</span>
+<span class="hljs-comment">// 4</span>
+
+<span class="hljs-comment">// Time</span>
+a = []
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000000</span>; i++) &#123;
+  a.push(i)
+&#125;
+<span class="hljs-keyword">let</span> dateStart = <span class="hljs-built_in">Date</span>.now()
+result = a.keys()
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> v <span class="hljs-keyword">of</span> result) &#123; &#125;
+<span class="hljs-keyword">let</span> dateEnd = <span class="hljs-built_in">Date</span>.now()
+<span class="hljs-built_in">console</span>.log(dateEnd - dateStart)  <span class="hljs-comment">// 运行三次，三次的耗时数 223ms 262ms 300ms</span>
+复制代码</code></pre>
+
+<h3 id="20、values-返回一个新的迭代器-不改变原数组"><a href="#20、values-返回一个新的迭代器-不改变原数组" class="headerlink" title="20、values()返回一个新的迭代器(不改变原数组)"></a>20、<code>values()</code>返回一个新的迭代器(不改变原数组)</h3><pre><code class="hljs qml"><span class="hljs-keyword">let</span> a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+<span class="hljs-keyword">let</span> result = a.values()
+<span class="hljs-built_in">console</span>.log(result.next())   <span class="hljs-comment">// &#123;value: 1, done: false&#125;  value为索引  </span>
+...
+<span class="hljs-built_in">console</span>.log(result.next())   <span class="hljs-comment">// &#123;value: 4, done: false&#125;</span>
+<span class="hljs-built_in">console</span>.log(result.next())   <span class="hljs-comment">// &#123;value: 5, done: false&#125;</span>
+<span class="hljs-built_in">console</span>.log(result)          <span class="hljs-comment">// Array Iterator &#123;&#125;</span>
+<span class="hljs-built_in">console</span>.log(a)               <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+
+result = a.values()
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> value <span class="hljs-keyword">of</span> result) &#123;
+  <span class="hljs-built_in">console</span>.log(value)
+&#125;
+<span class="hljs-comment">// 1</span>
+<span class="hljs-comment">// 2</span>
+<span class="hljs-comment">// 3</span>
+<span class="hljs-comment">// 4</span>
+<span class="hljs-comment">// 5</span>
+
+<span class="hljs-comment">// Time</span>
+a = []
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000000</span>; i++) &#123;
+  a.push(i)
+&#125;
+<span class="hljs-keyword">let</span> dateStart = <span class="hljs-built_in">Date</span>.now()
+result = a.values()
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> v <span class="hljs-keyword">of</span> result) &#123; &#125;
+<span class="hljs-keyword">let</span> dateEnd = <span class="hljs-built_in">Date</span>.now()
+<span class="hljs-built_in">console</span>.log(dateEnd - dateStart)  <span class="hljs-comment">// 运行三次，三次的耗时数 254ms 270ms 273ms</span>
+复制代码</code></pre>
+
+<h3 id="21、forEach-遍历数组-不改变原数组"><a href="#21、forEach-遍历数组-不改变原数组" class="headerlink" title="21、forEach()遍历数组(不改变原数组)"></a>21、<code>forEach()</code>遍历数组(不改变原数组)</h3><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+<span class="hljs-keyword">let</span> result = a.forEach(<span class="hljs-function">(<span class="hljs-params">v, i</span>)=&gt;</span>&#123;
+  <span class="hljs-built_in">console</span>.log(v, i)  
+  <span class="hljs-comment">// 1 0</span>
+  <span class="hljs-comment">// 2 1</span>
+  <span class="hljs-comment">// 3 2</span>
+  <span class="hljs-comment">// 4 3</span>
+  <span class="hljs-comment">// 5 4</span>
+&#125;)
+<span class="hljs-built_in">console</span>.log(result)   <span class="hljs-comment">// undefined</span>
+<span class="hljs-built_in">console</span>.log(a)        <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+
+<span class="hljs-comment">// Time</span>
+a = []
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000000</span>; i++) &#123;
+  a.push(i)
+&#125;
+<span class="hljs-keyword">let</span> dateStart = <span class="hljs-built_in">Date</span>.now()
+a.forEach(<span class="hljs-function"><span class="hljs-params">v</span>=&gt;</span>&#123;&#125;)
+<span class="hljs-keyword">let</span> dateEnd = <span class="hljs-built_in">Date</span>.now()
+<span class="hljs-built_in">console</span>.log(dateEnd - dateStart)  <span class="hljs-comment">// 运行三次，三次的耗时数 182ms 188ms 180ms</span>
+复制代码</code></pre>
+
+<h3 id="22、every-fn-判断数组中是否所有元素都满足fn函数中的条件-不改变原数组"><a href="#22、every-fn-判断数组中是否所有元素都满足fn函数中的条件-不改变原数组" class="headerlink" title="22、every(fn)判断数组中是否所有元素都满足fn函数中的条件(不改变原数组)"></a>22、<code>every(fn)</code>判断数组中是否所有元素都满足fn函数中的条件(不改变原数组)</h3><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+<span class="hljs-keyword">let</span> result = a.every(<span class="hljs-function">(<span class="hljs-params">currentValue</span>)=&gt;</span>&#123;
+  <span class="hljs-keyword">return</span> currentValue &gt; <span class="hljs-number">0</span>
+&#125;)
+<span class="hljs-built_in">console</span>.log(result)   <span class="hljs-comment">// true  显然所有元素都大于0</span>
+
+result = a.every(<span class="hljs-function">(<span class="hljs-params">currentValue</span>)=&gt;</span>&#123;
+  <span class="hljs-keyword">return</span> currentValue &gt; <span class="hljs-number">1</span>
+&#125;)
+<span class="hljs-built_in">console</span>.log(result)   <span class="hljs-comment">// false  1并不大于1</span>
+<span class="hljs-built_in">console</span>.log(a)        <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+
+<span class="hljs-comment">// Time</span>
+a = []
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000000</span>; i++) &#123;
+  a.push(i)
+&#125;
+<span class="hljs-keyword">let</span> dateStart = <span class="hljs-built_in">Date</span>.now()
+a.every(<span class="hljs-function"><span class="hljs-params">v</span>=&gt;</span> v &gt; <span class="hljs-number">-1</span> )
+<span class="hljs-keyword">let</span> dateEnd = <span class="hljs-built_in">Date</span>.now()
+<span class="hljs-built_in">console</span>.log(dateEnd - dateStart) <span class="hljs-comment">// 运行三次，三次的耗时数 176ms 200ms 186ms</span>
+
+dateStart = <span class="hljs-built_in">Date</span>.now()
+a.every(<span class="hljs-function"><span class="hljs-params">v</span>=&gt;</span> v &gt; <span class="hljs-number">8</span> )
+dateEnd = <span class="hljs-built_in">Date</span>.now()
+<span class="hljs-built_in">console</span>.log(dateEnd - dateStart) <span class="hljs-comment">// 0ms 0ms 0ms 不超过1ms，可见every的判断是在识别到不满足的条件时，立刻停止</span>
+复制代码</code></pre>
+
+<h3 id="23、filter-fn-返回数组中满足fn函数中条件的集合-不改变原数组"><a href="#23、filter-fn-返回数组中满足fn函数中条件的集合-不改变原数组" class="headerlink" title="23、filter(fn)返回数组中满足fn函数中条件的集合(不改变原数组)"></a>23、<code>filter(fn)</code>返回数组中满足fn函数中条件的集合(不改变原数组)</h3><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+<span class="hljs-keyword">let</span> result = a.filter(<span class="hljs-function">(<span class="hljs-params">currentValue</span>)=&gt;</span>&#123;
+  <span class="hljs-keyword">return</span> currentValue &gt; <span class="hljs-number">4</span>
+&#125;)
+<span class="hljs-built_in">console</span>.log(result)   <span class="hljs-comment">// [5] 只有5满足条件</span>
+<span class="hljs-built_in">console</span>.log(a)        <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+
+<span class="hljs-comment">// Time</span>
+a = []
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000000</span>; i++) &#123;
+  a.push(i)
+&#125;
+<span class="hljs-keyword">let</span> dateStart = <span class="hljs-built_in">Date</span>.now()
+a.filter(<span class="hljs-function"><span class="hljs-params">v</span>=&gt;</span> v &gt; <span class="hljs-number">-1</span> )
+<span class="hljs-keyword">let</span> dateEnd = <span class="hljs-built_in">Date</span>.now()
+<span class="hljs-built_in">console</span>.log(dateEnd - dateStart) <span class="hljs-comment">// 运行三次，三次的耗时数 584ms 660ms 552ms 全部值都满足条件的情况</span>
+
+a = []
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000000</span>; i++) &#123;
+  a.push(i)
+&#125;
+<span class="hljs-keyword">let</span> dateStart = <span class="hljs-built_in">Date</span>.now()
+a.filter(<span class="hljs-function"><span class="hljs-params">v</span>=&gt;</span> v &lt; <span class="hljs-number">0</span> )
+<span class="hljs-keyword">let</span> dateEnd = <span class="hljs-built_in">Date</span>.now()
+<span class="hljs-built_in">console</span>.log(dateEnd - dateStart) <span class="hljs-comment">// 200ms 194ms 183ms 这个时候才个forEach接近，这也是与forEach本身只有遍历的功能，没有执行其他逻辑相关</span>
+复制代码</code></pre>
+
+<h3 id="24、find-fn-返回数组中第一个匹配fn函数中条件的值没有则返回undefined-不改变原数组"><a href="#24、find-fn-返回数组中第一个匹配fn函数中条件的值没有则返回undefined-不改变原数组" class="headerlink" title="24、find(fn)返回数组中第一个匹配fn函数中条件的值没有则返回undefined(不改变原数组)"></a>24、<code>find(fn)</code>返回数组中第一个匹配fn函数中条件的值没有则返回undefined(不改变原数组)</h3><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+<span class="hljs-keyword">let</span> result = a.find(<span class="hljs-function">(<span class="hljs-params">currentValue</span>)=&gt;</span>&#123;
+  <span class="hljs-keyword">return</span> currentValue &gt; <span class="hljs-number">3</span>
+&#125;)
+<span class="hljs-built_in">console</span>.log(result)   <span class="hljs-comment">// 4</span>
+<span class="hljs-built_in">console</span>.log(a)        <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+
+<span class="hljs-keyword">let</span> result = a.find(<span class="hljs-function">(<span class="hljs-params">currentValue</span>)=&gt;</span>&#123;
+  <span class="hljs-keyword">return</span> currentValue &gt; <span class="hljs-number">5</span>
+&#125;)
+<span class="hljs-built_in">console</span>.log(result)   <span class="hljs-comment">// undefined</span>
+<span class="hljs-built_in">console</span>.log(a)        <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+
+<span class="hljs-comment">// Time</span>
+a = []
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000000</span>; i++) &#123;
+  a.push(i)
+&#125;
+<span class="hljs-keyword">let</span> dateStart = <span class="hljs-built_in">Date</span>.now()
+a.find(<span class="hljs-function"><span class="hljs-params">v</span>=&gt;</span> v &lt; <span class="hljs-number">0</span> )
+<span class="hljs-keyword">let</span> dateEnd = <span class="hljs-built_in">Date</span>.now()
+<span class="hljs-built_in">console</span>.log(dateEnd - dateStart)  <span class="hljs-comment">// 185ms 197ms 203ms 全部不满足的情况下，效率与forEach相当</span>
+
+a = []
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000000</span>; i++) &#123;
+  a.push(i)
+&#125;
+<span class="hljs-keyword">let</span> dateStart = <span class="hljs-built_in">Date</span>.now()
+a.find(<span class="hljs-function"><span class="hljs-params">v</span>=&gt;</span> v &gt; <span class="hljs-number">10</span> )
+<span class="hljs-keyword">let</span> dateEnd = <span class="hljs-built_in">Date</span>.now()
+<span class="hljs-built_in">console</span>.log(dateEnd - dateStart)  <span class="hljs-comment">// 0ms 0ms 0ms 小于1ms，可以判断当匹配到满足条件的第一个值后，立刻停止循环，与every相当</span>
+复制代码</code></pre>
+
+<h3 id="25、findIndex-fn-返回数组中第一个匹配fn函数中条件的索引没有则返回undefined-不改变原数组"><a href="#25、findIndex-fn-返回数组中第一个匹配fn函数中条件的索引没有则返回undefined-不改变原数组" class="headerlink" title="25、findIndex(fn)返回数组中第一个匹配fn函数中条件的索引没有则返回undefined(不改变原数组)"></a>25、<code>findIndex(fn)</code>返回数组中第一个匹配fn函数中条件的索引没有则返回undefined(不改变原数组)</h3><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+<span class="hljs-keyword">let</span> result = a.findIndex(<span class="hljs-function">(<span class="hljs-params">currentValue</span>)=&gt;</span>&#123;
+  <span class="hljs-keyword">return</span> currentValue &gt; <span class="hljs-number">3</span>
+&#125;)
+<span class="hljs-built_in">console</span>.log(result)   <span class="hljs-comment">// 3</span>
+<span class="hljs-built_in">console</span>.log(a)        <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+
+<span class="hljs-keyword">let</span> result = a.findIndex(<span class="hljs-function">(<span class="hljs-params">currentValue</span>)=&gt;</span>&#123;
+  <span class="hljs-keyword">return</span> currentValue &gt; <span class="hljs-number">5</span>
+&#125;)
+<span class="hljs-built_in">console</span>.log(result)   <span class="hljs-comment">// -1</span>
+<span class="hljs-built_in">console</span>.log(a)        <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+
+<span class="hljs-comment">// Time</span>
+a = []
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000000</span>; i++) &#123;
+  a.push(i)
+&#125;
+<span class="hljs-keyword">let</span> dateStart = <span class="hljs-built_in">Date</span>.now()
+a.findIndex(<span class="hljs-function"><span class="hljs-params">v</span>=&gt;</span> v &lt; <span class="hljs-number">0</span> )
+<span class="hljs-keyword">let</span> dateEnd = <span class="hljs-built_in">Date</span>.now()
+<span class="hljs-built_in">console</span>.log(dateEnd - dateStart)  <span class="hljs-comment">// 185ms 183ms 187ms 与find相当</span>
+
+a = []
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000000</span>; i++) &#123;
+  a.push(i)
+&#125;
+<span class="hljs-keyword">let</span> dateStart = <span class="hljs-built_in">Date</span>.now()
+a.findIndex(<span class="hljs-function"><span class="hljs-params">v</span>=&gt;</span> v &gt; <span class="hljs-number">10</span> )
+<span class="hljs-keyword">let</span> dateEnd = <span class="hljs-built_in">Date</span>.now()
+<span class="hljs-built_in">console</span>.log(dateEnd - dateStart)  <span class="hljs-comment">// 0ms 0ms 0ms 与find相当</span>
+复制代码</code></pre>
+
+<h3 id="26、includes-返回一个布尔值，表示某个数组是否包含给定的值-不改变原数组"><a href="#26、includes-返回一个布尔值，表示某个数组是否包含给定的值-不改变原数组" class="headerlink" title="26、includes()返回一个布尔值，表示某个数组是否包含给定的值(不改变原数组)"></a>26、<code>includes()</code>返回一个布尔值，表示某个数组是否包含给定的值(不改变原数组)</h3><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+<span class="hljs-keyword">let</span> result = a.includes(<span class="hljs-number">2</span>)
+<span class="hljs-built_in">console</span>.log(result)   <span class="hljs-comment">// true</span>
+<span class="hljs-built_in">console</span>.log(a)        <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+
+result = a.includes(<span class="hljs-number">6</span>)
+<span class="hljs-built_in">console</span>.log(result)   <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">console</span>.log(a)        <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+
+<span class="hljs-comment">// Time</span>
+a = []
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000000</span>; i++) &#123;
+  a.push(i)
+&#125;
+<span class="hljs-keyword">let</span> dateStart = <span class="hljs-built_in">Date</span>.now()
+a.includes(<span class="hljs-number">10</span>)
+<span class="hljs-keyword">let</span> dateEnd = <span class="hljs-built_in">Date</span>.now()
+<span class="hljs-built_in">console</span>.log(dateEnd - dateStart) <span class="hljs-comment">// 0ms 0ms 0ms</span>
+
+a = []
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000000</span>; i++) &#123;
+  a.push(i)
+&#125;
+<span class="hljs-keyword">let</span> dateStart = <span class="hljs-built_in">Date</span>.now()
+a.includes(<span class="hljs-number">10000000</span><span class="hljs-number">-1</span>)
+<span class="hljs-keyword">let</span> dateEnd = <span class="hljs-built_in">Date</span>.now()
+<span class="hljs-built_in">console</span>.log(dateEnd - dateStart) <span class="hljs-comment">// 22ms 18ms 27ms 性能不错</span>
+复制代码</code></pre>
+
+<h3 id="27、map-fn-以fn函数中返回值组成新的数组返回-不改变原数组"><a href="#27、map-fn-以fn函数中返回值组成新的数组返回-不改变原数组" class="headerlink" title="27、map(fn)以fn函数中返回值组成新的数组返回(不改变原数组)"></a>27、<code>map(fn)</code>以fn函数中返回值组成新的数组返回(不改变原数组)</h3><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+<span class="hljs-keyword">let</span> result = a.map(<span class="hljs-function">(<span class="hljs-params">v, i</span>)=&gt;</span>&#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">9</span>
+&#125;)
+<span class="hljs-built_in">console</span>.log(result)   <span class="hljs-comment">// [9, 9, 9, 9, 9]</span>
+<span class="hljs-built_in">console</span>.log(a)        <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+
+<span class="hljs-comment">// Time</span>
+a = []
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000000</span>; i++) &#123;
+  a.push(i)
+&#125;
+<span class="hljs-keyword">let</span> dateStart = <span class="hljs-built_in">Date</span>.now()
+a.map(<span class="hljs-function"><span class="hljs-params">v</span>=&gt;</span><span class="hljs-number">1</span>)
+<span class="hljs-keyword">let</span> dateEnd = <span class="hljs-built_in">Date</span>.now()
+<span class="hljs-built_in">console</span>.log(dateEnd - dateStart) <span class="hljs-comment">// 2158ms 2007ms 2079ms 耗时比较大</span>
+复制代码</code></pre>
+
+<h3 id="28、reduce-累计器-不改变原数组"><a href="#28、reduce-累计器-不改变原数组" class="headerlink" title="28、reduce()累计器(不改变原数组)"></a>28、<code>reduce()</code>累计器(不改变原数组)</h3><pre><code class="hljs yaml"><span class="hljs-string">let</span> <span class="hljs-string">a</span> <span class="hljs-string">=</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+<span class="hljs-string">let</span> <span class="hljs-string">result</span> <span class="hljs-string">=</span> <span class="hljs-string">a.reduce((accumulator,</span> <span class="hljs-string">currentValue,</span> <span class="hljs-string">currentIndex,</span> <span class="hljs-string">array)=&gt;&#123;</span>
+  <span class="hljs-string">console.log(accumulator,</span> <span class="hljs-string">currentValue,</span> <span class="hljs-string">currentIndex,</span> <span class="hljs-string">array)</span>
+  <span class="hljs-string">return</span> <span class="hljs-string">accumulator</span> <span class="hljs-string">+</span> <span class="hljs-string">currentValue</span>
+  <span class="hljs-string">//</span> <span class="hljs-number">5</span>  <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>  <span class="hljs-string">第一次accumulator的值为reduce第二个参数5,</span> <span class="hljs-string">currentValue为数组第一个元素</span>
+  <span class="hljs-string">//</span> <span class="hljs-number">6</span>  <span class="hljs-number">2</span> <span class="hljs-number">1</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>  <span class="hljs-string">第二次accumulator的值为5加上数组a中的第一个值，即是第一次循环时return的值</span>
+  <span class="hljs-string">//</span> <span class="hljs-number">8</span>  <span class="hljs-number">3</span> <span class="hljs-number">2</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>  <span class="hljs-string">同上</span>
+  <span class="hljs-string">//</span> <span class="hljs-number">11</span> <span class="hljs-number">4</span> <span class="hljs-number">3</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>  <span class="hljs-string">同上</span> 
+  <span class="hljs-string">//</span> <span class="hljs-number">15</span> <span class="hljs-number">5</span> <span class="hljs-number">4</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>  <span class="hljs-string">同上</span>
+<span class="hljs-string">&#125;,</span> <span class="hljs-number">5</span><span class="hljs-string">)</span>
+<span class="hljs-string">console.log(result)</span>   <span class="hljs-string">//</span> <span class="hljs-number">20</span> <span class="hljs-string">为最终累计的和</span>
+<span class="hljs-string">console.log(a)</span>        <span class="hljs-string">//</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+
+<span class="hljs-string">//</span> <span class="hljs-string">无初始值时，accumulator的初始值为数组的第一个元素，currentValue为数组第二个元素</span>
+<span class="hljs-string">result</span> <span class="hljs-string">=</span> <span class="hljs-string">a.reduce((accumulator,</span> <span class="hljs-string">currentValue,</span> <span class="hljs-string">currentIndex,</span> <span class="hljs-string">array)=&gt;&#123;</span>
+  <span class="hljs-string">console.log(accumulator,</span> <span class="hljs-string">currentValue,</span> <span class="hljs-string">currentIndex,</span> <span class="hljs-string">array)</span>
+  <span class="hljs-string">return</span> <span class="hljs-string">accumulator</span> <span class="hljs-string">+</span> <span class="hljs-string">currentValue</span>
+  <span class="hljs-string">//</span> <span class="hljs-number">1</span>  <span class="hljs-number">2</span> <span class="hljs-number">1</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+  <span class="hljs-string">//</span> <span class="hljs-number">3</span>  <span class="hljs-number">3</span> <span class="hljs-number">2</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+  <span class="hljs-string">//</span> <span class="hljs-number">6</span>  <span class="hljs-number">4</span> <span class="hljs-number">3</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+  <span class="hljs-string">//</span> <span class="hljs-number">10</span> <span class="hljs-number">5</span> <span class="hljs-number">4</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+<span class="hljs-string">&#125;)</span>
+<span class="hljs-string">console.log(result)</span>   <span class="hljs-string">//</span> <span class="hljs-number">15</span> <span class="hljs-string">为最终累计的和</span>
+<span class="hljs-string">console.log(a)</span>        <span class="hljs-string">//</span> <span class="hljs-string">[1,</span> <span class="hljs-number">2</span><span class="hljs-string">,</span> <span class="hljs-number">3</span><span class="hljs-string">,</span> <span class="hljs-number">4</span><span class="hljs-string">,</span> <span class="hljs-number">5</span><span class="hljs-string">]</span>
+
+<span class="hljs-string">//</span> <span class="hljs-string">Time</span>
+<span class="hljs-string">a</span> <span class="hljs-string">=</span> <span class="hljs-string">[]</span>
+<span class="hljs-string">for(let</span> <span class="hljs-string">i</span> <span class="hljs-string">=</span> <span class="hljs-number">0</span><span class="hljs-string">;</span> <span class="hljs-string">i</span> <span class="hljs-string">&lt;</span> <span class="hljs-number">10000000</span><span class="hljs-string">;</span> <span class="hljs-string">i++)</span> <span class="hljs-string">&#123;</span>
+  <span class="hljs-string">a.push(i)</span>
+<span class="hljs-string">&#125;</span>
+<span class="hljs-string">let</span> <span class="hljs-string">dateStart</span> <span class="hljs-string">=</span> <span class="hljs-string">Date.now()</span>
+<span class="hljs-string">a.reduce((accumulator,</span> <span class="hljs-string">currentValue,</span> <span class="hljs-string">currentIndex,</span> <span class="hljs-string">array)=&gt;&#123;</span>
+  <span class="hljs-string">return</span> <span class="hljs-string">accumulator</span> <span class="hljs-string">+</span> <span class="hljs-string">currentValue</span>
+<span class="hljs-string">&#125;)</span>
+<span class="hljs-string">let</span> <span class="hljs-string">dateEnd</span> <span class="hljs-string">=</span> <span class="hljs-string">Date.now()</span>
+<span class="hljs-string">console.log(dateEnd</span> <span class="hljs-bullet">-</span> <span class="hljs-string">dateStart)</span> <span class="hljs-string">//</span> <span class="hljs-string">200ms</span> <span class="hljs-string">258ms</span> <span class="hljs-string">257ms</span> <span class="hljs-string">效率与forEach相差也不多，而且比forEach多个累计的功能</span>
+<span class="hljs-string">复制代码</span></code></pre>
+
+<h3 id="29、reduceRight-与reduce功能一样，只是从数组末尾开始进行累计-不改变原数组"><a href="#29、reduceRight-与reduce功能一样，只是从数组末尾开始进行累计-不改变原数组" class="headerlink" title="29、reduceRight()与reduce功能一样，只是从数组末尾开始进行累计(不改变原数组)"></a>29、<code>reduceRight()</code>与reduce功能一样，只是从数组末尾开始进行累计(不改变原数组)</h3><pre><code class="hljs erlang">略...
+复制代码</code></pre>
+
+<h3 id="30、some-fn-检查数组中是否含有满足fn函数条件的值-不改变原数组"><a href="#30、some-fn-检查数组中是否含有满足fn函数条件的值-不改变原数组" class="headerlink" title="30、some(fn)检查数组中是否含有满足fn函数条件的值(不改变原数组)"></a>30、<code>some(fn)</code>检查数组中是否含有满足fn函数条件的值(不改变原数组)</h3><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+<span class="hljs-keyword">let</span> result = a.some(<span class="hljs-function">(<span class="hljs-params">v</span>)=&gt;</span>&#123;
+  <span class="hljs-keyword">return</span> v &gt; <span class="hljs-number">2</span>
+&#125;)
+<span class="hljs-built_in">console</span>.log(result)   <span class="hljs-comment">// true</span>
+<span class="hljs-built_in">console</span>.log(a)        <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+
+result = a.some(<span class="hljs-function">(<span class="hljs-params">v</span>)=&gt;</span>&#123;
+  <span class="hljs-keyword">return</span> v &gt; <span class="hljs-number">6</span>
+&#125;)
+<span class="hljs-built_in">console</span>.log(result)   <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">console</span>.log(a)        <span class="hljs-comment">// [1, 2, 3, 4, 5]</span>
+
+<span class="hljs-comment">// Time</span>
+a = []
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000000</span>; i++) &#123;
+  a.push(i)
+&#125;
+<span class="hljs-keyword">let</span> dateStart = <span class="hljs-built_in">Date</span>.now()
+a.some(<span class="hljs-function"><span class="hljs-params">v</span>=&gt;</span>&#123;
+  <span class="hljs-keyword">return</span> v &lt; <span class="hljs-number">0</span>
+&#125;)
+<span class="hljs-keyword">let</span> dateEnd = <span class="hljs-built_in">Date</span>.now()
+<span class="hljs-built_in">console</span>.log(dateEnd - dateStart)  <span class="hljs-comment">// 171ms 176ms 188ms 全部不满足的情况下效率与forEach相当</span>
+复制代码</code></pre>
+
+<h3 id="31、toLocaleString-将数组中的每个元素使用各自的toLocaleString-转换后用-拼接-不改变原数组"><a href="#31、toLocaleString-将数组中的每个元素使用各自的toLocaleString-转换后用-拼接-不改变原数组" class="headerlink" title="31、toLocaleString()将数组中的每个元素使用各自的toLocaleString()转换后用,拼接(不改变原数组)"></a>31、<code>toLocaleString()</code>将数组中的每个元素使用各自的toLocaleString()转换后用<code>,</code>拼接(不改变原数组)</h3><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a = [<span class="hljs-number">1</span>, <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(), <span class="hljs-string">'a'</span>, &#123;<span class="hljs-attr">m</span>: <span class="hljs-number">1</span>&#125;]
+<span class="hljs-keyword">let</span> result = a.toLocaleString()
+<span class="hljs-built_in">console</span>.log(result)   <span class="hljs-comment">// '1,2018/10/3 下午9:23:59,a,[object Object]'</span>
+<span class="hljs-built_in">console</span>.log(a)        <span class="hljs-comment">// [1, Wed Oct 03 2018 21:23:59 GMT+0800 (中国标准时间), "a", &#123;m: 1&#125;]</span>
+复制代码</code></pre>
+
+<h3 id="32、-iterator-数组自带的迭代器方法-不改变原数组"><a href="#32、-iterator-数组自带的迭代器方法-不改变原数组" class="headerlink" title="32、[@@iterator]()数组自带的迭代器方法(不改变原数组)"></a>32、<code>[@@iterator]()</code>数组自带的迭代器方法(不改变原数组)</h3><pre><code class="hljs cos">使得数组原生可以使用<span class="hljs-keyword">for</span>.<span class="hljs-built_in">..of</span>进行遍历</code></pre>
+
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CODE/">CODE</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/07/JS%E5%B8%B8%E7%94%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JS常用字符串方法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/06/vue.js%E4%B8%AD%E7%88%B6%E7%BB%84%E4%BB%B6%E8%A7%A6%E5%8F%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95/">
+                        <span class="hidden-mobile">vue.js中父组件触发子组件中的方法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
       </div>
     
-
-    
-
   </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
 
   
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
 
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+    <!-- APlayer 音乐播放器 -->
+    <div id="aplayer"></div>
+    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
+<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
 <script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+  var oldLoadAp = window.onload;
+  window.onload = function () {
+    oldLoadAp && oldLoadAp();
+
+    new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      autoplay: 'false' === 'true',
+      loop: 'all',
+      order: 'random',
+      theme: '#b7daff',
+      preload: 'none',
+      audio: [{"name":"name","artist":"artist","url":"http://music.163.com/song/media/outer/url?id=562598065.mp3","cover":"/img/favicon.JPG"}]
+    });
   }
 </script>
 
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
 
 
 
@@ -659,7 +994,150 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "JS数组方法总览&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
   
 
 
@@ -673,122 +1151,7 @@
 
 
 
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
 
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>
